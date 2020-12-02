@@ -1,0 +1,14 @@
+{
+    "scenarios": [
+      {
+        "title": "Minikube-example",
+        "description": "Minikube example",
+        "id": "minikube-example"
+      },
+      {
+        "title": "Prometheus example",
+        "description": "Prometheus example",
+        "id": "prometheus"
+      }
+    ]
+  }
