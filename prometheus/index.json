@@ -25,6 +25,6 @@
     "uilayout": "terminal"
   },
   "backend": {
-    "imageid": "prometheus"
+    "imageid": "ubuntu:2004"
   }
 }
