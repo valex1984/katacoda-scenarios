@@ -6,14 +6,9 @@
         "id": "minikube-example"
       },
       {
-        "title": "Prometheus example",
-        "description": "Prometheus example",
+        "title": "Prometheus",
+        "description": "Prometheus",
         "id": "prometheus"
-      },
-      {
-        "title": "Prometheus example",
-        "description": "Prometheus example",
-        "id": "getting-started"
       }
     ]
   }
