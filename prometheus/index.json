@@ -33,7 +33,7 @@
         }
     },
     "files": [
-        "prometheus.yml"
+        "prometheus.yaml"
     ],
     "environment": {
         "showdashboard": true,

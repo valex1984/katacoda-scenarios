@@ -1,1 +1,1 @@
-ssh root@docker "docker pull prom/prometheus:latest && docker pull quay.io/prometheus/node-exporter:v1.0.1"
+ssh root@docker "docker pull prom/prometheus && docker pull prom/node-exporter"
