@@ -9,6 +9,11 @@
         "title": "Prometheus example",
         "description": "Prometheus example",
         "id": "prometheus"
+      },
+      {
+        "title": "Prometheus example",
+        "description": "Prometheus example",
+        "id": "getting-started"
       }
     ]
   }
