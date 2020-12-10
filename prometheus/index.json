@@ -26,7 +26,6 @@
         "intro": {
             "text": "intro.md",
             "background": "courseBase.sh",
-            "foreground": "courseBase.sh",
             "credits": ""
         },
         "finish": {

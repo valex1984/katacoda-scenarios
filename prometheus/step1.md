@@ -13,9 +13,9 @@ scrape_configs:
       - targets: ['127.0.0.1:9100']
 </pre>
 
-_scrape\_interval_ - это частота, с которой Prometheus ходит для сбора метрик
+scrape_interval - это частота, с которой Prometheus ходит для сбора метрик
 
-_evaluation\_interval_ - это частота, с которой Prometheus вычисляет правила
+evaluation\_interval - это частота, с которой Prometheus вычисляет правила
 
 _9090_ - порт, по которому Prometheus отдает внутренние метрики
 
