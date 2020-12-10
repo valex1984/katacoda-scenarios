@@ -3,13 +3,11 @@
 ## Задание
 
 Следующая команда запускает контейнер с Prometheus-ом. 
-В качестве конфигурации передаем файл prometheus.yaml. Для этого его монтируем в контейнер нужное место. 
-Данные будут хранится на диске, в директории /prometheus/data. Для этого предварительно создадим ее и примонтируем внутрь контейнера
+В качестве конфигурации передаем файл prometheus.yaml. 
 
 ```
 docker run -d --net=host \
      -v /root/prometheus.yaml:/etc/prometheus/prometheus.yml \
-     --name prometheus-server \
      prom/prometheus
 ```{{execute}}
 
