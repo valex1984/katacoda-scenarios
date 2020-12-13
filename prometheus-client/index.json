@@ -1,7 +1,7 @@
 {
     "pathwayTitle": "Prometheus",
-    "title": "Знакомство с Prometheus",
-    "description": "Познакомимся с прометеем и посмотрим на метрики, которые отдает node exporter",
+    "title": "Инструментируем сервис метриками с Prometheus",
+    "description": "Инструментируем сервис метриками с Prometheus",
     "difficulty": "beginner",
     "time": "10-15 minutes",
     "details": {
@@ -13,14 +13,6 @@
             {
                 "title": "Шаг 2 - Стартуем Prometheus",
                 "text": "step2.md"
-            },
-            {
-                "title": "Шаг 3 - Запускаем Node Exporter",
-                "text": "step3.md"
-            },
-            {
-                "title": "Шаг 4 - Смотрим метрики",
-                "text": "step4.md"
             }
         ],
         "intro": {
@@ -39,10 +31,10 @@
         "showdashboard": true,
         "dashboards": [{"name": "Prometheus", "port": 9090}],
         "uilayout": "editor-terminal",
-        "uisettings": "yaml",
+        "uisettings": "py",
         "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
     },
     "backend": {
-      "imageid": "docker-direct"
+      "imageid": "python:3.6"
     }
 }

@@ -1,22 +1,34 @@
 Сконфигурируем Prometheus
 
-<pre class="file" data-filename="prometheus.yaml" data-target="replace">
-global:
-  scrape_interval:     15s
-  evaluation_interval: 15s
-scrape_configs:
-  - job_name: 'prometheus'
-    static_configs:
-      - targets: ['127.0.0.1:9090']
-  - job_name: 'node_exporter'
-    static_configs:
-      - targets: ['127.0.0.1:9100']
+<pre class="file" data-filename="app.py" data-target="replace">
+import os
+import json
+import random
+import time
+
+from flask import Flask, abort
+
+app = Flask(__name__)
+
+FAIL_RATE=float(os.environ.get('FAIL_RATE', '0.01'))
+SLOW_RATE=float(os.environ.get('SLOW_RATE', '0.01'))
+
+def do_staff():
+    time.sleep(random.gammavariate(alpha=3, beta=.1))
+
+def do_slow():
+    time.sleep(random.gammavariate(alpha=30, beta=0.3))
+
+@app.route('/probe')
+def probe():
+    if random.random() < FAIL_RATE:
+        abort(500)
+    if random.random() < SLOW_RATE:
+        do_slow()
+    else:
+        do_staff()
+    return "I'm ok! I'm not alcoholic"
+
+if __name__ == "__main__":
+    app.run(host='0.0.0.0', port='80', debug=True)
 </pre>
-
-scrape_interval - это частота, с которой Prometheus ходит для сбора метрик
-
-evaluation\_interval - это частота, с которой Prometheus вычисляет правила
-
-_9090_ - порт, по которому Prometheus отдает внутренние метрики
-
-_9100_ - порт, по которому Node Exporter отдает свои метрики
