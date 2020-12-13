@@ -32,3 +32,26 @@ def probe():
 if __name__ == "__main__":
     app.run(host='0.0.0.0', port='80', debug=True)
 </pre>
+
+
+Запускаем сервис:
+```
+python app.py
+```{{execute}}
+
+После запуска, по ссылке: [app](https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/probe) можем смотреть на ответ от сервера. 
+
+Либо с помощью curl:
+
+
+```
+curl localhost/probe
+```{{execute}}
+
+Запускаем прометеус: 
+
+```
+docker run -d --net=host \
+     -v /root/prometheus.yaml:/etc/prometheus/prometheus.yml \
+     prom/prometheus
+```{{execute}}
