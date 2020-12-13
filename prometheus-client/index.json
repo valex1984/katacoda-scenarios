@@ -7,11 +7,11 @@
     "details": {
         "steps": [
             {
-                "title": "Шаг 1 - Конфигурируем прометеус",
+                "title": "Стартуем приложение",
                 "text": "step1.md"
             },
             {
-                "title": "Шаг 2 - Стартуем Prometheus",
+                "title": "Инструментируем сервис метриками",
                 "text": "step2.md"
             }
         ],
@@ -25,7 +25,11 @@
         }
     },
     "files": [
-        "prometheus.yaml"
+        "prometheus.yaml",
+        "app.py",
+        "Dockerfile",
+        "requirements.txt",
+        "metrics.py"
     ],
     "environment": {
         "showdashboard": true,
