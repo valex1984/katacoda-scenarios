@@ -9,6 +9,11 @@
         "title": "Prometheus",
         "description": "Prometheus",
         "id": "prometheus"
+      },
+      {
+        "title": "Prometheus Client",
+        "description": "Prometheus Client",
+        "id": "prometheus-client"
       }
     ]
   }
