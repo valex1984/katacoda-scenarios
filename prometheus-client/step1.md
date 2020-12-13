@@ -34,11 +34,15 @@ if __name__ == "__main__":
 </pre>
 
 <pre class="file" data-filename="Dockerfile" data-target="replace">
-FROM python:3.5-onbuild
+FROM python:3.7-slim
 
-EXPOSE 8000
+EXPOSE 8080
+COPY requirements.txt /requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
 
-ENTRYPOINT ["python", "/usr/src/app/app.py"]
+COPY app.py /app.py
+
+CMD ["python", "/app.py"]
 </pre>
 
 <pre class="file" data-filename="requirements.txt" data-target="replace">
@@ -48,7 +52,7 @@ prometheus-client==0.7.1
 
 Запускаем сервис:
 ```
-docker built -t app:v1 .
+docker build -t app:v1 .
 ```{{execute}}
 
 ```
