@@ -1,6 +1,6 @@
 Сконфигурируем Prometheus
 
-<pre class="file" data-filename="app/app.py" data-target="replace">
+<pre class="file" data-filename="./app/app.py" data-target="replace">
 import os
 import json
 import random
@@ -45,7 +45,7 @@ COPY app /
 CMD ["python", "/app/app.py"]
 </pre>
 
-<pre class="file" data-filename="app/requirements.txt" data-target="replace">
+<pre class="file" data-filename="./app/requirements.txt" data-target="replace">
 Flask==1.1.2
 prometheus-client==0.7.1
 </pre>
