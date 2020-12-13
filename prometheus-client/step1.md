@@ -1,6 +1,6 @@
 Сконфигурируем Prometheus
 
-<pre class="file" data-filename="app.py" data-target="replace">
+<pre class="file" data-filename="app/app.py" data-target="replace">
 import os
 import json
 import random
@@ -33,27 +33,26 @@ if __name__ == "__main__":
     app.run(host='0.0.0.0', port='80', debug=True)
 </pre>
 
-<pre class="file" data-filename="Dockerfile" data-target="replace">
+<pre class="file" data-filename="app/Dockerfile" data-target="replace">
 FROM python:3.7-slim
 
 EXPOSE 8080
 COPY requirements.txt /requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY app.py /app.py
-COPY metrics.py /metrics.py
+COPY app /
 
-CMD ["python", "/app.py"]
+CMD ["python", "/app/app.py"]
 </pre>
 
-<pre class="file" data-filename="requirements.txt" data-target="replace">
+<pre class="file" data-filename="app/requirements.txt" data-target="replace">
 Flask==1.1.2
 prometheus-client==0.7.1
 </pre>
 
 Запускаем сервис:
 ```
-docker build -t app:v1 .
+docker build -t app:v1 app/
 ```{{execute}}
 
 ```
