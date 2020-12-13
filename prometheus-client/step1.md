@@ -33,16 +33,31 @@ if __name__ == "__main__":
     app.run(host='0.0.0.0', port='80', debug=True)
 </pre>
 
+<pre class="file" data-filename="Dockerfile" data-target="replace">
+FROM python:3.5-onbuild
+
+EXPOSE 8000
+
+ENTRYPOINT ["python", "/usr/src/app/app.py"]
+</pre>
+
+<pre class="file" data-filename="requirements.txt" data-target="replace">
+Flask==1.1.2
+prometheus-client==0.7.1
+</pre>
 
 Запускаем сервис:
 ```
-python app.py
+docker built -t app:v1 .
+```{{execute}}
+
+```
+docker run -d --net=host app:v1
 ```{{execute}}
 
 После запуска, по ссылке: [app](https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/probe) можем смотреть на ответ от сервера. 
 
 Либо с помощью curl:
-
 
 ```
 curl localhost/probe
