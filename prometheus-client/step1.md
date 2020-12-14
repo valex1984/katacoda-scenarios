@@ -31,13 +31,13 @@ if __name__ == "__main__":
     app.run(host='0.0.0.0', port='80', debug=True)
 </pre>
 
-<pre class="file" data-filename="./app/app.py" data-target="insert" data-marker="    return \"I'm ok! I'm not alcoholic\"">
-    return "I'm ok! I'm not alcoholic"
+<pre class="file" data-filename="./app/app.py" data-target="insert" data-marker="if __name__">
 
 @app.route('/metrics')
 def metrics():
     from prometheus_client import generate_latest
     return generate_latest()
+if __name__
 </pre>
 
 <pre class="file" data-filename="./app/Dockerfile" data-target="replace">
