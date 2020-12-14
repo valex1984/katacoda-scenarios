@@ -13,6 +13,10 @@
             {
                 "title": "Инструментируем сервис метриками",
                 "text": "step2.md"
+            },
+            {
+                "title": "Нагружаем сервис",
+                "text": "step3.md"
             }
         ],
         "intro": {
@@ -25,7 +29,7 @@
         }
     },
     "files": [
-        "prometheus.yaml",
+        "prometheus.yml",
         "./app/app.py",
         "./app/Dockerfile",
         "./app/requirements.txt",

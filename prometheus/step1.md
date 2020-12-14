@@ -13,6 +13,12 @@ scrape_configs:
       - targets: ['127.0.0.1:9100']
 </pre>
 
+```
+docker run -d --net=host \
+     -v /root/prometheus.yaml:/etc/prometheus/prometheus.yml \
+     prom/prometheus
+```{{execute}}
+
 scrape_interval - это частота, с которой Prometheus ходит для сбора метрик
 
 evaluation\_interval - это частота, с которой Prometheus вычисляет правила

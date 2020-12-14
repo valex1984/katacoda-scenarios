@@ -69,5 +69,15 @@ docker build -t app:metrics app/
 
 
 ```
-docker run -d --net=host app:metrics
+docker kill app-v1
+docker run -d --net=host app:metrics --name app-metrics
+```{{execute}}
+
+
+```
+curl localhost/probe
+```{{execute}}
+```
+
+curl localhost/metrics
 ```{{execute}}

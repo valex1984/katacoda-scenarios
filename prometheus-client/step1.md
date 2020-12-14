@@ -50,7 +50,7 @@ docker build -t app:v1 app/
 
 
 ```
-docker run -d --net=host app:v1
+docker run -d --net=host app:v1 --name app-v1
 ```{{execute}}
 
 После запуска, по ссылке: [app](https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/probe) можем смотреть на ответ от сервера. 
