@@ -1,6 +1,6 @@
 Теперь инструментируем сервис метриками. 
 
-<pre class="file" data-filename="app/metrics.py" data-target="replace">
+<pre class="file" data-filename="./app/metrics.py" data-target="replace">
 import time
 from prometheus_client import Counter, Histogram, Info
 from flask import request
@@ -18,7 +18,7 @@ METRICS_REQUEST_COUNT = Counter(
 METRICS_INFO = Info("app_version", "Application Version")
 </pre>
 
-<pre class="file" data-filename="app/metrics.py" data-target="append">
+<pre class="file" data-filename="./app/metrics.py" data-target="append">
 
 def before_request():
     request._prometheus_metrics_request_start_time = time.time()
@@ -35,7 +35,7 @@ def after_request(response):
 
 </pre>
 
-<pre class="file" data-filename="app/metrics.py" data-target="append">
+<pre class="file" data-filename="./app/metrics.py" data-target="append">
 def register_metrics(app, app_version=None, app_config=None):
     app.before_request(before_request)
     app.after_request(after_request)
@@ -43,7 +43,7 @@ def register_metrics(app, app_version=None, app_config=None):
 </pre>
 
 
-<pre class="file" data-filename="app/app.py" data-target="replace">
+<pre class="file" data-filename="./app/app.py" data-target="replace">
 import os
 import json
 import random
@@ -83,3 +83,12 @@ if __name__ == "__main__":
     register_metrics(app)
     app.run(host='0.0.0.0', port='80', debug=True)
 </pre>
+
+```
+docker build -t app:metrics app/
+```{{execute}}
+
+
+```
+docker run -d --net=host app:metrics
+```{{execute}}

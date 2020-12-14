@@ -1,5 +1,3 @@
-Сконфигурируем Prometheus
-
 <pre class="file" data-filename="./app/app.py" data-target="replace">
 import os
 import json
@@ -46,10 +44,10 @@ Flask==1.1.2
 prometheus-client==0.7.1
 </pre>
 
-Запускаем сервис:
 ```
 docker build -t app:v1 app/
 ```{{execute}}
+
 
 ```
 docker run -d --net=host app:v1
