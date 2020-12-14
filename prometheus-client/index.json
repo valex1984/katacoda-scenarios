@@ -26,10 +26,10 @@
     },
     "files": [
         "prometheus.yaml",
-        "app.py",
-        "Dockerfile",
-        "requirements.txt",
-        "metrics.py"
+        "./app/app.py",
+        "./app/Dockerfile",
+        "./app/requirements.txt",
+        "./app/metrics.py"
     ],
     "environment": {
         "showdashboard": true,
