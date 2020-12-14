@@ -42,6 +42,12 @@ def register_metrics(app, app_version=None, app_config=None):
     METRICS_INFO.info({"version": "1", "config": "develop"})
 </pre>
 
+<pre class="file" data-filename="./app/app.py" data-target="insert" data-marker="from flask import Flask, abort">
+from flask import Flask, abort
+
+from metrics import register_metrics
+</pre>
+
 
 <pre class="file" data-filename="./app/app.py" data-target="replace">
 import os
