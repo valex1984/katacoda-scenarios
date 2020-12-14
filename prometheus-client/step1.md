@@ -25,19 +25,20 @@ def probe():
         do_slow()
     else:
         do_staff()
-    return 'OK'
+    return "I'm ok! I'm not alcoholic"
 
-if __name__ == "__main__":
+if __name__ == '__main__':
     app.run(host='0.0.0.0', port='80', debug=True)
 </pre>
 
-<pre class="file" data-filename="./app/app.py" data-target="insert" data-marker="    return 'OK'">
-    return 'OK'
+<pre class="file" data-filename="./app/app.py" data-target="insert" data-marker="if __name__ == '__main__'">
 
 @app.route('/metrics')
 def metrics():
     from prometheus_client import generate_latest
     return generate_latest()
+
+if __name__ == '__main__':
 </pre>
 
 <pre class="file" data-filename="./app/Dockerfile" data-target="replace">
