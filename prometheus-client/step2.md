@@ -70,7 +70,7 @@ docker build -t app:metrics app/
 
 ```
 docker kill app-v1
-docker run -d --net=host app:metrics --name app-metrics
+docker run -d --net=host --name=app-metrics app:metrics 
 ```{{execute}}
 
 

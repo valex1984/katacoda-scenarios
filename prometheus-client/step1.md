@@ -8,8 +8,8 @@ from flask import Flask, abort
 
 app = Flask(__name__)
 
-FAIL_RATE=float(os.environ.get('FAIL_RATE', '0.2'))
-SLOW_RATE=float(os.environ.get('SLOW_RATE', '0.1'))
+FAIL_RATE=float(os.environ.get('FAIL_RATE', '0.05'))
+SLOW_RATE=float(os.environ.get('SLOW_RATE', '0.00'))
 
 def do_staff():
     time.sleep(random.gammavariate(alpha=3, beta=.1))
@@ -50,13 +50,13 @@ docker build -t app:v1 app/
 
 
 ```
-docker run -d --net=host app:v1 --name app-v1
+docker run -d --net=host --name=app-v1 app:v1 
 ```{{execute}}
-
-После запуска, по ссылке: [app](https://[[HOST_SUBDOMAIN]]-80-[[KATACODA_HOST]].environments.katacoda.com/probe) можем смотреть на ответ от сервера. 
-
-Либо с помощью curl:
 
 ```
 curl localhost/probe
+```{{execute}}
+
+```
+curl localhost/metrics
 ```{{execute}}

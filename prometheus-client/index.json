@@ -1,13 +1,17 @@
 {
     "pathwayTitle": "Prometheus",
-    "title": "Инструментируем сервис метриками с Prometheus",
-    "description": "Инструментируем сервис метриками с Prometheus",
+    "title": "Prometheus",
+    "description": "Prometheus",
     "difficulty": "beginner",
     "time": "10-15 minutes",
     "details": {
         "steps": [
             {
-                "title": "Стартуем приложение",
+                "title": "Запускаем прометеус",
+                "text": "step0.md"
+            },
+            {
+                "title": "Стартуем сервис",
                 "text": "step1.md"
             },
             {
@@ -15,8 +19,12 @@
                 "text": "step2.md"
             },
             {
-                "title": "Нагружаем сервис",
+                "title": "Нагружаем сервис и смотрим метрики",
                 "text": "step3.md"
+            },
+            {
+                "title": "Задание",
+                "text": "step4.md"
             }
         ],
         "intro": {
