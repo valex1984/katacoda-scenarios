@@ -10,8 +10,8 @@ from flask import Flask, abort
 
 app = Flask(__name__)
 
-FAIL_RATE=float(os.environ.get('FAIL_RATE', '0.01'))
-SLOW_RATE=float(os.environ.get('SLOW_RATE', '0.01'))
+FAIL_RATE=float(os.environ.get('FAIL_RATE', '0.2'))
+SLOW_RATE=float(os.environ.get('SLOW_RATE', '0.1'))
 
 def do_staff():
     time.sleep(random.gammavariate(alpha=3, beta=.1))
@@ -33,15 +33,11 @@ if __name__ == "__main__":
     app.run(host='0.0.0.0', port='80', debug=True)
 </pre>
 
-<pre class="file" data-filename="app/Dockerfile" data-target="replace">
+<pre class="file" data-filename="./app/Dockerfile" data-target="replace">
 FROM python:3.7-slim
-
-EXPOSE 8080
 COPY requirements.txt /requirements.txt
 RUN pip install --no-cache-dir -r requirements.txt
-
-COPY app /
-
+COPY . /app
 CMD ["python", "/app/app.py"]
 </pre>
 
@@ -65,12 +61,4 @@ docker run -d --net=host app:v1
 
 ```
 curl localhost/probe
-```{{execute}}
-
-Запускаем прометеус: 
-
-```
-docker run -d --net=host \
-     -v /root/prometheus.yaml:/etc/prometheus/prometheus.yml \
-     prom/prometheus
 ```{{execute}}
