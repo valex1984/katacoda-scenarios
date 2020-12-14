@@ -31,7 +31,7 @@ if __name__ == "__main__":
     app.run(host='0.0.0.0', port='80', debug=True)
 </pre>
 
-<pre class="file" data-filename="./app/app.py" data-target="insert" data-marker=" return \"I'm ok! I'm not alcoholic\"">
+<pre class="file" data-filename="./app/app.py" data-target="insert" data-marker="    return \"I'm ok! I'm not alcoholic\"">
     return "I'm ok! I'm not alcoholic"
 
 @app.route('/metrics')
