@@ -31,12 +31,14 @@ if __name__ == "__main__":
     app.run(host='0.0.0.0', port='80', debug=True)
 </pre>
 
-<pre class="file" data-filename="./app/app.py" data-target="insert" data-marker="from flask import Flask, abort">
-from flask import Flask, abort
+<pre class="file" data-filename="./app/app.py" data-target="insert" data-marker=" return \"I'm ok! I'm not alcoholic\"">
+    return "I'm ok! I'm not alcoholic"
 
-from metrics import register_metrics
+@app.route('/metrics')
+def metrics():
+    from prometheus_client import generate_latest
+    return generate_latest()
 </pre>
-
 
 <pre class="file" data-filename="./app/Dockerfile" data-target="replace">
 FROM python:3.7-slim

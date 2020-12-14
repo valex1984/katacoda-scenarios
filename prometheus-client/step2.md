@@ -48,6 +48,14 @@ from flask import Flask, abort
 from metrics import register_metrics
 </pre>
 
+<pre class="file" data-filename="./app/app.py" data-target="insert" data-marker=" return \"I'm ok! I'm not alcoholic\"">
+    return "I'm ok! I'm not alcoholic"
+
+@app.route('/metrics')
+def metrics():
+    from prometheus_client import generate_latest
+    return generate_latest()
+</pre>
 
 <pre class="file" data-filename="./app/app.py" data-target="replace">
 import os
