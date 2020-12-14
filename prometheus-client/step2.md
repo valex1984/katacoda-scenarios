@@ -48,54 +48,19 @@ from flask import Flask, abort
 from metrics import register_metrics
 </pre>
 
-<pre class="file" data-filename="./app/app.py" data-target="insert" data-marker=" return \"I'm ok! I'm not alcoholic\"">
-    return "I'm ok! I'm not alcoholic"
+<pre class="file" data-filename="./app/app.py" data-target="insert" data-marker="if __name__ == '__main__':">
 
 @app.route('/metrics')
 def metrics():
     from prometheus_client import generate_latest
     return generate_latest()
+
+if __name__ == '__main__':
 </pre>
 
-<pre class="file" data-filename="./app/app.py" data-target="replace">
-import os
-import json
-import random
-import time
-
-from flask import Flask, abort
-
-from metrics import register_metrics
-
-app = Flask(__name__)
-
-FAIL_RATE=float(os.environ.get('FAIL_RATE', '0.01'))
-SLOW_RATE=float(os.environ.get('SLOW_RATE', '0.01'))
-
-def do_staff():
-    time.sleep(random.gammavariate(alpha=3, beta=.1))
-
-def do_slow():
-    time.sleep(random.gammavariate(alpha=30, beta=0.3))
-
-@app.route('/probe')
-def probe():
-    if random.random() < FAIL_RATE:
-        abort(500)
-    if random.random() < SLOW_RATE:
-        do_slow()
-    else:
-        do_staff()
-    return "I'm ok! I'm not alcoholic"
-
-@app.route('/metrics')
-def metrics():
-    from prometheus_client import generate_latest
-    return generate_latest()
-
-if __name__ == "__main__":
+<pre class="file" data-filename="./app/app.py" data-target="insert" data-marker="if __name__ == '__main__':">
+if __name__ == '__main__':
     register_metrics(app)
-    app.run(host='0.0.0.0', port='80', debug=True)
 </pre>
 
 ```
