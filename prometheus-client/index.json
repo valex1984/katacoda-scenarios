@@ -33,7 +33,8 @@
         "./app/app.py",
         "./app/Dockerfile",
         "./app/requirements.txt",
-        "./app/metrics.py"
+        "./app/metrics.py",
+        "./targets/app.yml"
     ],
     "environment": {
         "showdashboard": true,

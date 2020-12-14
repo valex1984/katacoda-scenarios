@@ -13,7 +13,7 @@ scrape_configs:
 - job_name: prometheus
   file_sd_configs:
     - files:
-      - prometheus/*.yml
+      - '/targets/*.yml'
       refresh_interval: 10s
     metrics_path: /metrics
 </pre>
@@ -21,11 +21,11 @@ scrape_configs:
 ```
 docker run -d --net=host \
    -v /root/prometheus.yml:/etc/prometheus/prometheus.yml \
-   -v /root/prometheus:/prometheus\
+   -v /root/targets:/targets\
    prom/prometheus
 ```{{execute}}
 
-<pre class="file" data-filename="./prometheus/targets.yml" data-target="replace">
+<pre class="file" data-filename="./targets/app.yml" data-target="replace">
 - targets:
   - localhost:80
 </pre>
