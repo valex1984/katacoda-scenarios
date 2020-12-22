@@ -1,3 +1,19 @@
+
+>>Q1: Постройте график с количеством RPS, округленное до целых чисел<<
+=~= (2|3|4)
+
+>>Q2: Enter the string containing test<<
+=~= test
+
+>>Q3: Multiple Choice <<
+[*] Correct
+[*] Correct
+[ ] Incorrect
+
+>>Q4: Single Choice <<
+(*) Correct
+( ) Incorrect
+
 Запускаем прометеус
 
 Сначала запустим прометеус. Для этого необходимо создать конфигурационной файл. 
