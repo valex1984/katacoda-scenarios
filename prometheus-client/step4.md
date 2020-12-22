@@ -1,5 +1,3 @@
-Дашборд Prometheus доступ [здесь](https://[[HOST_SUBDOMAIN]]-9090-[[KATACODA_HOST]].environments.katacoda.com/)
-
 ## Задание
 Постройте график rps и введите получившееся среднее значение rps на метод /probe в целых числах
 
