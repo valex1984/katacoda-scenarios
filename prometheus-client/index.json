@@ -24,7 +24,12 @@
             },
             {
                 "title": "Задание",
-                "text": "step4.md"
+                "text": "step4.md",
+                "verify": "verify.sh"
+            },
+            {
+                "title": "Подсказка",
+                "text": "step4-answer.md"
             }
         ],
         "intro": {
