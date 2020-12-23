@@ -1,14 +1,9 @@
 {
     "scenarios": [
       {
-        "title": "Minikube-example",
-        "description": "Minikube example",
-        "id": "minikube-example"
-      },
-      {
-        "title": "Prometheus",
-        "description": "Prometheus",
-        "id": "prometheus"
+        "title": "Verified steps",
+        "description": "Verified steps",
+        "id": "verified-steps"
       },
       {
         "title": "Prometheus Client",

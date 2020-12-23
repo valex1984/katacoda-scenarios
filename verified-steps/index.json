@@ -1,0 +1,27 @@
+{
+    "title": "Verifying user actions during scenario",
+    "description": "Run checks to make sure the user can proceed. Scenario also offers user solutions if they struggle",
+    "noindex": true,
+    "details": {
+        "steps": [
+            {
+                "title": "Step 1 - Verify",
+                "text": "step1.md",
+                "verify": "step1-verify.sh"
+            },
+            {
+                "title": "Step 2 - Show Answers",
+                "text": "step2.md",
+                "answer": "step2-answer.md"
+            }
+        ]
+    },
+    "environment": {
+        "hideintro": true,
+        "hidefinish": true,
+        "uilayout": "terminal"
+    },
+    "backend": {
+        "imageid": "git"
+    }
+}
