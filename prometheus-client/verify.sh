@@ -1,8 +1,8 @@
 #!/bin/bash
-TOKEN=`awk 'NR==1' results.txt  | awk -F: '{print $2}' | sed -e 's/ //g'`
-RPS=`awk 'NR==2' results.txt  | awk -F: '{print $2}' | sed -e 's/ //g'`
-LATENCY=`awk 'NR==3' results.txt  | awk -F: '{print $2}' | sed -e 's/ //g'`
-ERRORS=`awk 'NR==4' results.txt  | awk -F: '{print $2}' | sed -e 's/ //g'`
+TOKEN=`awk 'NR==1' /root/results.txt  | awk -F: '{print $2}' | sed -e 's/ //g'`
+RPS=`awk 'NR==2' /root/results.txt  | awk -F: '{print $2}' | sed -e 's/ //g'`
+LATENCY=`awk 'NR==3' /root/results.txt  | awk -F: '{print $2}' | sed -e 's/ //g'`
+ERRORS=`awk 'NR==4' /root/results.txt  | awk -F: '{print $2}' | sed -e 's/ //g'`
 
 
 if (( $RPS > 2  &&  $RPS < 4)) ; then RPS_OK=1; else RPS_OK=0; fi
