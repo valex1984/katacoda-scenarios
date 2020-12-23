@@ -25,7 +25,6 @@
             {
                 "title": "Задание",
                 "text": "step4.md",
-                "verify": "verify.sh",
                 "answer": "step4-answer.md"
             }
         ],
