@@ -25,11 +25,8 @@
             {
                 "title": "Задание",
                 "text": "step4.md",
-                "verify": "verify.sh"
-            },
-            {
-                "title": "Подсказка",
-                "text": "step4-answer.md"
+                "verify": "verify.sh",
+                "answer": "step4-answer.md"
             }
         ],
         "intro": {
@@ -47,7 +44,8 @@
         "./app/Dockerfile",
         "./app/requirements.txt",
         "./app/metrics.py",
-        "./targets/app.yml"
+        "./targets/app.yml",
+        "results.txt"
     ],
     "environment": {
         "showdashboard": true,
