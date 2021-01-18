@@ -7,4 +7,4 @@ if (( $RPS > 2  &&  $RPS < 4)) ; then RPS_OK=1; else RPS_OK=0; fi
 if (( $ERRORS > 1  &&  $ERRORS < 40)) ; then ERRORS_OK=1; else ERRORS_OK=0; fi
 if (( $LATENCY > 200  &&  $LATENCY < 600)) ; then LATENCY_OK=1; else LATENCY_OK=0; fi
 
-[[ $RPS_OK == 1 && $ERRORS_OK == 1 && $LATENCY_OK == 1 ]] || echo "done"
+[[ $RPS_OK == 1 && $ERRORS_OK == 1 && $LATENCY_OK == 1 ]] && echo "done"
