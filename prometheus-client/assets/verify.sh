@@ -1,5 +1,3 @@
-#!/bin/bash
-
 TOKEN=`awk 'NR==1' /root/results.txt  | awk -F: '{print $2}' | sed -e 's/ //g'`
 RPS=`awk 'NR==2' /root/results.txt  | awk -F: '{print $2}' | sed -e 's/ //g'`
 LATENCY=`awk 'NR==3' /root/results.txt  | awk -F: '{print $2}' | sed -e 's/ //g'`

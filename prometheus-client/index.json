@@ -51,6 +51,13 @@
         "./targets/app.yml",
         "results.txt"
     ],
+    "assets": {
+      "host01": [
+          {"file": "send.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+          {"file": "verify.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+          {"file": "verify.sh", "target": "/tmp", "chmod": "+x"}
+      ]
+    },
     "environment": {
         "showdashboard": true,
         "dashboards": [{"name": "Prometheus", "port": 9090}],
