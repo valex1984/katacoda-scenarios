@@ -38,6 +38,14 @@
             "background": "courseBase.sh",
             "credits": ""
         },
+        "assets": {
+            "host01": [
+                {"file": "send.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+                {"file": "verify.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+                {"file": "load.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+                {"file": "verify.sh", "target": "/tmp", "chmod": "+x"}
+            ]
+        },
         "finish": {
             "text": "finish.md"
         }
@@ -51,14 +59,6 @@
         "./targets/app.yml",
         "results.txt"
     ],
-    "assets": {
-      "host01": [
-          {"file": "send.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-          {"file": "verify.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-          {"file": "load.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-          {"file": "verify.sh", "target": "/tmp", "chmod": "+x"}
-      ]
-    },
     "environment": {
         "showdashboard": true,
         "dashboards": [{"name": "Prometheus", "port": 9090}],
