@@ -56,7 +56,6 @@
         "./app/Dockerfile",
         "./app/requirements.txt",
         "./app/metrics.py",
-        "./targets/app.yml",
         "results.txt"
     ],
     "environment": {

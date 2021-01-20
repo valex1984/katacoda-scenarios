@@ -34,7 +34,7 @@ def probe():
     return "I'm ok! I'm not alcoholic"
 
 if __name__ == '__main__':
-    app.run(host='0.0.0.0', port='80', debug=True)
+    app.run(host='0.0.0.0', port='8000', debug=True)
 </pre>
 
 Теперь давайте запустим этот сервис с помощью Docker. Для этого нам понадобится файл с описанием зависимостей для Python и Dockerfile.
@@ -73,7 +73,7 @@ docker run -d --net=host --name=app-v1 app:v1
 Проверить работоспособность можно с помощью curl.
 
 ```
-curl localhost/probe
+curl localhost:8000/probe
 ```{{execute}}
 
 Пока наш сервис не предоставляем никаких метрик в Прометеус, но в шаге 3 мы исправим это.
