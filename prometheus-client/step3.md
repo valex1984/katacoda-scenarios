@@ -41,7 +41,7 @@ sum(rate(app_request_count_total{endpoint="/probe"}[5m]))
 
 ![App_](./assets/katacoda_promql_bucket.png)
 
-Посчитаем медианное значение времени ответа с помощью вот такого запроса.
+Посчитать медианное значение времени ответа можно с помощью вот такого запроса.
 
 histogram_quantile(0.5, (sum by (le) (rate(app_request_latency_seconds_bucket{endpoint="/probe"}[1m]))))
 
