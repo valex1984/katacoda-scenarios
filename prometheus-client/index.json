@@ -3,7 +3,7 @@
     "title": "Prometheus",
     "description": "Prometheus",
     "difficulty": "beginner",
-    "time": "10-15 minutes",
+    "time": "30 minutes",
     "details": {
         "steps": [
             {
@@ -25,12 +25,6 @@
             {
                 "title": "Задание",
                 "text": "step4.md",
-                "verify": "verify.sh",
-                "answer": "step4-answer.md"
-            },
-            {
-                "title": "Задание выполнено",
-                "text": "step5.md"
             }
         ],
         "intro": {

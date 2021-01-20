@@ -27,15 +27,20 @@ scrape_configs:
     - targets: ['localhost:8000']
 </pre>
 
-Давайте запустим сервис Prometheus-a. Для этого воспользуемся докером и официальным образом prom/prometheus. Примонитируем внутрь контейнера конфигурационный файл и директорию targets.
+Давайте запустим сервис Prometheus-a. Для этого воспользуемся докером и официальным образом prom/prometheus. Примонитируем внутрь контейнера конфигурационный файл.
 
 ```
 docker run -d --net=host \
    -v /root/prometheus.yml:/etc/prometheus/prometheus.yml \
-   -v /root/targets:/targets\
    prom/prometheus
 ```{{execute}}
 
 Проверить, работает ли Prometheus можно зайдя по ссылке на его дашборд. В разделе targets будет пусто, и там появятся записи, как только мы добавим файлы конфигруации в директорию targets на диске.
 
 Дашборд Prometheus доступ [здесь](https://[[HOST_SUBDOMAIN]]-9090-[[KATACODA_HOST]].environments.katacoda.com/)
+
+Если зайти в раздел Status -> Targets, то там мы увидим список задач и таргетов: одну задачу app и один таргет в ней http://localhost:8000/metrics . После первого скрейпа состояние таргета изменится с UNKNOWN на DOWN, потому что в нашем сервисе еще не реализован эндпоинт, который бы отдавал метрики. 
+
+![TargetDown](./assets/katacoda_prom_target_down.png)
+
+В следующем шаге мы с вами добавим в наш сервис этот эндпоинт, воспользовавшись клиентской библиотекой от Prometheus.
