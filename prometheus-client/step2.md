@@ -1,10 +1,21 @@
 Теперь инструментируем сервис метриками. 
 
-Добавим файл metrics.py, в котором воспользуемся клиентской библиотекой прометеуса для того, чтобы отдавать метрики. Скорее всего для разных фреймворков уже существуют готовые плагины, но мы воспользуемся голой библиотекой, чтобы немного разобраться, как все работает под капотом. 
+Поскольку Prometheus работает по pull модели сбора метрик. Он сам забирает метрики у приложения по протоколу HTTP. Т.е. чтобы наше приложение начать мониторить с помощью Prometheus-а мы должны добавить эндпоинт в наш сервис, который бы отдавал метрики в формате prometheus-a. По умолчанию в Prometheus это эндпоинт /metrics. 
+
+В сервисе мы хотим мониторить RPS и распределение времени ответа (latency).
+
+И прежде чем отдавать метрики, мы должны начать их считать.
+
+Добавим файл metrics.py, в котором воспользуемся клиентской библиотекой Prometheus для того, чтобы считать метрики. Скорее всего для разных фреймворков уже существуют готовые плагины, но мы воспользуемся библиотекой, чтобы немного разобраться, как все работает под капотом. 
 
 В данном коде мы определяем 2 метрики: 
-* гистограмма времени ответа, с метками method и endpoint. И названием метрики app_request_latency_seconds  - время ответа в секундах
-* счетчик запросов - app_request_count. Метки: method, endpoint, http_status.
+* app_requst_latency_seconds - время ответа в секундах. Поскольку мы хотим считать распределение ответа и квантили (перцентили), то эта метрика должна быть гистограммой. Для каждой метрики мы можем определить набор меток для нее. Например, метки method и endpoint.
+
+* app_request_count - это количество запросов. Поскольку мы хотим считать RPS, то это должен быть counter. И для этой метрики определим метки: method, endpoint, http_status.
+
+В prometheus есть неявное (неформальное) соглашение о названии метрик. Метрики типа гистограмы должны заканчиваться на _bucket, а метрики типа счетчик (counter) должны заканчиваться на _total. Клиентская библиотека это сделает за нас, и в итоге, когда мы будем делать запросы к Prometheus метрики будут называться app_request_latency_seconds_bucket и app_requests_count_total.
+
+Откройте закладку файла ./app/metrics.py в редакторе и введите в него код ниже, либо нажмите кнопку "Copy to Editor". 
 
 <pre class="file" data-filename="./app/metrics.py" data-target="replace">
 import time
@@ -24,11 +35,11 @@ METRICS_REQUEST_COUNT = Counter(
 METRICS_INFO = Info("app_version", "Application Version")
 </pre>
 
+Таким образом мы просто определили, какие метрики мы хотим считать. Теперь давайте их начнем считать. Опять-таки воспользуемся для этого библиотекой от Prometheus.
 
-Создаем middleware, которое выполняется до запроса и после. 
-До запроса запоминаем время его начала. 
-После запроса высчитываем request_latency и инкрементим количество запросов, передавая нужные метки.
+Создаем middleware, которое выполняется до запроса и после. До запроса запоминаем время его начала. После запроса высчитываем request_latency и инкрементим количество запросов, передавая нужные метки.
 
+Откройте закладку файла ./app/metrics.py в редакторе и добавьте код ниже, либо нажмите кнопку "Copy to Editor". 
 <pre class="file" data-filename="./app/metrics.py" data-target="append">
 
 def before_request():
@@ -44,18 +55,14 @@ def after_request(response):
     ).inc()
     return response
 
-</pre>
-
-Как видим, клиентская библиотека прометеуса за нас решает проблемы с тем, какие бакеты используются для гистограммы. И нам не нужно самим вычислять на клиенте все данные и распределять их по бакетам.
-
-
-Регистрируем middleware
-<pre class="file" data-filename="./app/metrics.py" data-target="append">
 def register_metrics(app, app_version=None, app_config=None):
     app.before_request(before_request)
     app.after_request(after_request)
     METRICS_INFO.info({"version": "1", "config": "develop"})
+
 </pre>
+
+Импортируем middleware.
 
 <pre class="file" data-filename="./app/app.py" data-target="insert" data-marker="from flask import Flask, abort">
 from flask import Flask, abort
@@ -63,7 +70,14 @@ from flask import Flask, abort
 from metrics import register_metrics
 </pre>
 
-Добавляем /metrics путь. Для того, чтобы отдать данные в формате прометеуса опять используем библиотечную функцию.
+Регистрируем middleware
+
+<pre class="file" data-filename="./app/app.py" data-target="insert" data-marker="if __name__ == '__main__':">
+if __name__ == '__main__':
+    register_metrics(app)
+</pre>
+
+Теперь необходимо добавить эндпоинт /metrics, по которому Prometheus будет забирать метрики. Для того, чтобы отдать данные в формате прометеуса опять используем библиотечную функцию.
 
 <pre class="file" data-filename="./app/app.py" data-target="insert" data-marker="if __name__ == '__main__':">
 
@@ -75,12 +89,6 @@ def metrics():
 if __name__ == '__main__':
 </pre>
 
-Регистрируем middleware
-
-<pre class="file" data-filename="./app/app.py" data-target="insert" data-marker="if __name__ == '__main__':">
-if __name__ == '__main__':
-    register_metrics(app)
-</pre>
 
 После того, как инструментировали код, давайте пересоберем приложение
 

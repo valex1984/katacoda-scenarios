@@ -7,4 +7,4 @@
 
 Нагружаем сервис с помощью команды:
 ```
-docker run -d --net=host -it httpd:alpine sh -c "while true; do ab -n50 127.0.0.1/probe; sleep 0; done"```{{execute}}
+load.sh```{{execute}}
