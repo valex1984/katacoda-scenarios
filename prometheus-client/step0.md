@@ -23,8 +23,9 @@ global:
   scrape_interval:     15s
 scrape_configs:
 - job_name: app
+  metrics_path: '/metrics'
   static_configs:
-    - targets: ['localhost:8000']
+    - targets: ['127.0.0.1:8000']
 </pre>
 
 Давайте запустим сервис Prometheus-a. Для этого воспользуемся докером и официальным образом prom/prometheus. Примонитируем внутрь контейнера конфигурационный файл.
