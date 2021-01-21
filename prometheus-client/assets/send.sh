@@ -21,6 +21,6 @@ curl -s -v -d @-  \
 -H "Authorization: Bearer $token" -H "Content-Type: application/json" \
 -X POST https://bootcamp.pcbltools.ru/services/result-service/save > /tmp/send.log 2>&1
 
-cp /tmp/send.log /root/exercise
+cp /tmp/send.log /root/
 
-echo -en "\e[91mLogs created at /root/exercise/send.log\e[0m\n"
+echo -en "\e[91mLogs created at /root/send.log\e[0m\n"
