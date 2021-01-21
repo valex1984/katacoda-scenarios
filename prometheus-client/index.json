@@ -8,11 +8,11 @@
         "steps": [
             {
                 "title": "Создаем и запускаем сервис",
-                "text": "step1.md"
+                "text": "step0.md"
             },
             {
                 "title": "Запускаем прометеус",
-                "text": "step0.md"
+                "text": "step1.md"
             },
             {
                 "title": "Инструментируем сервис",
@@ -36,8 +36,7 @@
             "host01": [
                 {"file": "send.sh", "target": "/usr/local/bin/", "chmod": "+x"},
                 {"file": "verify.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-                {"file": "load.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-                {"file": "verify.sh", "target": "/tmp", "chmod": "+x"}
+                {"file": "load.sh", "target": "/usr/local/bin/", "chmod": "+x"}
             ]
         },
         "finish": {

@@ -1,47 +1,79 @@
-Теперь давайте запустим Prometheus. Prometheus - это система мониторинга с открытым кодом, работающая по pull-модели сбора метрик. Prometheus также предоставляет возможность запрашивать данные с помощью языка запросов PromQL. 
+Напишем и запустим сервис, который будет эмулировать работу реального приложения. А в следующем шаге инструментируем, чтобы он отдавал метрики для Prometheus.
 
-Prometheus написан на go и распространяется в виде бинарного запускаемого файла. Чтобы запустить Prometheus достаточно запустить исполняемый файл и передать ему конфигурацию. 
+Сервис напишем на питоне. По пути /probe этот сервис будет отвечать с некоторой задержкой, которая будет определяться с помощью некоторого распределения вероятностей, и также с некоторой вероятностью приложения иногда будет 500тить. 
 
-Минимальный конфиг для Prometheus-а представляется собой файл в формате yaml. И в файле есть две секции: global - для глобальных настроек и scrape_configs - конфиги скрапинга. 
+Откройте закладку файла app.py в редакторе и введите в него код на Питоне ниже, либо нажмите кнопку "Copy to Editor". Это основной файл нашего приложения.
 
-Prometheus использует pull модель сбора метрик, а это значит, что с некоторой периодичностью Prometheus ходит в сервисы, которые мониторит и забирает у них метрики в формате Prometheus expose format по протоколу HTTP. Это процесс называется скрапингом (scaping, от английского scrape - выскабливать). А сервисы, которые должен мониторить Prometheus таргетами (targets от англисйского target - цель). Поэтому основные настройки Prometheus-а, которые мы будем использовать в конфиге, будут относится к этому процессу.  
+<pre class="file" data-filename="./app/app.py" data-target="replace">
+import os
+import json
+import random
+import time
 
-Глобальные настройки. 
+from flask import Flask, abort
 
-    scrape_interval: 15s - это интервал, с которым Prometheus будет ходить за метриками в таргеты по умолчанию. 
+app = Flask(__name__)
 
-Настройки, описывающие, конкретные таргеты, находятся в разделе scrape_configs. Это раздел представляет собой список задач (job-ов). Задача в контексте Prometheus - это коллекция таргетов, имеющих одно и то же предназначение, плюс настройки скрапинга. Например, приложение может быть в виде 3 экземпляров сервисов, расположенных на разных нодах. Т.е. в терминах Prometheus для мониторинга этого приложения ему нужно 3 таргета.  
+FAIL_RATE=float(os.environ.get('FAIL_RATE', '0.05'))
+SLOW_RATE=float(os.environ.get('SLOW_RATE', '0.00'))
 
-Параметры задачи (job). Прежде всего название job_name. А для описания списка таргетов воспользуемся статическим конфигом - т.е. опишем список таргетов прямо в файле конфигурации. 
+def do_staff():
+    time.sleep(random.gammavariate(alpha=1.5, beta=.1))
 
-Также у Prometheus есть другие возможность получать список таргетов динамически с помощью различных методов обнаружения (service discovery): например, из kubernetes, consul, файлов и т.д.
+def do_slow():
+    time.sleep(random.gammavariate(alpha=30, beta=0.3))
 
-Вот пример простейшего конфига для Prometheus-a. Введите строки ниже в файл prometheus.yml. Вы можете сделать это вручную или нажав кнопку "Copy to Editor".
+@app.route('/probe')
+def probe():
+    if random.random() < FAIL_RATE:
+        abort(500)
+    if random.random() < SLOW_RATE:
+        do_slow()
+    else:
+        do_staff()
+    return "I'm ok! I'm not alcoholic"
 
-<pre class="file" data-filename="prometheus.yml" data-target="replace">
-global:
-  scrape_interval:     15s
-scrape_configs:
-- job_name: app
-  metrics_path: '/metrics'
-  static_configs:
-    - targets: ['127.0.0.1:8000']
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port='8000', debug=True)
 </pre>
 
-Давайте запустим сервис Prometheus-a. Для этого воспользуемся докером и официальным образом prom/prometheus. Примонитируем внутрь контейнера конфигурационный файл.
+Теперь давайте запустим этот сервис с помощью Docker. Для этого нам понадобится файл с описанием зависимостей для Python и Dockerfile.
+
+
+Откройте закладку файла ./app/Dockefile в редакторе и введите в него код ниже, либо нажмите кнопку "Copy to Editor". Это Dockefile.
+
+<pre class="file" data-filename="./app/Dockerfile" data-target="replace">
+FROM python:3.7-slim
+COPY requirements.txt /requirements.txt
+RUN pip install --no-cache-dir -r requirements.txt
+COPY . /app
+CMD ["python", "/app/app.py"]
+</pre>
+
+Откройте закладку файла ./app/Dockefile в редакторе и введите в него код ниже, либо нажмите кнопку "Copy to Editor". Это файл с описанием зависимостей для сервиса
+
+<pre class="file" data-filename="./app/requirements.txt" data-target="replace">
+Flask==1.1.2
+prometheus-client==0.7.1
+</pre>
+
+С помощью команды docker build собираем локальный образ с меткой app:v1. Докер образ будет хранится локально.
 
 ```
-docker run -d --net=host \
-   -v /root/prometheus.yml:/etc/prometheus/prometheus.yml \
-   prom/prometheus
+docker build -t app:v1 app/
 ```{{execute}}
 
-Проверить, работает ли Prometheus можно зайдя по ссылке на его дашборд. В разделе targets будет пусто, и там появятся записи, как только мы добавим файлы конфигруации в директорию targets на диске.
+Запускаем это приложение с помощью docker-a в хост-сети, имя контейнера пусть будет app-v1
 
-Дашборд Prometheus доступ [здесь](https://[[HOST_SUBDOMAIN]]-9090-[[KATACODA_HOST]].environments.katacoda.com/)
+```
+docker run -d --net=host --name=app-v1 app:v1 
+```{{execute}}
 
-Если зайти в раздел Status -> Targets, то там мы увидим список задач и таргетов: одну задачу app и один таргет в ней http://localhost:8000/metrics . После первого скрейпа состояние таргета изменится с UNKNOWN на DOWN, потому что в нашем сервисе еще не реализован эндпоинт, который бы отдавал метрики. 
 
-![TargetDown](./assets/katacoda_prom_target_down.png)
+Проверить работоспособность можно с помощью curl.
 
-В следующем шаге мы с вами добавим в наш сервис этот эндпоинт, воспользовавшись клиентской библиотекой от Prometheus.
+```
+curl localhost:8000/probe
+```{{execute}}
+
+Пока наш сервис не предоставляем никаких метрик в Прометеус, но в шаге 3 мы исправим это.
