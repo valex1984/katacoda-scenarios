@@ -1,11 +1,6 @@
 {
     "scenarios": [
       {
-        "title": "Verified steps",
-        "description": "Verified steps",
-        "id": "verified-steps"
-      },
-      {
         "title": "Prometheus Client",
         "description": "Prometheus Client",
         "id": "prometheus-client"
