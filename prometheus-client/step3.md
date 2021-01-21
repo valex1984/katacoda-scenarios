@@ -31,9 +31,11 @@ rate(app_request_count_total{endpoint="/probe"}[1m])
 
 Если мы хотим общий RPS, без разбивки по отличающимся метками, мы должны суммировать RPS.
 
-sum(rate(app_request_count_total{endpoint="/probe"}[5m]))
+sum(rate(app_request_count_total{endpoint="/probe"}[1m]))
 
 ![App_](./assets/katacoda_promql_sum_rate.png)
+
+В среднем получается где-то 3 RPS.
 
 Важно понимать, что значение точки на графике - это не моментальное значение rps - а среднее значение за какой-то период (1m, 5m и т.д.) в данный момент времени. И чем больше этот период, тем более гладким будет график. 
 
@@ -46,3 +48,5 @@ sum(rate(app_request_count_total{endpoint="/probe"}[5m]))
 histogram_quantile(0.5, (sum by (le) (rate(app_request_latency_seconds_bucket{endpoint="/probe"}[1m]))))
 
 ![App_](./assets/katacoda_promql_histogram.png)
+
+В среднем получается 250 миллисекунд - медианное время ответа. 
