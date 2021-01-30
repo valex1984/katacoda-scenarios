@@ -7,4 +7,4 @@ if (( $RPS >= 6  &&  $RPS <= 8)) ; then RPS_OK=1; else RPS_OK=0; fi
 if (( $LATENCY >= 300  &&  $LATENCY <= 400)) ; then LATENCY_OK=1; else LATENCY_OK=0; fi
 
 [[ $RPS_OK == 1 && $LATENCY_OK == 1 ]] && echo '{"allow":["OK"], "deny":[]}'
-echo '{"allow":[], "deny":["FAILED"]}'
+[[ $RPS_OK == 1 && $LATENCY_OK == 1 ]] || echo '{"allow":[], "deny":["FAILED"]}'
