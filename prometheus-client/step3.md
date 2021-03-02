@@ -19,23 +19,23 @@ load.sh```{{execute}}
 
 Давайте отфильтруем и посмотрим запросы только для эндпоинта /probe.
 
-app_request_count_total{endpoint="/probe"}
+`app_request_count_total{endpoint="/probe"}`{{copy}}
 
 ![App_](./assets/katacoda_promql_counter_probe.png)
 
-С помощью функции rate можем вычислить RPS запросов 
+С помощью функции rate можем вычислить RPS - количество запросов в секунду:
 
-rate(app_request_count_total{endpoint="/probe"}[1m])
+`rate(app_request_count_total{endpoint="/probe"}[1m])`{{copy}}
 
 ![App_](./assets/katacoda_promql_rate.png)
 
 Если мы хотим общий RPS, без разбивки по отличающимся метками, мы должны суммировать RPS.
 
-sum(rate(app_request_count_total{endpoint="/probe"}[1m]))
+'sum(rate(app_request_count_total{endpoint="/probe"}[1m]))'{{copy}}
 
 ![App_](./assets/katacoda_promql_sum_rate.png)
 
-В среднем получается где-то 3 RPS.
+В среднем получается где-то 3 запроса в секунду.
 
 Важно понимать, что значение точки на графике - это не моментальное значение rps - а среднее значение за какой-то период (1m, 5m и т.д.) в данный момент времени. И чем больше этот период, тем более гладким будет график. 
 
@@ -45,7 +45,7 @@ sum(rate(app_request_count_total{endpoint="/probe"}[1m]))
 
 Посчитать медианное значение времени ответа можно с помощью вот такого запроса.
 
-histogram_quantile(0.5, (sum by (le) (rate(app_request_latency_seconds_bucket{endpoint="/probe"}[1m]))))
+`histogram_quantile(0.5, (sum by (le) (rate(app_request_latency_seconds_bucket{endpoint="/probe"}[1m]))))`{{copy}}
 
 ![App_](./assets/katacoda_promql_histogram.png)
 
