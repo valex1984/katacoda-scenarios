@@ -1,6 +1,6 @@
 #!/bin/bash
 
-verify.sh || exit 1
+validate.sh || exit 1
 
 read -p "Enter token: " token
 

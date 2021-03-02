@@ -37,6 +37,7 @@
                 {"file": "send.sh", "target": "/usr/local/bin/", "chmod": "+x"},
                 {"file": "courseBase.sh", "target": "/usr/local/bin/", "chmod": "+x"},
                 {"file": "verify.sh", "target": "/usr/local/bin/", "chmod": "+x"},
+                {"file": "validate.sh", "target": "/usr/local/bin/", "chmod": "+x"},
                 {"file": "load.sh", "target": "/usr/local/bin/", "chmod": "+x"}
             ]
         },
