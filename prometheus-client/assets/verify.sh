@@ -1,6 +1,6 @@
 #!/bin/bash
 
-[ -f /root/results.txt ] || echo "Создайте файл results.txt" && exit 1
+[ -f /root/results.txt ] || { echo "Создайте файл results.txt"; exit 1; }
 
 RPS=`awk 'NR==1' /root/results.txt  | awk -F: '{print $2}' | sed -e 's/ //g'`
 LATENCY=`awk 'NR==2' /root/results.txt  | awk -F: '{print $2}' | sed -e 's/ //g'`
