@@ -2,6 +2,8 @@
 
 read -p "Enter token: " token
 
+verify.sh || exit 1
+
 # change json variable value if you want to have custom json output
 json=$(verify.sh)
 

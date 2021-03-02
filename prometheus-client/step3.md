@@ -31,7 +31,7 @@ load.sh```{{execute}}
 
 Если мы хотим общий RPS, без разбивки по отличающимся метками, мы должны суммировать RPS.
 
-'sum(rate(app_request_count_total{endpoint="/probe"}[1m]))'{{copy}}
+`sum(rate(app_request_count_total{endpoint="/probe"}[1m]))`{{copy}}
 
 ![App_](./assets/katacoda_promql_sum_rate.png)
 
