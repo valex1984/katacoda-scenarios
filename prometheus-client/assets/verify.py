@@ -29,13 +29,13 @@ if __name__ == '__main__':
         rps = float(lines[0].split(':')[1].strip())
     except ValueError:
         if not for_robot:
-            print(u'Введите числовое значение для RPS')
+            print(u'Введите числовое значение для Количества запросов')
 
     try:
         latency = float(lines[1].split(':')[1].strip())
     except ValueError:
         if not for_robot:
-            print(u'Введите числовое значение для Latency')
+            print(u'Введите числовое значение для Времени ответа')
 
     if rps == -1 or latency == -1:
         sys.exit(1)
