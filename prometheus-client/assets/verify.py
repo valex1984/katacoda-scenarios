@@ -1,6 +1,7 @@
 # encoding: utf-8
 
 import sys
+import json
 
 FILENAME="results.txt"
 
@@ -49,7 +50,15 @@ if __name__ == '__main__':
         is_latency_ok = True
 
     if for_robot:
-        if is_latency_ok and is_rps_ok:
-            print('{"allow":["OK"], "deny":[]}')
+        result = {"allow":[], "deny":[], "task_id": "prometheus", "err": []}
+
+        if is_latency_ok:
+            result['allow'].append(f"Проверка на latency пройдена. Latency: {latency} ms")
         else:
-            print('{"allow":[], "deny":["FAILED"]}')
+            result['deny'].append(f"Проверка на latency не пройдена. Latency: {latency} ms")
+
+        if is_rps_ok:
+            result['allow'].append(f"Проверка на rps пройдена. Rps: {rps}")
+        else:
+            result['deny'].append(f"Проверка на rps не пройдена. Rps: {rps}")
+        print(json.dumps(result))
