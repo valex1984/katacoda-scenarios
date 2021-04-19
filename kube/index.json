@@ -18,6 +18,9 @@
             "text": "finish.md"
         }
     },
+    "files": [
+        "pod.yaml"
+    ],
     "environment": {
         "showdashboard": true,
         "dashboards": [{"name": "Prometheus", "port": 9090}],
