@@ -25,6 +25,7 @@
     "environment": {
         "uilayout": "terminal",
         "uisettings": "yaml",
+        "showide": true,
         "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n",
         "uimessage2": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
     },
