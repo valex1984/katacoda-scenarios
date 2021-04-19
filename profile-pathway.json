@@ -1,9 +1,14 @@
 {
     "scenarios": [
-      {
-        "title": "Prometheus Client",
-        "description": "Prometheus Client",
-        "id": "prometheus-client"
-      }
+        {
+            "title": "Prometheus Client",
+            "description": "Prometheus Client",
+            "id": "prometheus-client"
+        },
+        {
+            "title": "Kube",
+            "description": "Kube",
+            "id": "kube"
+        }
     ]
   }
