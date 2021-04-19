@@ -1,3 +1,4 @@
+This environment has a `launch.sh`{{execute}}
 
 <pre class="file" data-filename="./pod.yaml" data-target="replace">
 apiVersion: v1
