@@ -1,88 +1,72 @@
-Создаем и запускаем под.
+Для того, чтобы запустить Кластер кубернетеса надо выполнить: 
 
-This environment has a `launch.sh`{{execute}}
+`launch.sh`{{execute}}
 
-Проверяем статус кластера
+Как только команда отработает, можно проверить статус нод кластера:
 
 `kubectl get nodes`{{execute}}
 
-Заходим на рабочую ноду
+Сначала будет только одна (мастер) нода, через некоторое время добавится вторая (рабочая). 
 
+Давайте зайдем на рабочую ноду, для этого откроем новый терминал 
+
+``{{execute T2}}
 `ssh node01`{{execute T2}}
 
-Создадим под
+И откроем третий терминал и запустим мониторинг ресурсов куба 
 
-<pre class="file" data-filename="./pod.yaml" data-target="replace">
-apiVersion: v1
-kind: Pod
-metadata:
-  name: hello-app
-  labels:
-    app: hello-app
-spec:
-  containers:
-  - name: hello-app
-    image: schetinnikov/hello-app:v1
-    ports:
-      - containerPort: 9080
-</pre>
+``{{execute T3}}
+`watch kubectl get all`{{execute T3}}
 
-Отправляем его 
+Под
+
+Создадим под, для этого запустим в первом терминале:
 `kubectl apply -f pod.yaml`{{execute T1}}
 
-Проверяем, что под создался
-`kubectl get pods`{{execute T1}}
+Проверяем статус пода в третьем терминале.
 
-Как только запустится можем проверить, что он запустился на рабочей ноде 
+Как только запустится можем проверить, что под реально запустился на рабочей ноде в docker:
+
+Запускаем на мастер ноде: 
 `docker ps | grep hello`{{execute T1}}
+
+Не должно быть ничего 
+
+Запускаем на рабочей ноде:
 `docker ps | grep hello`{{execute T2}}
 
-Получить доступ к поду можно по ip. 
+Должны увидеть два контейнера.
 
+Получить доступ к поду можно по ip. 
 Для этого, вытаскиваем ip командой describe 
 
-И ходим в него через wget
+`kubectl describe pod hello-app`{{execute T1}}
 
-И ходим с мастерноды 
+И можем зайти в него через curl:
+`curl http://[[PODID]]:8000/`
 
-
-Для того, чтобы запустить в нескольких экземплярах будем использовать replicaset
-
-Удалим текущий под
-
+Удалим под:
 `kubectl delete -f pod.yaml`{{execute T1}}
 
-<pre class="file" data-filename="./replicaset.yaml" data-target="replace">
-apiVersion: apps/v1
-kind: ReplicaSet
-metadata:
-    name: hello-rs-demo
-spec:
-    replicas: 3
-    selector:
-       matchLabels:
-          app: hello-demo
-    # pod template
-    template:
-       metadata:
-          labels:
-             app: hello-demo
-       spec:
-          containers:
-          - name: hello-demo
-            image: schetinnikov/hello-app:v1
-            ports:
-              - containerPort: 9080
-</pre>
+За процессом удаления можно смотреть в третий терминал. 
+``{{execute T3}}
 
-`kubectl apply -f replicaset.yaml`{{execute T1}}
+Удалятся под может достаточно долго (до минуты)
 
-`kubectl get pods`{{execute T1}}
+Основные команды 
 
-Поменяйте на 4, а потом 2 и посмотрите, что будет после выполнения 
+`kubectl apply -f deployment.yaml`{{execute T1}}
 
-`kubectl apply -f replicaset.yaml`{{execute T1}}
+`kubectl apply -f service.yaml`{{execute T1}}
 
-Теперь удалим:
+`kubectl apply -f deployment-v2.yaml`{{execute T1}}
 
-`kubectl delete -f replicaset.yaml`{{execute T1}}
+`kubectl apply -f deployment-probes.yaml`{{execute T1}}
+
+`kubectl delete -f deployment.yaml`{{execute T1}}
+
+`kubectl delete -f service.yaml`{{execute T1}}
+
+`kubectl delete -f deployment-v2.yaml`{{execute T1}}
+
+`kubectl delete -f deployment-probes.yaml`{{execute T1}}
