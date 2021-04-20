@@ -16,7 +16,17 @@
         },
         "finish": {
             "text": "finish.md"
-        }
+        },
+        "assets": {
+            "host01": [
+                {"file": "pod.yaml", "target": "/root/"},
+                {"file": "replicaset.yaml", "target": "/root/"},
+                {"file": "deployment.yaml", "target": "/root/"},
+                {"file": "service.yaml", "target": "/root/"},
+                {"file": "deployment-v2.yaml", "target": "/root/"},
+                {"file": "deployment-probes.yaml", "target": "/root/"}
+            ]
+        },
     },
     "files": [
         "pod.yaml",

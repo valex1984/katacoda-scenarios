@@ -1,0 +1,22 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+   name: hello-deployment
+spec:
+   replicas: 3
+   selector:
+      matchLabels:
+         app: hello-app
+   strategy:
+      # type: Recreate
+      type: RollingUpdate
+   template:
+      metadata:
+         labels:
+            app: hello-app
+      spec:
+         containers:
+         - name: hello-app
+           image: schetinnikov/hello-app:v1
+           ports:
+             - containerPort: 8000
