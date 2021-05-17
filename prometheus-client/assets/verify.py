@@ -27,16 +27,16 @@ if __name__ == '__main__':
     is_rps_ok = False
 
     try:
-        rps = float(lines[0].split(':')[1].strip())
+        rps = float(lines[0].split(':')[1].strip().replace(',', '.'))
     except ValueError:
         if not for_robot:
-            print(u'Введите числовое значение для Количества запросов')
+            print(u'В файле results.txt введите числовое значение для Количества запросов')
 
     try:
-        latency = float(lines[1].split(':')[1].strip())
+        latency = float(lines[1].split(':')[1].strip().replace(',', '.'))
     except ValueError:
         if not for_robot:
-            print(u'Введите числовое значение для Времени ответа')
+            print(u'В файле results.txt введите числовое значение для Времени ответа')
 
     if rps == -1 or latency == -1:
         sys.exit(1)
