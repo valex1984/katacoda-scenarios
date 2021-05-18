@@ -50,6 +50,7 @@
         "prometheus.yml",
         "./app/app.py",
         "./app/Dockerfile",
+        "./app/pip.conf",
         "./app/requirements.txt",
         "./app/metrics.py",
         "results.txt"

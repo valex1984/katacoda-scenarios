@@ -45,6 +45,7 @@ if __name__ == '__main__':
 <pre class="file" data-filename="./app/Dockerfile" data-target="replace">
 FROM python:3.7-slim
 COPY requirements.txt /requirements.txt
+COPY pip.conf /etc/pip.conf
 RUN pip install --no-cache-dir -r requirements.txt
 COPY . /app
 CMD ["python", "/app/app.py"]
@@ -57,10 +58,18 @@ Flask==1.1.2
 prometheus-client==0.7.1
 </pre>
 
+Откройте вкладку файла ./app/pip.conf в редакторе и введите в него код ниже, либо нажмите кнопку "Copy to Editor". Это файл с описанием откуда брать зависимости
+
+<pre class="file" data-filename="./app/pip.conf" data-target="replace">
+[global]
+index-url = http://nexus:8081/repository/pypi/simple
+trusted-host = nexus
+</pre>
+
 С помощью команды docker build собираем локальный образ с меткой app:v1. Докер образ будет хранится локально.
 
 ```
-docker build -t app:v1 app/
+docker build --network=host -t app:v1 app/
 ```{{execute}}
 
 Запускаем это приложение с помощью docker-a в хост-сети, имя контейнера пусть будет app-v1
