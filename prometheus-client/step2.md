@@ -95,7 +95,7 @@ if __name__ == '__main__':
 После того, как инструментировали код, давайте пересоберем приложение
 
 ```
-docker build -t app:metrics app/
+docker build --network=host -t app:metrics app/
 ```{{execute}}
 
 
