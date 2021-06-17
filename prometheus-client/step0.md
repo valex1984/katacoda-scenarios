@@ -1,4 +1,4 @@
-<iframe width=\"560\" height=\"315\" src=\"https://youtu.be/UsxIDNNIwa0" frameborder=\"0\" allow=\"accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture\" allowfullscreen></iframe>
+<iframe width="560" height="315" src="https://youtu.be/UsxIDNNIwa0" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
 
 Напишем и запустим сервис, который будет эмулировать работу реального приложения. А в следующем шаге инструментируем, чтобы он отдавал метрики для Prometheus.
 
