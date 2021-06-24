@@ -9,6 +9,11 @@
             "title": "Kube",
             "description": "Kube",
             "id": "kube"
+        },
+        {
+            "title": "Prometheus Client Full",
+            "description": "Prometheus Client Full",
+            "id": "prometheus-client-full"
         }
     ]
   }
