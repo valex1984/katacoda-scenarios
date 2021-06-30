@@ -35,12 +35,17 @@ scrape_configs:
 Давайте запустим сервис Prometheus-a. Для этого воспользуемся докером и официальным образом prom/prometheus. Примонитируем внутрь контейнера конфигурационный файл.
 
 ```
-docker run -d --net=host \
+docker run -d --net=host --name=prometheus \
    -v /root/prometheus.yml:/etc/prometheus/prometheus.yml \
-   prom/prometheus
+   prom/prometheus \
+   --config.file=/etc/prometheus/prometheus.yml \
+   --storage.tsdb.path=/prometheus \
+   --web.console.libraries=/usr/share/prometheus/console_libraries \
+   --web.console.templates=/usr/share/prometheus/consoles \
+   --web.route-prefix=$(cat /usr/local/etc/sbercode-prefix)-9090/
 ```{{execute}}
 
-Проверить, работает ли Prometheus можно зайдя по ссылке на его дашборд. Дашборд Prometheus доступен [здесь](https://[[HOST_SUBDOMAIN]]-9090-[[KATACODA_HOST]].environments.katacoda.com/)
+Проверить, работает ли Prometheus можно зайдя по ссылке на его дашборд. Дашборд Prometheus доступен [здесь](https://[[HOST_SUBDOMAIN]]-9090-[[KATACODA_HOST]].environments.katacoda.com/graph)
 
 Если зайти в раздел Status -> Targets, то там мы увидим список задач и таргетов: одну задачу app и один таргет в ней `http://localhost:8000/metrics` . Ровно так, как у нас было в конфиге. После первого скрейпа состояние таргета изменится с UNKNOWN на DOWN, потому что в нашем сервисе еще не реализован эндпоинт, который бы отдавал метрики. 
 
