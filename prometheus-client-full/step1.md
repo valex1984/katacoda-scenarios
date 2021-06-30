@@ -42,10 +42,11 @@ docker run -d --net=host --name=prometheus \
    --storage.tsdb.path=/prometheus \
    --web.console.libraries=/usr/share/prometheus/console_libraries \
    --web.console.templates=/usr/share/prometheus/consoles \
-   --web.route-prefix=$(cat /usr/local/etc/sbercode-prefix)-9090/
+   --web.route-prefix=$(cat /usr/local/etc/sbercode-prefix)-9090/ \
+   --web.external-url=http://127.0.0.1/$(cat /usr/local/etc/sbercode-prefix)-9090/
 ```{{execute}}
 
-Проверить, работает ли Prometheus можно зайдя по ссылке на его дашборд. Дашборд Prometheus доступен [здесь](https://[[HOST_SUBDOMAIN]]-9090-[[KATACODA_HOST]].environments.katacoda.com/graph)
+Проверить, работает ли Prometheus можно зайдя по ссылке на его дашборд. Дашборд Prometheus доступен [здесь](https://[[HOST_SUBDOMAIN]]-9090-[[KATACODA_HOST]].environments.katacoda.com/)
 
 Если зайти в раздел Status -> Targets, то там мы увидим список задач и таргетов: одну задачу app и один таргет в ней `http://localhost:8000/metrics` . Ровно так, как у нас было в конфиге. После первого скрейпа состояние таргета изменится с UNKNOWN на DOWN, потому что в нашем сервисе еще не реализован эндпоинт, который бы отдавал метрики. 
 
