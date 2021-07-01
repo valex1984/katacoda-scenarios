@@ -116,7 +116,6 @@ curl localhost:8000/probe
 curl localhost:8000/metrics
 ```{{execute}}
 
-или открыв [ссылку](https://[[HOST_SUBDOMAIN]]-8000-[[KATACODA_HOST]].environments.katacoda.com/metrics)
 
 Теперь если открыть [дашборд](https://[[HOST_SUBDOMAIN]]-9090-[[KATACODA_HOST]].environments.katacoda.com/targets) прометеуса, можно увидеть, что статус таргета стал UP.
 
