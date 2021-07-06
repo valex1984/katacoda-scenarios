@@ -42,8 +42,6 @@ spec:
     metadata:
       labels:
         app: prometheus
-      annotations:
-        traffic.sidecar.istio.io/excludeInboundPorts: "9090"
     spec:
       containers:
       - name: prometheus
@@ -54,8 +52,8 @@ spec:
           - '--config.file=/etc/prometheus/prometheus.yml'
           - '--web.console.libraries=/usr/share/prometheus/console_libraries'
           - '--web.console.templates=/usr/share/prometheus/consoles'
-          - "--web.route-prefix=$(cat /usr/local/etc/sbercode-prefix)-9090/"
-          - "--web.external-url=http://127.0.0.1/$(cat /usr/local/etc/sbercode-prefix)-9090/"
+          - "--web.route-prefix=$(cat /usr/local/etc/sbercode-prefix)-80/"
+          - "--web.external-url=http://127.0.0.1/$(cat /usr/local/etc/sbercode-prefix)-80/"
         ports:
         - name: web
           containerPort: 9090
