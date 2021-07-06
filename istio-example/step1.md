@@ -42,12 +42,12 @@ spec:
   http:
   - match:
     - uri:
-        prefix: /$(cat /usr/local/etc/sbercode-prefix)-9090
+        prefix: /$(cat /usr/local/etc/sbercode-prefix)-80
     route:
     - destination:
         host: prometheus.default.svc.cluster.local
         port:
-          number: 9090
+          number: 80
 EOF
 ```{{execute}}
 

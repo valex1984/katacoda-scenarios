@@ -83,7 +83,7 @@ spec:
     app: prometheus
   ports:
     - protocol: TCP
-      port: 9090
+      port: 80
       targetPort: 9090
       name: http
 EOF
