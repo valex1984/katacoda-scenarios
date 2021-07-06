@@ -20,14 +20,14 @@ metadata:
 data:
   prometheus.yml: |
     global:
-    scrape_interval:     15s
+      scrape_interval:     15s
     scrape_configs:
     - job_name: app
-    metrics_path: '/metrics'
-    static_configs:
+      metrics_path: '/metrics'
+      static_configs:
         - targets: ['127.0.0.1:8000']
 ---
-apiVersion: extensions/v1
+apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: prometheus

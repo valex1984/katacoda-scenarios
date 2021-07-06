@@ -45,7 +45,7 @@ spec:
         prefix: /$(cat /usr/local/etc/sbercode-prefix)-9090
     route:
     - destination:
-        host: prometheus
+        host: prometheus.default.svc.cluster.local
         port:
           number: 9090
 EOF
