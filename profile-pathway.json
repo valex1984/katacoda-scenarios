@@ -6,9 +6,9 @@
             "id": "prometheus-client"
         },
         {
-            "title": "Kube",
-            "description": "Kube",
-            "id": "kube"
+            "title": "Kubernetes dashboards example",
+            "description": "Kubernetes dashboards example",
+            "id": "kube-dashboards"
         },
         {
             "title": "Prometheus Client Full",
