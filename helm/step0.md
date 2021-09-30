@@ -14,8 +14,10 @@
 Поищем чарт
 
 `helm search repo zoo`{{execute}}
+```
 NAME                    CHART VERSION   APP VERSION     DESCRIPTION                                       
 bitnami/zookeeper       7.4.5           3.7.0           A centralized service for maintaining configura...
+```
 
 и установим его
 
