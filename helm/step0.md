@@ -20,14 +20,11 @@ bitnami/zookeeper       7.4.5           3.7.0           A centralized service fo
 и установим его
 
 `helm install zk bitnami/zookeeper`{{execute}}
-NAME: zk
-LAST DEPLOYED: Thu Sep 30 07:01:51 2021
-NAMESPACE: default
-STATUS: deployed
-REVISION: 1
-TEST SUITE: None
-NOTES:
+NAME: zk  
+LAST DEPLOYED: Thu Sep 30 07:01:51 2021  
+NAMESPACE: default  
+STATUS: deployed  
+REVISION: 1  
+TEST SUITE: None  
+NOTES:  
 ** Please be patient while the chart is being deployed **
-
-ZooKeeper can be accessed via port 2181 on the following DNS name from within your cluster:
-...
