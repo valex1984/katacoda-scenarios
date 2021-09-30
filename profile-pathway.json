@@ -19,6 +19,11 @@
             "title": "Istio example",
             "description": "Istio example with prometheus",
             "id": "istio-example"
+        },
+        {
+            "title": "Helm chart example",
+            "description": "Helm chart example with nexus proxy",
+            "id": "helm"
         }
     ]
   }
