@@ -6,89 +6,29 @@
   "details": {
     "steps": [{
       "title": "Подготовить учебный кластер",
-      "text": "step1.md",
-      "verify": "step1-verify.sh"
+      "text": "step1.md"
     },
     {
       "title": "Bookinfo Application",
-      "text": "step2.md",
-      "verify": "step2-verify.sh"
+      "text": "step2.md"
     },
     {
       "title": "Основные объекты приложения",
-      "text": "step3.md",
-      "verify": "step3-verify.sh"
+      "text": "step3.md"
     },
     {
       "title": "Диагностика и исправление отклонений",
-      "text": "step4.md",
-      "answer": "step4-answer.md"
+      "text": "step4.md"
     }
     ],
     "intro": {
       "text": "intro.md",
-      "code": "foreground.sh",
       "credits": ""
     },
     "finish": {
       "text": "finish.md"
     },
     "assets": {
-      "controlpane": [
-        {"file": "bookinfo.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-        {"file": "istio-install.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-        {"file": "chaostest.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-        {"file": "load.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-        {"file": "troubleshoot.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-        {"file": "all-descriptors.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-        {"file": "bookinfo-no-deployment.yaml", "target": "/tmp"},
-        {"file": "destination-rule-all-mtls.yaml", "target": "/tmp"},
-        {"file": "antiaffinity.yaml", "target": "/tmp"},
-        {"file": "node-port.yaml", "target": "/tmp"},
-        {"file": "replicas.yaml", "target": "/tmp"},
-        {"file": "traffic-policy.yaml", "target": "/tmp"},
-        {"file": "immutable-port-kiali.yaml", "target": "/tmp"},
-        {"file": "immutable-ports.yaml", "target": "/tmp"},
-        {"file": "all.rego", "target": "/tmp"},
-        {"file": "checklist.sh", "target": "/usr/local/bin/", "chmod": "+x"}
-      ],
-      "host01": [
-          {"file": "bookinfo.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-          {"file": "istio-install.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-          {"file": "chaostest.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-          {"file": "load.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-          {"file": "troubleshoot.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-          {"file": "all-descriptors.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-          {"file": "bookinfo-no-deployment.yaml", "target": "/tmp"},
-          {"file": "destination-rule-all-mtls.yaml", "target": "/tmp"},
-          {"file": "antiaffinity.yaml", "target": "/tmp"},
-          {"file": "node-port.yaml", "target": "/tmp"},
-          {"file": "replicas.yaml", "target": "/tmp"},
-          {"file": "traffic-policy.yaml", "target": "/tmp"},
-          {"file": "immutable-port-kiali.yaml", "target": "/tmp"},
-          {"file": "immutable-ports.yaml", "target": "/tmp"},
-          {"file": "all.rego", "target": "/tmp"},
-          {"file": "checklist.sh", "target": "/usr/local/bin/", "chmod": "+x"}
-      ],
-      "host02": [
-        {"file": "bookinfo.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-        {"file": "istio-install.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-        {"file": "chaostest.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-        {"file": "load.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-        {"file": "troubleshoot.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-        {"file": "all-descriptors.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-        {"file": "bookinfo-no-deployment.yaml", "target": "/tmp"},
-        {"file": "destination-rule-all-mtls.yaml", "target": "/tmp"},
-        {"file": "antiaffinity.yaml", "target": "/tmp"},
-        {"file": "node-port.yaml", "target": "/tmp"},
-        {"file": "replicas.yaml", "target": "/tmp"},
-        {"file": "traffic-policy.yaml", "target": "/tmp"},
-        {"file": "immutable-port-kiali.yaml", "target": "/tmp"},
-        {"file": "immutable-ports.yaml", "target": "/tmp"},
-        {"file": "all.rego", "target": "/tmp"},
-        {"file": "checklist.sh", "target": "/usr/local/bin/", "chmod": "+x"}
-      ]
-
     }
   },
   "environment": {
