@@ -141,7 +141,7 @@ spec:
           - name: NAMESPACE
             value: bookinfo
           name: kubeinvaders
-          image: "webngt/kubeinvaders:0.0.1"
+          image: "webngt/kubeinvaders:0.0.2"
           imagePullPolicy: Always
           ports:
             - name: http
@@ -188,4 +188,5 @@ spec:
           number: 8080
 EOF
 
+echo "Waiting for kube invaders...."
 ensure_label "app.kubernetes.io/name=kubeinvaders" "kubeinvaders"
