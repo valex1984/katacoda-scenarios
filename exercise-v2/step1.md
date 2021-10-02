@@ -6,5 +6,5 @@
 init.sh
 ```{{execute}}
 
-[Ivaders](https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com)
+[Invaders](https://[[HOST_SUBDOMAIN]]-8080-[[KATACODA_HOST]].environments.katacoda.com/)
 
