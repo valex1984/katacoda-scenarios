@@ -1,5 +1,12 @@
 #!/bin/bash
 
+ensure_label() {
+    while [ "$(kubectl -n $2 wait --for=condition=ContainersReady --timeout=5m pods -l $1 2>&1)" = "error: no matching resources found" ]; do
+        echo "No pod with label $1 found. Retry..."
+        sleep 20
+    done
+}
+
 launch.sh
 
 kubectl create ns bookinfo
@@ -130,7 +137,7 @@ spec:
       containers:
         - env:
           - name: ENDPOINT
-            value: sbercode.pcbltools.ru\/$prefix-8080
+            value: sbercode.pcbltools.ru\/$prefix-80/invaders
           - name: NAMESPACE
             value: bookinfo
           name: kubeinvaders
@@ -171,7 +178,7 @@ spec:
   http:
   - match:
     - uri:
-        prefix: /$prefix-80/
+        prefix: /$prefix-80/invaders/
     rewrite:
       uri: /
     route:
@@ -181,3 +188,4 @@ spec:
           number: 8080
 EOF
 
+ensure_label "app.kubernetes.io/name=kubeinvaders" "kubeinvaders"
