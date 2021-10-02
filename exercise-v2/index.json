@@ -30,8 +30,8 @@
     },
     "assets": {
       "host01": [
-          {"file": "bookinfo.yaml", "target": "/root"},
-          {"file": "kube-invaders.yaml", "target": "/root"}
+          {"file": "bookinfo.yaml", "target": "/tmp"},
+          {"file": "init.sh", "target": "/usr/local/bin", "chmod": "+x"}
       ]
     }
   },

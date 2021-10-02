@@ -1,3 +1,16 @@
+#!/bin/sh
+
+launch.sh
+
+kubectl create ns bookinfo
+kubectl create ns kubeinvaders
+kubectl label ns kubeinvaders istio-injection=enable
+
+prefix=$(cat /usr/local/etc/sbercode-prefix)
+
+kubectl -n bookinfo apply -f /tmp/bookinfo.yaml
+
+cat <<EOF | kubectl -n kubeinvaders apply -f -
 ---
 apiVersion: v1
 kind: ServiceAccount
@@ -113,13 +126,12 @@ spec:
         app.kubernetes.io/name: kubeinvaders
         app.kubernetes.io/instance: kubeinvaders
       annotations:
-
     spec:
       serviceAccountName: kubeinvaders
       containers:
         - env:
           - name: ENDPOINT
-            value: 2886795354-30016-simba11.environments.katacoda.com
+            value: sbercode.pcbltools.ru\/$prefix-8080
           - name: NAMESPACE
             value: bookinfo
           name: kubeinvaders
@@ -160,7 +172,7 @@ spec:
   http:
   - match:
     - uri:
-        prefix: /ed35bf69-323e-4cba-ad11-24594a9df79b-8080/
+        prefix: /$prefix-8080/
     rewrite:
       uri: /
     route:
@@ -168,3 +180,5 @@ spec:
         host: kubeinvaders
         port:
           number: 8080
+EOF
+
