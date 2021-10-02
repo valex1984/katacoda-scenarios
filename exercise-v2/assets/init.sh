@@ -4,7 +4,7 @@ launch.sh
 
 kubectl create ns bookinfo
 kubectl create ns kubeinvaders
-kubectl label ns kubeinvaders istio-injection=enable
+kubectl label ns kubeinvaders istio-injection=enabled
 
 prefix=$(cat /usr/local/etc/sbercode-prefix)
 
