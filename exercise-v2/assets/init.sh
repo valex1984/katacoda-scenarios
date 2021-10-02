@@ -153,7 +153,7 @@ spec:
     istio: ingressgateway
   servers:
   - port:
-      number: 8080
+      number: 80
       name: http
       protocol: HTTP
     hosts:
@@ -171,7 +171,7 @@ spec:
   http:
   - match:
     - uri:
-        prefix: /$prefix-8080/
+        prefix: /$prefix-80/
     rewrite:
       uri: /
     route:
