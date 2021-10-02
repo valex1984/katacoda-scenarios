@@ -94,7 +94,6 @@ metadata:
     app.kubernetes.io/instance: kubeinvaders
     app.kubernetes.io/managed-by: Helm
 spec:
-  type: NodePort
   ports:
     - port: 8080
       targetPort: http
