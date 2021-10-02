@@ -137,7 +137,7 @@ spec:
       containers:
         - env:
           - name: ENDPOINT
-            value: sbercode.pcbltools.ru\/$prefix-80/invaders
+            value: sbercode.pcbltools.ru\/$prefix-80\/invaders
           - name: NAMESPACE
             value: bookinfo
           name: kubeinvaders
