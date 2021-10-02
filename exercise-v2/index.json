@@ -29,6 +29,10 @@
       "text": "finish.md"
     },
     "assets": {
+      "host01": [
+          {"file": "bookinfo.yaml", "target": "/root"},
+          {"file": "kube-invaders.yaml", "target": "/root"}
+      ]
     }
   },
   "environment": {
