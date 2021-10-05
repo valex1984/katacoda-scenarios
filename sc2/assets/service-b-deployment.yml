@@ -27,5 +27,5 @@ spec:
             runAsUser: 1000
           resources:
             limits:
-              memory: 64Mi
+              memory: 32Mi
               cpu: 100m
