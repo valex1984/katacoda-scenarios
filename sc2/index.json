@@ -1,0 +1,76 @@
+{
+  "title": "2. Маршрутизация трафика внутри service mesh",
+  "description": "Рассмотрим маршрутизацию трафика внутри service mesh",
+  "details": {
+    "steps": [
+      {
+        "title": "Введение",
+        "text": "intro.md"
+      },
+      {
+        "title": "Подготовка среды выполнения",
+        "text": "step1.md"
+      },
+      {
+        "title": "Сценарии упражнения",
+        "text": "step2.md"
+      },
+      {
+        "title": "Маршрутизация входящего трафика в ServiceA",
+        "text": "step3.md"
+      },
+      {
+        "title": "Направление исходящих запросов из ServiceA в ServiceB.",
+        "text": "step4.md"
+      },
+      {
+        "title": "Расщепление трафика из ServiceA.",
+        "text": "step5.md"
+      },
+      {
+        "title": "Создание виртуального кластера external-cluster",
+        "text": "step6.md"
+      },
+      {
+        "title": "Открытие исходящего трафика в worldtimeapi.org",
+        "text": "step7.md"
+      },
+      {
+        "title": "Перевод всех запросов из ServiceA в ServiceC",
+        "text": "step8.md"
+      },
+      {
+        "title": "Завершение",
+        "text": "finish.md"
+      }
+    ],
+    "assets": {
+      "host01": [
+        {"file": "serviceA-v1-deployment.yml", "target": "/root"},
+        {"file": "serviceA-gw.yml", "target": "/root"},
+        {"file": "inbound-to-serviceA-vs.yml", "target": "/root"},
+        {"file": "service-b-deployment.yml", "target": "/root"},
+        {"file": "producer-internal-host.yml", "target": "/root"},
+        {"file": "producer-internal-host-vs.yml", "target": "/root"},
+        {"file": "service-c-deployment.yml", "target": "/root"},
+        {"file": "service-c-srv.yml", "target": "/root"},
+        {"file": "producer-internal-host-50-c-vs.yml", "target": "/root"},
+        {"file": "service-ext-host-se.yml", "target": "/root"},
+        {"file": "service-ext-outbound-gw.yml", "target": "/root"},
+        {"file": "outbound-srv-c-to-service-ext-vs.yml", "target": "/root"},
+        {"file": "producer-internal-host-100-c-vs.yml", "target": "/root"},
+        {"file": "service-ext-deployment.yml", "target": "/root"},
+        {"file": "service-ext-srv.yml", "target": "/root"},
+        {"file": "service-ext-gw.yml", "target": "/root"},
+        {"file": "inbound-to-service-ext-vs.yml", "target": "/root"},
+        {"file": "serviceA-srv.yml", "target": "/root"}
+      ]
+    }
+  },
+  "environment": {
+    "uilayout": "terminal"
+  },
+  "backend": {
+    "imageid": "k3s-istio:1.10.1"
+  }
+}
