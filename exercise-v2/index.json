@@ -1,0 +1,48 @@
+{
+  "title": "Cloud Native",
+  "description": "Что-то пошло не так",
+  "difficulty": "medium",
+  "time": "30 minutes",
+  "details": {
+    "steps": [{
+      "title": "Подготовить учебный кластер",
+      "text": "step1.md"
+    },
+    {
+      "title": "Bookinfo Application",
+      "text": "step2.md"
+    },
+    {
+      "title": "Основные объекты приложения",
+      "text": "step3.md"
+    },
+    {
+      "title": "Диагностика и исправление отклонений",
+      "text": "step4.md"
+    }
+    ],
+    "intro": {
+      "text": "intro.md",
+      "credits": ""
+    },
+    "finish": {
+      "text": "finish.md"
+    },
+    "assets": {
+      "host01": [
+          {"file": "bookinfo.yaml", "target": "/tmp"},
+          {"file": "init.sh", "target": "/usr/local/bin", "chmod": "+x"}
+      ]
+    }
+  },
+  "environment": {
+    "showdashboard": true,
+    "dashboards": [{"name": "Prometheus", "port": 80}],
+    "uilayout": "editor-terminal",
+    "uisettings": "py",
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "k3s-istio:1.10.1"
+  }
+}

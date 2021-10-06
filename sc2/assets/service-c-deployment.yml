@@ -19,7 +19,7 @@ spec:
     spec:
       containers:
         - name: service-c-container
-          image: artashesavetisyan/istio-basics-course:service-c-03-00
+          image: webngt/service-c:0.0.6
           imagePullPolicy: Always
           ports:
             - containerPort: 8082
