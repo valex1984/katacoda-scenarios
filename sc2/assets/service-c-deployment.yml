@@ -21,11 +21,13 @@ spec:
         - name: service-c-container
           image: webngt/service-c:0.0.6
           imagePullPolicy: Always
+          command: ["java"]
+          args:
+            - -Xms32m
+            - -Xmx32m
+            -  -jar 
+            - app.jar
           ports:
             - containerPort: 8082
           securityContext:
             runAsUser: 1000
-          resources:
-            limits:
-              memory: 32Mi
-              cpu: 100m
