@@ -24,6 +24,11 @@
             "title": "Helm chart example",
             "description": "Helm chart example with nexus proxy",
             "id": "helm"
+        },
+        {
+            "title": "kotlin example",
+            "description": "kotlin example",
+            "id": "kotlin"
         }
     ]
   }
