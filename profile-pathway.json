@@ -24,12 +24,6 @@
             "title": "Helm chart example",
             "description": "Helm chart example with nexus proxy",
             "id": "helm"
-        },
-        {
-            "title": "Маршрутизация трафика внутри service mesh",
-            "description": "Будет осуществлено канареечное развертывание сервисов, плавная смена направления трафика внутри service mesh, открытие исходящего трафика с соединением с API worldtimeapi.org",
-            "id": "sc2"
         }
-    
     ]
   }
