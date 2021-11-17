@@ -20,8 +20,8 @@ function prepare_env() {
     kubectl create ns openfaas-fn --dry-run=client -o yaml | kubectl apply -f -
     echo "export KUBECONFIG=/etc/rancher/k3s/k3s.yaml" >~/envs
     echo "export OPENFAAS_URL=http://$(hostname):31112" >>~/envs
-    echo "export OPENFAAS_PREFIX=sbercode" >>~/envs
     echo "export REGISTRY=$(hostname):32500" >>~/envs    
+    echo "export OPENFAAS_PREFIX=$REGISTRY/sbercode" >>~/envs
     . ~/envs
 
 }
