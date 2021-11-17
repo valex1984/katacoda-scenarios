@@ -10,7 +10,7 @@
 `docker images|grep sbercode`{{execute}}
 имя образа состоит из префикса репозитория кубернетис, куда мы его будем заливать, префикса `sbercode` и имени функции. Префиксы выставлены через переменные указанные в файле ~/envs
 
-Зальем образ в репозиторий  наkubernetes
+Зальем образ в репозиторий  наkubernetes:
 `docker push $REGISTRY/sbercode/fn1`{{execute}}
 
 И проверим его наличие
@@ -26,8 +26,23 @@
 
 ## Деплой функции в OpenFaas
 
-Для деплоя необходимо выполнить команду
+Для деплоя необходимо выполнить команду:
 `faas-cli deploy -f fn1.yml`{{execute}}
 
 Проверить статус можно командой:
 `kubectl get po -n openfaas-fn`{{execute}}
+Дождемся, пока статус пода станет Ready
+```
+NAME                   READY   STATUS    RESTARTS   AGE
+fn1-794f59b5fd-448pd   1/1     Running   0          14s
+```
+
+## Вызов функции
+
+Выполним запрос утилитой curl:
+
+`curl $OPENFAAS_URL/function/fn1`{{execute}}  
+Функция должна вывести сообщений вида:  
+`Hello from OpenFaaS!`
+
+Мы успешно собрали и развернули простейшую функцию в кубернетес.
