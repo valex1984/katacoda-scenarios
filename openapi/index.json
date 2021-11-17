@@ -7,8 +7,12 @@
     "details": {
         "steps": [
             {
-                "title": "Подготовка окружения kubernetes + OpenFaas",
+                "title": "Подготовка окружения",
                 "text": "step0.md"
+            },
+            {
+                "title": "Реализация простейшей serverless функции",
+                "text": "step1.md"
             }
         ],
         "intro": {
