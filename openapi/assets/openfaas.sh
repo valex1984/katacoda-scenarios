@@ -21,7 +21,7 @@ function prepare_env() {
     echo "export KUBECONFIG=/etc/rancher/k3s/k3s.yaml" >~/envs
     echo "export OPENFAAS_URL=http://$(hostname):31112" >>~/envs
     echo "export REGISTRY=$(hostname):32500" >>~/envs    
-    echo "export OPENFAAS_PREFIX=$REGISTRY/sbercode" >>~/envs
+    echo "export OPENFAAS_PREFIX=$(hostname):32500/sbercode" >>~/envs
     . ~/envs
 
 }
