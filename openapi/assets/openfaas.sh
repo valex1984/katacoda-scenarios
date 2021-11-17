@@ -31,6 +31,7 @@ function install_openfaas() {
 
     if [ ! -f "$OPENFAAS_DONE" ]; then
         helm repo add nexus http://nexus:8081/repository/helm-hosted
+        test $? -eq 1 && echo "[ERROR] cannot add helm repo" && kill "$!" && exit 1
 
         helm upgrade openfaas --install nexus/openfaas \
             --namespace openfaas \
