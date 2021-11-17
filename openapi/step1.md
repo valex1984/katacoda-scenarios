@@ -27,7 +27,7 @@
 ## Деплой функции в OpenFaas
 
 Для деплоя необходимо выполнить команду
-`faas-cli deploy -f fn1.yaml`{{execute}}
+`faas-cli deploy -f fn1.yml`{{execute}}
 
 Проверить статус можно командой:
 `kubectl get po -n openfaas-fn`{{execute}}
