@@ -14,8 +14,15 @@
 `docker push $REGISTRY/sbercode/fn1`{{execute}}
 
 И проверим его наличие
-`curl $REGISTRY/v2/_catalog`{{execute}}
-
+`curl -s $REGISTRY/v2/_catalog|jq`{{execute}}
+Вывод должен иметь следующий вид:
+```
+{
+  "repositories": [
+    "sbercode/fn1"
+  ]
+}
+```
 
 ## Деплой функции в OpenFaas
 
