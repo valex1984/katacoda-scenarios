@@ -216,6 +216,7 @@ function install_pg() {
 }
 
 function install_apim() {
+  echo -e "\n[INFO] Installing gravitee"
 
   helm upgrade --install -n gravitee gravitee -f /tmp/gravitee-values.yaml nexus/apim3
   test $? -eq 1 && echo "[ERROR] cannot install gravitee" && kill "$!" && exit 1
@@ -224,7 +225,7 @@ function install_apim() {
 
 function install_gravitee() {
 
-  echo -e "\n[INFO] Installing gravitee"
+
   if [ ! -f "$GRAVITEE_DONE" ]; then
     install_es
     install_pg
@@ -234,7 +235,7 @@ function install_gravitee() {
     echo done
     touch $GRAVITEE_DONE
   else
-    echo already installed
+    echo gravitee already installed
   fi
 
 }
