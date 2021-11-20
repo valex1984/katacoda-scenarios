@@ -201,7 +201,7 @@ extraEnvs:
  - name: xpack.monitoring.enabled
    value: "false"
 EOF
-  helm upgrade --install -n gravitee elasticsearch nexus/elasticsearch /tmp/es-values.yaml
+  helm upgrade --install -n gravitee elasticsearch -f /tmp/es-values.yaml nexus/elasticsearch 
 
 }
 
@@ -217,7 +217,7 @@ function install_pg() {
 
 function install_apim() {
 
-  helm upgrade --install -n gravitee gravitee -f /tmp/gravitee-values.yaml graviteeio/apim3
+  helm upgrade --install -n gravitee gravitee -f /tmp/gravitee-values.yaml nexus/apim3
   test $? -eq 1 && echo "[ERROR] cannot install gravitee" && kill "$!" && exit 1
   sed -e "s#BASE_PATH#$BASE_PATH#g" /tmp/apim-ingress.yaml | kubectl apply -f-
 }
