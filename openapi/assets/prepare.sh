@@ -1,7 +1,8 @@
 #!/bin/bash
 
 OPENFAAS_DONE=/tmp/dashboard_installed
-REGISTRY_DONE=/tmp/ingress_installed
+REGISTRY_DONE=/tmp/registry_installed
+INGRESS_DONE=/tmp/ingress_installed
 GRAVITEE_DONE=/tmp/gravitee_installed
 BASE_PATH="$(cat /usr/local/etc/sbercode-prefix)-32500"
 
