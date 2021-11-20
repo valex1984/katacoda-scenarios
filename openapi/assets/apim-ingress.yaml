@@ -1,0 +1,65 @@
+apiVersion: networking.k8s.io/v1 
+kind: Ingress
+metadata:
+  name: gravitee-apim3-gateway
+  namespace: gravitee
+  labels:
+    app.kubernetes.io/name: gravitee-apim3-gateway 
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$1$2
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /BASE_PATH/gateway(/|$)(.*)
+            pathType: Prefix
+            backend:
+               service:
+                  name: gravitee-apim3-gateway
+                  port:
+                    number:  82
+---
+apiVersion: networking.k8s.io/v1 
+kind: Ingress
+metadata:
+  name: gravitee-apim3-ui
+  namespace: gravitee
+  labels:
+    app.kubernetes.io/name: gravitee-apim3-ui 
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$1$2
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /BASE_PATH/ui(/|$)(.*)
+            pathType: Prefix
+            backend:
+               service:
+                  name: gravitee-apim3-ui
+                  port:
+                    number:  8002
+---
+apiVersion: networking.k8s.io/v1 
+kind: Ingress
+metadata:
+  name: gravitee-apim3-portal
+  namespace: gravitee
+  labels:
+    app.kubernetes.io/name: gravitee-apim3-portal
+  annotations:
+    kubernetes.io/ingress.class: nginx
+    nginx.ingress.kubernetes.io/rewrite-target: /$1$2
+spec:
+  rules:
+    - http:
+        paths:
+          - path: /BASE_PATH/portal(/|$)(.*)
+            pathType: Prefix
+            backend:
+               service:
+                  name: gravitee-apim3-portal
+                  port:
+                    number:  8003

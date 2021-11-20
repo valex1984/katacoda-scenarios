@@ -23,6 +23,8 @@
         },
         "assets": {
             "host01": [
+                {"file": "apim-ingress.yaml", "target": "/tmp"},
+                {"file": "gravitee-values.yaml", "target": "/tmp"},
                 {"file": "openfaas.sh", "target": "/usr/local/bin", "chmod": "+x"}
             ]
           }
