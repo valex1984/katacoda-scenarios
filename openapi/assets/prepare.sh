@@ -154,11 +154,11 @@ EOF
 function install_ingress() {
   echo -e "\n[INFO] Installing nginx ingress controller"
   if [ ! -f "$INGRESS_DONE" ]; then
-    kubectl apply -f /usr/local/etc/nginx-ingress-deploy.yaml >>$LOG 2>&1
-    kubectl -n ingress-nginx wait --for=condition=available --timeout=3m deployment/ingress-nginx-controller >>$LOG 2>&1
+    kubectl apply -f /usr/local/etc/nginx-ingress-deploy.yaml
+    kubectl -n ingress-nginx wait --for=condition=available --timeout=3m deployment/ingress-nginx-controller
     test $? -eq 1 && echo "[ERROR] Ingress controller not ready" && kill "$!" && exit 1
     kubectl -n ingress-nginx patch svc ingress-nginx-controller --patch \
-      '{"spec": { "type": "NodePort", "ports": [ { "nodePort": 32100, "port": 80, "protocol": "TCP", "targetPort": 80 } ] } }' >>$LOG 2>&1
+      '{"spec": { "type": "NodePort", "ports": [ { "nodePort": 32100, "port": 80, "protocol": "TCP", "targetPort": 80 } ] } }'
     echo done
     touch $INGRESS_DONE
   else
@@ -228,7 +228,7 @@ function install_gravitee() {
     install_es
     install_pg
     install_apim
-    kubectl -n gravitee wait --for=condition=available --timeout=5m --all deployment >>$LOG 2>&1
+    kubectl -n gravitee wait --for=condition=available --timeout=5m --all deployment
     test $? -eq 1 && echo "[ERROR] gravitee not ready" && kill "$!" && exit 1
     echo done
     touch $GRAVITEE_DONE
@@ -238,8 +238,7 @@ function install_gravitee() {
 
 }
 
-#
-wait for cluster readiness
+# wait for cluster readiness
 launch.sh
 
 spinner &
