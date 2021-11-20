@@ -230,7 +230,7 @@ function install_gravitee() {
     install_es
     install_pg
     install_apim
-    kubectl -n gravitee wait --for=condition=available --timeout=5m --all deployment
+   kubectl -n gravitee wait --for=condition=ContainersReady --timeout=5m --all pods
     test $? -eq 1 && echo "[ERROR] gravitee not ready" && kill "$!" && exit 1
     echo done
     touch $GRAVITEE_DONE
