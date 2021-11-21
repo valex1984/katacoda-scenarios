@@ -4,7 +4,7 @@ OPENFAAS_DONE=/tmp/dashboard_installed
 REGISTRY_DONE=/tmp/registry_installed
 INGRESS_DONE=/tmp/ingress_installed
 GRAVITEE_DONE=/tmp/gravitee_installed
-BASE_PATH="$(cat /usr/local/etc/sbercode-prefix)-32100"
+BASE_PATH="$(cat /usr/local/etc/sbercode-prefix)"
 INGRESS_HOSTNAME_PLACEHOLDER="$(cat /usr/local/etc/sbercode-ingress)"
 
 spinner() {
@@ -161,12 +161,58 @@ function install_ingress() {
     test $? -eq 1 && echo "[ERROR] Ingress controller not ready" && kill "$!" && exit 1
     kubectl -n ingress-nginx patch svc ingress-nginx-controller --patch \
       '{"spec": { "type": "NodePort", "ports": [ { "nodePort": 32100, "port": 80, "protocol": "TCP", "targetPort": 80 } ] } }'
+    cat <<EOF >/tmp/add-ingress-svc.yaml
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+  name: ingress-nginx-controller2
+  namespace: ingress-nginx
+spec:
+  ports:
+  - name: http
+    nodePort: 32110
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/name: ingress-nginx
+  sessionAffinity: None
+  type: NodePort
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+  name: ingress-nginx-controller3
+  namespace: ingress-nginx
+spec:
+  ports:
+  - name: http
+    nodePort: 32120
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/name: ingress-nginx
+  sessionAffinity: None
+  type: NodePort
     echo done
     touch $INGRESS_DONE
   else
     echo already installed
   fi
-
+EOF
+    kubectl apply -f /tmp/add-ingress-svc.yaml
+    echo done
+    touch $INGRESS_DONE
+  else
+    echo already installed
+  fi
 }
 
 function install_es() {
@@ -202,7 +248,7 @@ extraEnvs:
  - name: xpack.monitoring.enabled
    value: "false"
 EOF
-  helm upgrade --install -n gravitee elasticsearch -f /tmp/es-values.yaml nexus/elasticsearch 
+  helm upgrade --install -n gravitee elasticsearch -f /tmp/es-values.yaml nexus/elasticsearch
 
 }
 
@@ -227,12 +273,11 @@ function install_apim() {
 
 function install_gravitee() {
 
-
   if [ ! -f "$GRAVITEE_DONE" ]; then
     install_es
     install_pg
     install_apim
-   kubectl -n gravitee wait --for=condition=ContainersReady --timeout=5m --all pods
+    kubectl -n gravitee wait --for=condition=ContainersReady --timeout=5m --all pods
     test $? -eq 1 && echo "[ERROR] gravitee not ready" && kill "$!" && exit 1
     echo done
     touch $GRAVITEE_DONE
