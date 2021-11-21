@@ -265,8 +265,8 @@ function install_pg() {
 function install_apim() {
   echo -e "\n[INFO] Installing gravitee"
 
-  sed -ie "s#BASE_PATH#$BASE_PATH#g" /tmp/gravitee-values.yaml
-  sed -ie "s#INGRESS_HOSTNAME_PLACEHOLDER#$INGRESS_HOSTNAME_PLACEHOLDER#g" /tmp/gravitee-values.yaml
+  sed -i "s#BASE_PATH#$BASE_PATH#g" /tmp/gravitee-values.yaml
+  sed -i "s#INGRESS_HOSTNAME_PLACEHOLDER#$INGRESS_HOSTNAME_PLACEHOLDER#g" /tmp/gravitee-values.yaml
   helm upgrade --install -n gravitee gravitee -f /tmp/gravitee-values.yaml nexus/apim3
   test $? -eq 1 && echo "[ERROR] cannot install gravitee" && kill "$!" && exit 1
 }
