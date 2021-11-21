@@ -537,7 +537,7 @@ api:
             - INGRESS_HOSTNAME_PLACEHOLDER
           secretName: api-custom-cert
     portal:
-      enabled: false
+      enabled: true
       path: /BASE_PATH/portal
       # Used to create an Ingress record.
       hosts:
@@ -545,16 +545,7 @@ api:
       annotations:
         kubernetes.io/ingress.class: nginx
         nginx.ingress.kubernetes.io/configuration-snippet: "etag on;\nproxy_pass_header ETag;\nproxy_set_header if-match \"\";\n"
-        # kubernetes.io/tls-acme: "true"
-      #tls:
-        # Secrets must be manually created in the namespace.
-        # - secretName: chart-example-tls
-        #   hosts:
-        #     - chart-example.local
-      tls:
-        - hosts:
-            - INGRESS_HOSTNAME_PLACEHOLDER
-          secretName: api-custom-cert
+      tls: false 
   resources:
     # We usually recommend not to specify default resources and to leave this as a conscious
     # choice for the user. This also increases chances charts run on environments with little
@@ -959,8 +950,8 @@ portal:
     runAsGroup: 101
     runAsNonRoot: true
   ingress:
-    enabled: false
-    path: /
+    enabled: true
+    path: /BASE_PATH/portal2/
     # Used to create an Ingress record.
     hosts:
       - INGRESS_HOSTNAME_PLACEHOLDER
@@ -972,10 +963,7 @@ portal:
       # - secretName: chart-example-tls
       #   hosts:
       #     - chart-example.local
-    tls:
-      - hosts:
-          - INGRESS_HOSTNAME_PLACEHOLDER
-        secretName: api-custom-cert
+    tls: false 
   resources:
     # We usually recommend not to specify default resources and to leave this as a conscious
     # choice for the user. This also increases chances charts run on environments with little
@@ -1106,7 +1094,7 @@ ui:
     runAsGroup: 101
     runAsNonRoot: true
   ingress:
-    enabled: false
+    enabled: true
     path: /BASE_PATH/console(/|$)(.*)
     # Used to create an Ingress record.
     hosts:
@@ -1115,15 +1103,7 @@ ui:
       kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/rewrite-target: /$1$2
       nginx.ingress.kubernetes.io/configuration-snippet: "etag on;\nproxy_pass_header ETag;\n"
-      #tls:
-      # Secrets must be manually created in the namespace.
-      # - secretName: chart-example-tls
-      #   hosts:
-      #     - chart-example.local
-    tls:
-      - hosts:
-          - INGRESS_HOSTNAME_PLACEHOLDER
-        secretName: api-custom-cert
+    tls: false 
   resources:
     # We usually recommend not to specify default resources and to leave this as a conscious
     # choice for the user. This also increases chances charts run on environments with little
