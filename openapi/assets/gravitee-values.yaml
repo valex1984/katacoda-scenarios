@@ -1085,7 +1085,7 @@ ui:
       nginx.ingress.kubernetes.io/configuration-snippet: |
         etag on;
         proxy_pass_header ETag;
-        sub_filter '<base href="/"' '<base href="/console"';
+        sub_filter 'link href="' 'link href="/console/';
         sub_filter_once on;
     tls: false 
   resources:
