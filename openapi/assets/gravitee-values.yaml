@@ -518,7 +518,7 @@ api:
     targetMemoryAverageUtilization: 80
   ingress:
     management:
-      enabled: false
+      enabled: true
       path: /BASE_PATH-32120
       # Used to create an Ingress record.
       hosts:
