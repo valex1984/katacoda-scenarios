@@ -5,6 +5,7 @@ REGISTRY_DONE=/tmp/registry_installed
 INGRESS_DONE=/tmp/ingress_installed
 GRAVITEE_DONE=/tmp/gravitee_installed
 BASE_PATH="$(cat /usr/local/etc/sbercode-prefix)-32100"
+INGRESS_HOSTNAME_PLACEHOLDER="$(cat /usr/local/etc/sbercode-ingress)"
 
 spinner() {
   local i sp n
@@ -218,6 +219,8 @@ function install_pg() {
 function install_apim() {
   echo -e "\n[INFO] Installing gravitee"
 
+  sed -ie "s#BASE_PATH#$BASE_PATH#g" /tmp/gravitee-values.yaml
+  sed -ie "s#INGRESS_HOSTNAME_PLACEHOLDER#$INGRESS_HOSTNAME_PLACEHOLDER#g" /tmp/gravitee-values.yaml
   helm upgrade --install -n gravitee gravitee -f /tmp/gravitee-values.yaml nexus/apim3
   test $? -eq 1 && echo "[ERROR] cannot install gravitee" && kill "$!" && exit 1
   sed -e "s#BASE_PATH#$BASE_PATH#g" /tmp/apim-ingress.yaml | kubectl apply -f-

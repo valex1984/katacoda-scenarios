@@ -538,7 +538,7 @@ api:
           secretName: api-custom-cert
     portal:
       enabled: false
-      path: /portal
+      path: /BASE_PATH/portal
       # Used to create an Ingress record.
       hosts:
         - INGRESS_HOSTNAME_PLACEHOLDER
@@ -829,7 +829,7 @@ gateway:
     targetMemoryAverageUtilization: 80
   ingress:
     enabled: false
-    path: /gateway
+    path: /BASE_PATH/gateway
     # Used to create an Ingress record.
     # Multiple hostnames supported
     # - hosts:
@@ -1107,7 +1107,7 @@ ui:
     runAsNonRoot: true
   ingress:
     enabled: false
-    path: /console(/|$)(.*)
+    path: /BASE_PATH/console(/|$)(.*)
     # Used to create an Ingress record.
     hosts:
       - INGRESS_HOSTNAME_PLACEHOLDER
