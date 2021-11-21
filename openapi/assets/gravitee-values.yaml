@@ -518,25 +518,16 @@ api:
     targetMemoryAverageUtilization: 80
   ingress:
     management:
-      enabled: false
-      path: /management
+      enabled: true
+      path: /BASE_PATH/management
       # Used to create an Ingress record.
       hosts:
         - INGRESS_HOSTNAME_PLACEHOLDER
       annotations:
         kubernetes.io/ingress.class: nginx
         nginx.ingress.kubernetes.io/configuration-snippet: "etag on;\nproxy_pass_header ETag;\nproxy_set_header if-match \"\";\n"
-        # kubernetes.io/tls-acme: "true"
-      #tls:
-        # Secrets must be manually created in the namespace.
-        # - secretName: chart-example-tls
-        #   hosts:
-        #     - chart-example.local
-      tls:
-        - hosts:
-            - INGRESS_HOSTNAME_PLACEHOLDER
-          secretName: api-custom-cert
-    portal:
+      tls: false       
+    portal: 
       enabled: true
       path: /BASE_PATH/portal
       # Used to create an Ingress record.
@@ -819,7 +810,7 @@ gateway:
     targetAverageUtilization: 50
     targetMemoryAverageUtilization: 80
   ingress:
-    enabled: false
+    enabled: true
     path: /BASE_PATH/gateway
     # Used to create an Ingress record.
     # Multiple hostnames supported
@@ -831,18 +822,7 @@ gateway:
     annotations:
       kubernetes.io/ingress.class: nginx
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
-      # nginx.ingress.kubernetes.io/configuration-snippet: "etag on;\nproxy_pass_header ETag;\nproxy_set_header if-match \"\";\n"
-      # kubernetes.io/tls-acme: "true"
-    #tls:
-      # Secrets must be manually created in the namespace.
-      # - secretName: chart-example-tls
-      #   hosts:
-      #     - chart-example.local
-      #     - chart-example2.local
-    tls:
-      - hosts:
-          - INGRESS_HOSTNAME_PLACEHOLDER
-        secretName: api-custom-cert
+    tls: false
   resources:
     # We usually recommend not to specify default resources and to leave this as a conscious
     # choice for the user. This also increases chances charts run on environments with little
@@ -951,7 +931,7 @@ portal:
     runAsNonRoot: true
   ingress:
     enabled: true
-    path: /BASE_PATH/portal2/
+    path: /BASE_PATH/
     # Used to create an Ingress record.
     hosts:
       - INGRESS_HOSTNAME_PLACEHOLDER
