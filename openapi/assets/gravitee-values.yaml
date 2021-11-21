@@ -518,7 +518,7 @@ api:
     targetMemoryAverageUtilization: 80
   ingress:
     management:
-      enabled: true
+      enabled: false
       path: /BASE_PATH/management
       # Used to create an Ingress record.
       hosts:
@@ -528,7 +528,7 @@ api:
         nginx.ingress.kubernetes.io/configuration-snippet: "etag on;\nproxy_pass_header ETag;\nproxy_set_header if-match \"\";\n"
       tls: false       
     portal: 
-      enabled: true
+      enabled: false
       path: /BASE_PATH/portal
       # Used to create an Ingress record.
       hosts:
