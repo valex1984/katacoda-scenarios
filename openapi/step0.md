@@ -30,8 +30,9 @@
 Function                        Image                                           Invocations     Replicas        CreatedAt
 ```
 
-Интерфейс gravitee доступен по ссылке [gravitee ](https://[[HOST_SUBDOMAIN]]-32100-[[KATACODA_HOST]].environments.katacoda.com/)
-Портал доступен по ссылке [gravitee portal](https://[[HOST_SUBDOMAIN]]-32110-[[KATACODA_HOST]].environments.katacoda.com/)
-manage доступен по ссылке [gravitee manage](https://[[HOST_SUBDOMAIN]]-32120-[[KATACODA_HOST]].environments.katacoda.com/)
+Интерфейс gravitee доступен по ссылке [gravitee ](https://[[HOST_SUBDOMAIN]]-32120-[[KATACODA_HOST]].environments.katacoda.com/)
+api портала  доступн по ссылке [gravitee portal api](https://[[HOST_SUBDOMAIN]]-32110-[[KATACODA_HOST]].environments.katacoda.com/)
+gravitee gateway доступено по ссылке [gravitee gateway](https://[[HOST_SUBDOMAIN]]-32130-[[KATACODA_HOST]].environments.katacoda.com/)
+manage доступен по ссылке [gravitee mangement api](https://[[HOST_SUBDOMAIN]]-32100-[[KATACODA_HOST]].environments.katacoda.com/)
 
 На этом настройка окружения успешно завершена. Далее попробуем запустить свою первую serverless функцию.

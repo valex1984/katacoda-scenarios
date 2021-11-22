@@ -166,7 +166,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-  name: ingress-nginx-controller2
+  name: ingress-nginx-api-portal
   namespace: ingress-nginx
 spec:
   ports:
@@ -186,7 +186,7 @@ apiVersion: v1
 kind: Service
 metadata:
   annotations:
-  name: ingress-nginx-controller3
+  name: ingress-nginx-ui
   namespace: ingress-nginx
 spec:
   ports:
@@ -201,11 +201,26 @@ spec:
     app.kubernetes.io/name: ingress-nginx
   sessionAffinity: None
   type: NodePort
-    echo done
-    touch $INGRESS_DONE
-  else
-    echo already installed
-  fi
+---
+apiVersion: v1
+kind: Service
+metadata:
+  annotations:
+  name: ingress-nginx-gateway
+  namespace: ingress-nginx
+spec:
+  ports:
+  - name: http
+    nodePort: 32130
+    port: 80
+    protocol: TCP
+    targetPort: 80
+  selector:
+    app.kubernetes.io/component: controller
+    app.kubernetes.io/instance: ingress-nginx
+    app.kubernetes.io/name: ingress-nginx
+  sessionAffinity: None
+  type: NodePort
 EOF
     kubectl apply -f /tmp/add-ingress-svc.yaml
     echo done
@@ -265,9 +280,9 @@ function install_pg() {
 function install_apim() {
   echo -e "\n[INFO] Installing gravitee"
 
-  sed -i "s#BASE_PATH#$BASE_PATH#g" /tmp/gravitee-values.yaml
-  sed -i "s#INGRESS_HOSTNAME_PLACEHOLDER#$INGRESS_HOSTNAME_PLACEHOLDER#g" /tmp/gravitee-values.yaml
-  helm upgrade --install -n gravitee gravitee -f /tmp/gravitee-values.yaml nexus/apim3
+  sed -i "s#BASE_PATH#$BASE_PATH#g" /tmp/gravitee.yaml
+  sed -i "s#INGRESS_HOSTNAME_PLACEHOLDER#$INGRESS_HOSTNAME_PLACEHOLDER#g" /tmp/gravitee.yaml
+  kubectl apply -n gravitee -f /tmp/gravitee.yaml
   test $? -eq 1 && echo "[ERROR] cannot install gravitee" && kill "$!" && exit 1
 }
 

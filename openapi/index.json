@@ -23,7 +23,7 @@
         },
         "assets": {
             "host01": [
-                {"file": "gravitee-values.yaml", "target": "/tmp"},
+                {"file": "gravitee.yaml", "target": "/tmp"},
                 {"file": "prepare.sh", "target": "/usr/local/bin", "chmod": "+x"}
             ]
           }
