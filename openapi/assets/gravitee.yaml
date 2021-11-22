@@ -878,7 +878,7 @@ metadata:
   annotations:
       kubernetes.io/ingress.class: "nginx"
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
-      nginx.ingress.kubernetes.io/rewrite-target: "/gateway/$1$2"
+      nginx.ingress.kubernetes.io/rewrite-target: "/gateway$1$2"
 spec:
   rules:
   - host: INGRESS_HOSTNAME_PLACEHOLDER
