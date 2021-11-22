@@ -906,7 +906,11 @@ metadata:
     helm.sh/chart: apim3-3.1.30
   annotations:
       kubernetes.io/ingress.class: "nginx"
-      nginx.ingress.kubernetes.io/configuration-snippet: "etag on;\nproxy_pass_header ETag;\n"
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        etag on;
+        proxy_pass_header ETag;
+        sub_filter '<base href="/"' '<base href="/BASE_PATH-32100/portal-ui/"';
+        sub_filter_once on;
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
       nginx.ingress.kubernetes.io/rewrite-target: "/$1$2"
 spec:
