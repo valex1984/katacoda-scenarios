@@ -83,29 +83,22 @@ data:
               password: $2a$10$9kjw/SH9gucCId3Lnt6EmuFreUAcXSZgpvAYuW2ISv7hSOhHRH1AO
               roles: ORGANIZATION:USER, ENVIRONMENT:USER
     # SMTP configuration used to send mails
-    email:
-      enabled: true 
-      host: smtp.example.com
-      subject: "[gravitee] %s"
-      port: 25
-      from: info@example.com
-      username: info@example.com
-      password: example.com
-      properties:
-        auth: true
-        starttls.enable: false
+  email:
+    enabled: false
+    host: smtp.my.domain
+    subject: "[Gravitee.io] %s"
+    port: 587
+    from: noreply@my.domain
+
 
     # SMTP configuration used to send notifications / alerts
-    notifiers:
-      email:
-        enabled: true
-        host: ${email.host}
-        subject: "${email.subject}"
-        port: ${email.port}
-        from: ${email.from}
-        username: ${email.username}
-        password: ${email.password}
-        starttls.enabled: false
+  notifiers:
+    email:
+      enabled: true
+      host: ${email.host}
+      subject: ${email.subject}
+      port: ${email.port}
+
 
     # Mail templates
     templates:
