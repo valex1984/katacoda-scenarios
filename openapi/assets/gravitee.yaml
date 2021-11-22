@@ -74,9 +74,9 @@ data:
               username: admin
               password: $2a$10$Ihk05VSds5rUSgMdsMVi9OKMIx2yUvMz7y9VP3rJmQeizZLrhLMyq
               roles: ORGANIZATION:ADMIN, ENVIRONMENT:ADMIN
-              email: 
-              firstName: 
-              lastName: 
+              email: sbercode@none.net
+              firstName: admin
+              lastName: admin
     # SMTP configuration used to send mails
     email:
       enabled: false
