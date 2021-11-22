@@ -15,7 +15,7 @@ data:
   gravitee.yml: |
 
     management:
-      url: https://INGRESS_HOSTNAME_PLACEHOLDER/BASE_PATH-32120/
+      url: https://INGRESS_HOSTNAME_PLACEHOLDER/BASE_PATH-32100/
       type: jdbc
       jdbc:
         url: jdbc:postgresql://postgres-apim-postgresql:5432/graviteeapim
@@ -278,7 +278,7 @@ data:
   gzip-types: "*"
   config.json: |
     {
-      "baseURL": "https://INGRESS_HOSTNAME_PLACEHOLDER/BASE_PATH-32110/environments/DEFAULT",
+      "baseURL": "https://INGRESS_HOSTNAME_PLACEHOLDER/BASE_PATH-32100/portal/environments/DEFAULT",
       "loaderURL": "assets/images/gravitee-loader.gif",
       "pagination": {
         "size": {
@@ -306,7 +306,7 @@ data:
   gzip-types: "*"
   constants.json: |
     {
-      "baseURL": "https://INGRESS_HOSTNAME_PLACEHOLDER/BASE_PATH-32100/organizations/DEFAULT/environments/DEFAULT/",
+      "baseURL": "https://INGRESS_HOSTNAME_PLACEHOLDER/BASE_PATH-32100/management/organizations/DEFAULT/environments/DEFAULT/",
       "management": {
         "title": "API Management"
       },
@@ -317,7 +317,7 @@ data:
         "url": "http://docs.gravitee.io/"
       },
       "portal": {
-        "entrypoint": "https://INGRESS_HOSTNAME_PLACEHOLDER/BASE_PATH-32130",
+        "entrypoint": "https://INGRESS_HOSTNAME_PLACEHOLDER/BASE_PATH-32100/gateway",
         "title": "Management UI",
         "analytics": {"enabled":false,"trackingId":""},
         "apikeyHeader": "X-Gravitee-Api-Key",
@@ -670,7 +670,7 @@ spec:
             runAsUser: 101
           env:
             - name: PORTAL_API_URL
-              value: "https://INGRESS_HOSTNAME_PLACEHOLDER/BASE_PATH-32110/"
+              value: "https://INGRESS_HOSTNAME_PLACEHOLDER/BASE_PATH-32100/portal/"
           envFrom: 
             []
           ports:
@@ -755,7 +755,7 @@ spec:
             runAsUser: 101
           env:
             - name: MGMT_API_URL
-              value: "https://INGRESS_HOSTNAME_PLACEHOLDER/BASE_PATH-32100/"
+              value: "https://INGRESS_HOSTNAME_PLACEHOLDER/BASE_PATH-32100/management/"
           envFrom: 
             []
           ports:
@@ -806,13 +806,14 @@ metadata:
   annotations:
       kubernetes.io/ingress.class: "nginx"
       nginx.ingress.kubernetes.io/configuration-snippet: "etag on;\nproxy_pass_header ETag;\nproxy_set_header if-match \"\";\n"
+      nginx.ingress.kubernetes.io/rewrite-target: "/management/$1$2"
 spec:
   rules:
   - host: INGRESS_HOSTNAME_PLACEHOLDER
     http:
       paths:
       - pathType: Prefix
-        path: /BASE_PATH-32100
+        path: /BASE_PATH-32100/management(/|$)(.*)
         backend:
           service:
             name: gravitee-apim3-api
@@ -834,13 +835,14 @@ metadata:
   annotations:
       kubernetes.io/ingress.class: "nginx"
       nginx.ingress.kubernetes.io/configuration-snippet: "etag on;\nproxy_pass_header ETag;\nproxy_set_header if-match \"\";\n"
+      nginx.ingress.kubernetes.io/rewrite-target: "/portal/$1$2"
 spec:
   rules:
   - host: INGRESS_HOSTNAME_PLACEHOLDER
     http:
       paths:
       - pathType: Prefix
-        path: /BASE_PATH-32110
+        path: /BASE_PATH-32100/portal(/|$)(.*)
         backend:
           service:
             name: gravitee-apim3-api
@@ -862,13 +864,14 @@ metadata:
   annotations:
       kubernetes.io/ingress.class: "nginx"
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/rewrite-target: "/gateway/$1$2"
 spec:
   rules:
   - host: INGRESS_HOSTNAME_PLACEHOLDER
     http:
       paths:
       - pathType: Prefix
-        path: /BASE_PATH-32130
+        path: /BASE_PATH-32100/gateway(/|$)(.*)
         backend:
           service:
             name: gravitee-apim3-gateway
@@ -925,7 +928,7 @@ spec:
     http:
       paths:
       - pathType: Prefix
-        path: /BASE_PATH-32120(/|$)(.*)
+        path: /BASE_PATH-32100(/|$)(.*)
         backend:
           service:
             name: gravitee-apim3-ui
