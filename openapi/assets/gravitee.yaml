@@ -77,6 +77,11 @@ data:
               email: sbercode@none.net
               firstName: admin
               lastName: admin
+            - user:
+              username: user
+              # Password value: password
+              password: $2a$10$9kjw/SH9gucCId3Lnt6EmuFreUAcXSZgpvAYuW2ISv7hSOhHRH1AO
+              roles: ORGANIZATION:USER, ENVIRONMENT:USER
     # SMTP configuration used to send mails
     email:
       enabled: false
