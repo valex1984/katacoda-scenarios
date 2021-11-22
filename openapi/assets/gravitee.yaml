@@ -893,32 +893,34 @@ spec:
               number: 8082
 ---
 # Source: apim3/templates/portal/portal-ingress.yaml
-# apiVersion: networking.k8s.io/v1
-# kind: Ingress
-# metadata:
-#   name: gravitee-apim3-portal
-#   labels:
-#     app.kubernetes.io/name: apim3
-#     app.kubernetes.io/instance: gravitee
-#     app.kubernetes.io/version: 3.11.2
-#     app.kubernetes.io/component: "portal"
-#     app.kubernetes.io/managed-by: Helm
-#     helm.sh/chart: apim3-3.1.30
-#   annotations:
-#       kubernetes.io/ingress.class: "nginx"
-#       nginx.ingress.kubernetes.io/configuration-snippet: "etag on;\nproxy_pass_header ETag;\n"
-# spec:
-#   rules:
-#   - host: INGRESS_HOSTNAME_PLACEHOLDER
-#     http:
-#       paths:
-#       - pathType: Prefix
-#         path: /
-#         backend:
-#           service:
-#             name: gravitee-apim3-portal
-#             port:
-#               number: 8003
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gravitee-apim3-portal
+  labels:
+    app.kubernetes.io/name: apim3
+    app.kubernetes.io/instance: gravitee
+    app.kubernetes.io/version: 3.11.2
+    app.kubernetes.io/component: "portal"
+    app.kubernetes.io/managed-by: Helm
+    helm.sh/chart: apim3-3.1.30
+  annotations:
+      kubernetes.io/ingress.class: "nginx"
+      nginx.ingress.kubernetes.io/configuration-snippet: "etag on;\nproxy_pass_header ETag;\n"
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+      nginx.ingress.kubernetes.io/rewrite-target: "/$1$2"
+spec:
+  rules:
+  - host: INGRESS_HOSTNAME_PLACEHOLDER
+    http:
+      paths:
+      - pathType: Prefix
+        path: /BASE_PATH-32100/portal-ui(/|$)(.*)
+        backend:
+          service:
+            name: gravitee-apim3-portal
+            port:
+              number: 8003
 ---
 # Source: apim3/templates/ui/ui-ingress.yaml
 apiVersion: networking.k8s.io/v1
