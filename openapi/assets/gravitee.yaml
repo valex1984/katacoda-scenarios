@@ -345,7 +345,7 @@ metadata:
 spec:
   type: "ClusterIP"
   ports:
-    - port: 83
+    - port: 8083
       targetPort: 8083
       protocol: TCP
       name: api
@@ -370,7 +370,7 @@ metadata:
 spec:
   type: "ClusterIP"
   ports:
-    - port: 82
+    - port: 8082
       targetPort: 8082
       protocol: TCP
       name: gateway
@@ -817,7 +817,7 @@ spec:
           service:
             name: gravitee-apim3-api
             port:
-              number: 83
+              number: 8083
 ---
 # Source: apim3/templates/api/api-ingress-portal.yaml
 apiVersion: networking.k8s.io/v1
@@ -845,7 +845,7 @@ spec:
           service:
             name: gravitee-apim3-api
             port:
-              number: 83
+              number: 8083
 ---
 # Source: apim3/templates/gateway/gateway-ingress.yaml
 apiVersion: networking.k8s.io/v1
@@ -873,7 +873,7 @@ spec:
           service:
             name: gravitee-apim3-gateway
             port:
-              number: 82
+              number: 8082
 ---
 # Source: apim3/templates/portal/portal-ingress.yaml
 # apiVersion: networking.k8s.io/v1
