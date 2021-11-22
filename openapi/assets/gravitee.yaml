@@ -806,7 +806,7 @@ metadata:
   annotations:
       kubernetes.io/ingress.class: "nginx"
       nginx.ingress.kubernetes.io/configuration-snippet: "etag on;\nproxy_pass_header ETag;\nproxy_set_header if-match \"\";\n"
-      nginx.ingress.kubernetes.io/rewrite-target: "/management/$1$2"
+      nginx.ingress.kubernetes.io/rewrite-target: "/management$1$2"
 spec:
   rules:
   - host: INGRESS_HOSTNAME_PLACEHOLDER
@@ -835,7 +835,7 @@ metadata:
   annotations:
       kubernetes.io/ingress.class: "nginx"
       nginx.ingress.kubernetes.io/configuration-snippet: "etag on;\nproxy_pass_header ETag;\nproxy_set_header if-match \"\";\n"
-      nginx.ingress.kubernetes.io/rewrite-target: "/portal/$1$2"
+      nginx.ingress.kubernetes.io/rewrite-target: "/portal$1$2"
 spec:
   rules:
   - host: INGRESS_HOSTNAME_PLACEHOLDER
