@@ -7,16 +7,20 @@
     "details": {
         "steps": [
             {
-                "title": "Подготовка окружения",
+                "title": "Готовим стенд",
                 "text": "step0.md"
             },
             {
-                "title": "Реализация простейшей serverless функции",
+                "title": "Изучаем serverless функции",
                 "text": "step1.md"
             },
             {
-                "title": "Управление serverless функцией",
+                "title": "Изучаем serverless функции",
                 "text": "step2.md"
+            },
+            {
+                "title": "Изучаем api gateway",
+                "text": "step3.md"
             }
         ],
         "intro": {
