@@ -13,7 +13,7 @@ password: password
 Подключем ранее созданную функцию fn1 через api gateway.  
 1. после авторизации в интерфейсе переходим на вкладку "APIs"  
 2. нажимаем "+" в правом нижнем углу и выбираем вариант "import"  
-3. сохраняем файл по ссылке https://raw.githubusercontent.com/valex1984/katacoda-scenarios/sbercode/openapi/assets/fn1.json`  
+3. сохраняем файл описания api в формате  gravitee по [ссылке](https://raw.githubusercontent.com/valex1984/katacoda-scenarios/sbercode/openapi/assets/fn1.json)
 4. выбираем "import from file" и указываем ранее сохраненный файл  
 5. в верней части экрана видим предупреждение, что апи не синхронизировано. Нажимаем "deploy your API"  
 6. нажимаем "START THE API"  
