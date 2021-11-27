@@ -7,7 +7,7 @@
     "details": {
         "steps": [
             {
-                "title": "Подготовка окружения",
+                "title": "Готовим окружение",
                 "text": "step0.md"
             },
             {
@@ -15,7 +15,7 @@
                 "text": "step1.md"
             },
             {
-                "title": "Изучаем serverless функции - st2",
+                "title": "Изучаем serverless функции",
                 "text": "step2.md"
             },
             {
