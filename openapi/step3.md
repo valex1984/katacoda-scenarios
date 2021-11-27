@@ -11,3 +11,5 @@ password: password
 ```
 ### Маппинг serverless функции
 Подключем ранее созданную функцию fn1 через api gateway
+
+и вызовем по ссылке [fn1] (https://[[HOST_SUBDOMAIN]]-32100-[[KATACODA_HOST]].environments.katacoda.com/gateway/serverless) 
