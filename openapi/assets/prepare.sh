@@ -52,7 +52,6 @@ function install_openfaas() {
     echo "waiting for openfaas system pods ready"
     kubectl -n openfaas wait --for=condition=ContainersReady --timeout=5m --all pods
     test $? -eq 1 && echo "[ERROR] openfaas pods not ready" && kill "$!" && exit 1
-    PASSWORD=$(kubectl -n openfaas get secret basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode) && echo $PASSWORD | faas-cli login --username admin -s >/dev/null
     echo "done"
     touch $OPENFAAS_DONE
   else
@@ -240,6 +239,11 @@ function install_gravitee() {
 
 }
 
+function login_openfaas() {
+
+      PASSWORD=$(kubectl -n openfaas get secret basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode) && echo $PASSWORD | faas-cli login --username admin -s >/dev/null
+}
+
 # wait for cluster readiness
 launch.sh
 
@@ -249,5 +253,6 @@ install_openfaas
 install_registry
 install_ingress
 install_gravitee
+login_openfaas
 #stop spinner
 kill "$!"
