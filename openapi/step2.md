@@ -26,7 +26,7 @@ changed</pre>
 Изменим для нашей функции данные настройки на следующие:
 - минимум 2 реплики, максимум 10
 - скейл на 50% от максимального значения ( + 5 реплик )
-<pre class="file" data-filename="./fn1.yaml" data-target="append">
+<pre class="file" data-filename="./fn1.yml" data-target="append">
     labels:
       com.openfaas.scale.min: "2"
       com.openfaas.scale.max: "10"
