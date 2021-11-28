@@ -834,6 +834,25 @@ spec:
             port:
               number: 8083
 ---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gravitee-apim3-api-management-internal
+  annotations:
+      kubernetes.io/ingress.class: "nginx"
+      nginx.ingress.kubernetes.io/configuration-snippet: "etag on;\nproxy_pass_header ETag;\nproxy_set_header if-match \"\";\n"
+spec:
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: /management
+        backend:
+          service:
+            name: gravitee-apim3-api
+            port:
+              number: 8083
+---
 # Source: apim3/templates/api/api-ingress-portal.yaml
 apiVersion: networking.k8s.io/v1
 kind: Ingress
@@ -886,6 +905,25 @@ spec:
       paths:
       - pathType: Prefix
         path: /BASE_PATH-32100/gateway/(.*)
+        backend:
+          service:
+            name: gravitee-apim3-gateway
+            port:
+              number: 8082
+---
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: gravitee-apim3-gateway-internal
+  annotations:
+      kubernetes.io/ingress.class: "nginx"
+      nginx.ingress.kubernetes.io/ssl-redirect: "false"
+spec:
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: /gateway
         backend:
           service:
             name: gravitee-apim3-gateway
