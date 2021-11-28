@@ -145,7 +145,7 @@ EOF
     echo "waiting for container registry pod ready"
     kubectl -n container-registry wait --for=condition=ContainersReady --timeout=5m --all pods
     test $? -eq 1 && echo "[ERROR] registry pod not ready" && kill "$!" && exit 1
-    echo -e "[[registry]]\nlocation = \"$REGISTRY\"\ninsecure = true" | tee -a /etc/containers/registries.conf
+    echo -e "\n[[registry]]\nlocation = \"$REGISTRY\"\ninsecure = true" | tee -a /etc/containers/registries.conf
     echo "done"
     touch $REGISTRY_DONE
   else
