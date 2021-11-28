@@ -6,7 +6,7 @@
 changed</pre>
 
 Для публикации изменений пересоберем и опубликуем образ
-`faas-cli build -f fn1.yml && docker push $REGISTRY/sbercode/fn1 && faas-cli deploy -f fn1.yml`{{execute}}
+`faas-cli up -f fn1.yml `{{execute}}
 
 Кубернетес развернет новый под с функцией и уничтожит предыдущую версию. Посмотреть статус деплоймента можно командой:
 `kubectl get po -n openfaas-fn`{{execute}}
@@ -34,7 +34,7 @@ changed</pre>
 </pre>
 
 И далее заново опубликуем изменения:
-`faas-cli build -f fn1.yml && docker push $REGISTRY/sbercode/fn1 && faas-cli deploy -f fn1.yml`{{execute}}
+`faas-cli up -f fn1.yml`{{execute}}
 
 Убедимся, что кубернетес развернет новый под с количеством реплик равным двум:
 `kubectl get po -n openfaas-fn`{{execute}}
