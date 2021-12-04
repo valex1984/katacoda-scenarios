@@ -59,3 +59,7 @@ password: password
 ```
 Hello from OpenFaaS!
 ```
+В текущем плане подписки нашего приложения установлен рейтлимит 3 запроса/мин. Еще несколько раз вызовем функцию и получим следующий ответ:
+```
+{"message":"Rate limit exceeded ! You reach the limit of 3 requests per 1 minutes","http_status_code":429}
+```
