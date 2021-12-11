@@ -5,7 +5,7 @@
 
 faas_fn1_out=$(curl $OPENFAAS_URL/function/fn1)
 gravitee_fn1_out=$(curl http://localhost:32100/gateway/serverless)
-gravitee_fn2_out=$(curl http://localhost:32100/gateway/fn2)
+gravitee_fn2_out=$(curl -H @/root/apikey http://localhost:32100/gateway/fn2)
 
 jq --null-input \
 --arg faas_fn1_out "$faas_fn1_out" \
