@@ -8,6 +8,15 @@ changed</pre>
 Для публикации изменений пересоберем и опубликуем образ
 `faas-cli up -f fn1.yml `{{execute}}
 
+Сборка образа упала с ошибкой. Что произошло? Не прошли юнит тесты, т.к. мы поменяли поведение функции.  
+Поправим ошибку в файле fn1/handler_test.py
+
+<pre class="file" data-filename="./fn1/handler_test.py" data-target="insert" data-marker="Hello from OpenFaaS!">
+changed</pre>
+
+И затем заново запустим сборку и публикацию функции
+`faas-cli up -f fn1.yml `{{execute}}
+
 Кубернетес развернет новый под с функцией и уничтожит предыдущую версию. Посмотреть статус деплоймента можно командой:
 `kubectl get po -n openfaas-fn`{{execute}}
 
