@@ -1,0 +1,130 @@
+{
+  "name": "serverless",
+  "version": "1.0",
+  "description": "openapi demo",
+  "visibility": "PRIVATE",
+  "gravitee": "2.0.0",
+  "flow_mode": "DEFAULT",
+  "resources": [],
+  "properties": [],
+  "members": [
+    {
+      "source": "memory",
+      "sourceId": "admin",
+      "roles": [
+        "05f84f04-499a-44ec-b84f-04499a64ec6f"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "id": "ebe4d20e-6232-3f2e-8b1f-2d3850591782",
+      "name": "Aside",
+      "type": "SYSTEM_FOLDER",
+      "order": 0,
+      "published": true,
+      "visibility": "PUBLIC",
+      "lastModificationDate": 1638033648401,
+      "contentType": "application/json",
+      "configuration": {},
+      "homepage": false,
+      "parentPath": "",
+      "excludedAccessControls": false,
+      "accessControls": [],
+      "metadata": {},
+      "api": "b66f4be1-e7b1-48c7-af4b-e1e7b158c77d",
+      "attached_media": []
+    }
+  ],
+  "plans": [
+    {
+      "id": "896d8a21-d3b4-33e0-99f5-872b86db9fb7",
+      "name": "demo",
+      "description": "demo plan",
+      "validation": "AUTO",
+      "security": "KEY_LESS",
+      "type": "API",
+      "status": "PUBLISHED",
+      "api": "b66f4be1-e7b1-48c7-af4b-e1e7b158c77d",
+      "order": 0,
+      "characteristics": [],
+      "tags": [],
+      "created_at": 1638033648458,
+      "updated_at": 1638033648458,
+      "paths": {},
+      "flows": [
+        {
+          "name": "",
+          "path-operator": {
+            "path": "/",
+            "operator": "STARTS_WITH"
+          },
+          "condition": "",
+          "consumers": [],
+          "methods": [],
+          "pre": [],
+          "post": [],
+          "enabled": true
+        }
+      ],
+      "excluded_groups": [],
+      "comment_required": false
+    }
+  ],
+  "metadata": [
+    {
+      "key": "email-support",
+      "name": "email-support",
+      "format": "MAIL",
+      "value": "${(api.primaryOwner.email)!''}",
+      "defaultValue": "support@change.me",
+      "apiId": "b66f4be1-e7b1-48c7-af4b-e1e7b158c77d"
+    }
+  ],
+  "id": "b66f4be1-e7b1-48c7-af4b-e1e7b158c77d",
+  "path_mappings": [],
+  "proxy": {
+    "virtual_hosts": [
+      {
+        "path": "/serverless"
+      }
+    ],
+    "strip_context_path": false,
+    "preserve_host": false,
+    "groups": [
+      {
+        "name": "default-group",
+        "endpoints": [
+          {
+            "name": "default",
+            "target": "http://gateway.openfaas:8080/function/fn1",
+            "weight": 1,
+            "backup": false,
+            "type": "HTTP",
+            "inherit": true
+          }
+        ],
+        "load_balancing": {
+          "type": "ROUND_ROBIN"
+        },
+        "http": {
+          "connectTimeout": 5000,
+          "idleTimeout": 60000,
+          "keepAlive": true,
+          "readTimeout": 10000,
+          "pipelining": false,
+          "maxConcurrentConnections": 100,
+          "useCompression": true,
+          "followRedirects": false
+        }
+      }
+    ]
+  },
+  "response_templates": {},
+  "primaryOwner": {
+    "id": "179acccb-8a68-4eab-9acc-cb8a68ceabf5",
+    "email": "sbercode@none.net",
+    "displayName": "admin admin",
+    "type": "USER"
+  }
+}

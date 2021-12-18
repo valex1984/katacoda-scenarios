@@ -1,0 +1,52 @@
+{
+    "pathwayTitle": "openapi3",
+    "title": "openapi - управление версиями",
+    "description": "openapi3",
+    "difficulty": "beginner",
+    "time": "30 minutes",
+    "details": {
+        "steps": [
+            {
+                "title": "Готовим окружение",
+                "text": "step0.md"
+            },
+            {
+                "title": "Изучаем serverless функции",
+                "text": "step1.md"
+            },
+            {
+                "title": "Изучаем serverless функции",
+                "text": "step2.md"
+            },
+            {
+                "title": "Изучаем api gateway",
+                "text": "step3.md"
+            }
+        ],
+        "intro": {
+            "text": "intro.md"
+        },
+        "finish": {
+            "text": "finish.md"
+        },
+        "assets": {
+            "host01": [
+                {"file": "gravitee.yaml", "target": "/tmp"},
+                {"file": "prepare.sh", "target": "/usr/local/bin", "chmod": "+x"},
+                {"file": "serverless-example-1-0-0.json", "target": "/root"},
+                {"file": "apikey", "target": "/root"}
+            ]
+          }
+    },
+    "files": [],
+    "environment": {
+        "uilayout": "terminal",
+        "uisettings": "yaml",
+        "showide": true,
+        "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n",
+        "uimessage2": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
+    },
+    "backend": {
+        "imageid": "k3s-docker"
+    }
+}
