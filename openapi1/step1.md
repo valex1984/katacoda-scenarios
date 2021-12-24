@@ -6,6 +6,6 @@ httpbin - это сервис для отладки http запросов/отв
  * /basic-auth/{user}/{password} - пример запроса с авторизацией
 
 
-Также можно ознакомиться с полной спецификацией в формате  OpenApi `/root/httpbin-openapi.yaml`{{open}}
+Также можно ознакомиться с полной спецификацией в формате  OpenApi `~/httpbin-openapi.yaml`{{open}}
 
 
