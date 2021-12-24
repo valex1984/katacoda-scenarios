@@ -4,9 +4,26 @@
 Выполним GET запрос:
 `curl -v localhost:32100/httpbin/get`{{execute}}
 
+В ответе запроса получаем данные в виде json
+
+Выполним POST запрос:
+`curl -v -XPOST localhost:32100/post -H "Content-Type: application/json" -d'{"data":"test data here"}'`{{execute}}
+В ответе получим json, который будет содержать в поле "json" данные нашего запроса.
+
+При попытке выполнить данный запрос без явного указания типа POST(-XPOST) будет выполнен запрос типа GET, который вернет ошибку `405 Method Not Allowed`
+
 ### Запросы с авторизацией
 
+ httpbin позволяет симитировать запрос с авторизацией. Т.к. сам сервис stateless, user/password указываются следующим образом:  
+ /basic-auth/{user}/{password}  
 
+ Выполним запрос
+
+`curl -v localhost:32100/basic-auth/usr/pass`{{execute}}
+получаем 401 ошибку, не хватает заголовка с авторизацией. Повторим запрос с нужеыми заголовками
+
+`curl -v -u usr:pass localhost:32100/basic-auth/usr/pass`{{execute}}
+видим в запросе нужный заголовок > Authorization: Basic dXNyOnBhc3M=  и 200 ответ.
 
 
 При желании можно самостоятельно поэксперементировать с другими типами запросов согласно спецификации.
