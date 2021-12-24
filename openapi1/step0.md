@@ -4,7 +4,8 @@
 
 ### Деплой приложения httpbin
 Для демонстрации доступа к api будем использовать приложение httpbin
-Изучим манифест деплоя `httpbin.yaml`{{open}}
+Изучим манифест деплоя 
+`httpbin.yaml`{{open}}
 Выполним деплой командой 
 `kubectl apply -f httpbin.yaml`{{execute}}
 
