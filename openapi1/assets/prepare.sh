@@ -1,6 +1,6 @@
 #!/bin/bash
 
-INGRESS_HOSTNAME_PLACEHOLDER="$(cat /usr/local/etc/sbercode-ingress)"
+INGRESS_DONE=/tmp/ingress_installed
 
 spinner() {
   local i sp n
