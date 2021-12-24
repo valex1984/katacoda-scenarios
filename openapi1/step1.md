@@ -7,6 +7,6 @@ httpbin - это сервис для отладки http запросов/отв
 
 
 Также можно ознакомиться с полной спецификацией в формате  OpenApi
-* спецификация `httpbin-openapi.yaml`{{open}}
+`httpbin-openapi.yaml`{{open}}
 
 
