@@ -250,11 +250,11 @@ function login_openfaas() {
 launch.sh
 
 spinner &
-prepare_env
-install_openfaas
-install_registry
+# prepare_env
+# install_openfaas
+# install_registry
 install_ingress
-install_gravitee
-login_openfaas
+# install_gravitee
+# login_openfaas
 #stop spinner
 kill "$!"
