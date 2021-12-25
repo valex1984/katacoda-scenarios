@@ -30,7 +30,7 @@ pasword: admin
 ![App_](./assets/openapi4-4.png) 
 
 Проверим настройки, выполнив 20 обращений к апи
-for i in {1..20}; do echo "$(curl -s  http://localhost:32100/gateway/api/v1)"; done
+`for i in {1..20}; do echo "$(curl -s  http://localhost:32100/gateway/api/v1)"; done`{{execute}}
 
 пример вывода:
 ```
@@ -61,7 +61,7 @@ Hello from OpenFaaS!
 Для этого переходим на страницу управления эндпоинтами и корректируем настройки.
 ![App_](./assets/openapi4-5.png) 
 Применяем изменения и проверяем, что весь траффик направляется на новую версию.
-for i in {1..10}; do echo "$(curl -s  http://localhost:32100/gateway/api/v1)"; done
+`for i in {1..10}; do echo "$(curl -s  http://localhost:32100/gateway/api/v1)"; done`{{execute}}
 
 пример вывода:
 
