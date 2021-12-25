@@ -42,6 +42,7 @@ function install_ingress() {
 function install_es() {
 
   echo -e "\n[INFO] Installing elasticsearch"
+  helm repo add nexus http://nexus:8081/repository/helm-hosted
   helm repo add bitnami http://nexus:8081/repository/bitnami/
   test $? -eq 1 && echo "[ERROR] cannot add bitnami proxy repo" && kill "$!" && exit 1
   kubectl create ns gravitee --dry-run=client -o yaml | kubectl apply -f -
