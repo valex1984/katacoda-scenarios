@@ -9,6 +9,6 @@ httpbin - это сервис для отладки http запросов/отв
 Также можно ознакомиться с полной спецификацией в формате  OpenApi
 `httpbin-openapi.yaml`{{open}}
 
-Также спецификация доступна в интерактивном режиме по [ссылке](https://[[HOST_SUBDOMAIN]]-32100-[[KATACODA_HOST]].environments.katacoda.com)
+Также спецификация доступна в интерактивном режиме по [ссылке](https://[[HOST_SUBDOMAIN]]-32100-[[KATACODA_HOST]].environments.katacoda.com/)
 
 

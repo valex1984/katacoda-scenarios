@@ -31,7 +31,7 @@ metadata:
   name: httpbin-external
   annotations:
       kubernetes.io/ingress.class: "nginx"
-      nginx.ingress.kubernetes.io/rewrite-target: "/$1$2"
+      nginx.ingress.kubernetes.io/rewrite-target: "/$1"
 spec:
   rules:
   - http:
