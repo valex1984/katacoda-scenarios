@@ -1,21 +1,21 @@
 package sbercode
 
-default fn2_ok = false
+default ok = false
 
-fn2_ok = true {
+ok = true {
 	res := input.results[_]
 	res.httpbin_retcode == "200"
 }
 
 allow[msg] {
 	res := input.results[_]
-	fn2_ok
+	ok
 	msg := "[OK] сервис httpbin доступен"
 }
 
 deny[msg] {
 	res := input.results[_]
-	fn2_ok == false
+	ok == false
 	msg := "[ERROR] сервис httpbin не доступен"
 }
 
