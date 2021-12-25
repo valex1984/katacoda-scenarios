@@ -1,51 +1,22 @@
 package sbercode
 
-default fn2_ok = false
-
-fn2_ok = true {
-	res := input.results[_]
-	res.gravitee_fn2_retcode == "200"
-}
-
-fn2_ok = true {
+allow[msg] {
 	res := input.results[_]
 	res.gravitee_fn2_retcode == "429"
-}
-
-allow[msg] {
-	res := input.results[_]
-	res.faas_fn1_out == "changed"
-	msg := sprintf("[OK] Результат работы  функции fn1, вызов через gw OpenFaaS: %s", [res.faas_fn1_out])
+	contains(res.gravitee_fn2_out ,"limit of 5 requests per 1 minutes")
+	msg := sprintf("[OK] Результат работы  функции fn2, вызов через gw OpenFaaS: %s", [res.gravitee_fn2_out])
 }
 
 deny[msg] {
 	res := input.results[_]
-	res.faas_fn1_out != "changed"
-	msg := sprintf("[ERROR] Результат работы  функции fn1, вызов через gw OpenFaaS: %s", [res.faas_fn1_out])
-}
-
-allow[msg] {
-	res := input.results[_]
-	res.gravitee_fn1_out == "changed"
-	msg := sprintf("[OK] Результат работы  функции fn1, вызов через gw gravitee: %s", [res.gravitee_fn1_out])
+	res.gravitee_fn2_retcode != "429"
+	msg := sprintf("[ERROR] код возврата  функции fn2, вызов через gw OpenFaaS: %s", [res.gravitee_fn2_retcode])
 }
 
 deny[msg] {
 	res := input.results[_]
-	res.gravitee_fn1_out != "changed"
-	msg := sprintf("[ERROR] Результат работы  функции fn1, вызов через gw gravitee: %s", [res.gravitee_fn1_out])
-}
-
-allow[msg] {
-	res := input.results[_]
-	fn2_ok
-	msg := sprintf("[OK] Результат работы  функции fn2, вызов через gw gravitee: %s", [res.gravitee_fn2_out])
-}
-
-deny[msg] {
-	res := input.results[_]
-	fn2_ok == false
-	msg := sprintf("[ERROR] Результат работы  функции fn2, вызов через gw gravitee: %s", [res.gravitee_fn2_out])
+	contains(res.gravitee_fn2_out ,"limit of 5 requests per 1 minutes") == false
+	msg := sprintf("[ERROR] Не настроен лимит 5 запросов/мин. Ответ функции fn2, вызов через gw OpenFaaS: %s", [res.gravitee_fn2_out])
 }
 
 error[msg] {
