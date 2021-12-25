@@ -25,7 +25,7 @@ load.sh```{{execute}}
 
 С помощью функции rate можем вычислить RPS - количество запросов в секунду:
 
-`rate(app_request_count_total{endpoint="/probe"}[1m])`{{copy}}
+`rate(app_request_count_total{endpoint="/probe"}[1m])`{{copy}}git 
 
 ![App_](./assets/katacoda_promql_rate.png)
 
