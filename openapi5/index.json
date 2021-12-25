@@ -11,16 +11,20 @@
                 "text": "step0.md"
             },
             {
-                "title": "Изучаем serverless функции",
+                "title": "Публикуем апи",
                 "text": "step1.md"
             },
             {
-                "title": "Изучаем serverless функции",
+                "title": "Получаем доступ к апи",
                 "text": "step2.md"
             },
             {
-                "title": "Изучаем api gateway",
+                "title": "Получаем доступ к апи",
                 "text": "step3.md"
+            },
+            {
+                "title": "Работа в условиях высокой нагрузки",
+                "text": "step4.md"
             }
         ],
         "intro": {

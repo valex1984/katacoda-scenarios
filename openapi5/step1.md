@@ -1,48 +1,19 @@
-### Создание функции
-Для создания структуры директорий новой функции из темплейта выполним команду:
-`faas-cli new --lang python3-sbercode fn1`{{execute}}
-Данная команда ищет темплейт с имененем python3-sbercode (мы скачали его при подготовке окружения) и создает на его основе скелет функции в текущей директории. Результат можно посмотреть в директории fn1
+###  Создание и публикация функции через gravitee api gateway
+Cоздадим функцию из темплейта и выполним ее сборку и деплой:
 
-Выполним сборку функции в докер образ командой:
-`faas-cli build -f fn1.yml`{{execute}}
+`faas-cli new --lang python3-sbercode fn2 && faas-cli up -f fn2.yml`{{execute}}
 
-Проверим наличие образа в локальном докер репозитории
-`docker images|grep sbercode`{{execute}}
-имя образа состоит из префикса репозитория кубернетис, куда мы его будем заливать, префикса `sbercode` и имени функции. Префиксы выставлены через переменные указанные в файле ~/envs и прописываются в дескриптор имя_функции.yml при создании через `faas-cli new`
+Импортируем файл описания апи для нашей функции командой
 
-Зальем образ в репозиторий на kubernetes:
-`docker push $REGISTRY/sbercode/fn1`{{execute}}
+`curl -u admin:admin -H "Content-Type:application/json;charset=UTF-8" -d @serverless-example-1-0-0.json    http://localhost:32100/management/organizations/DEFAULT/environments/DEFAULT/apis/import`{{execute}}
 
-И проверим его наличие
-`curl -s $REGISTRY/v2/_catalog|jq`{{execute}}
-Вывод должен иметь следующий вид:
-```
-{
-  "repositories": [
-    "sbercode/fn1"
-  ]
-}
-```
+Далее переходим в интерфейсе gravitee на вкладку APIs, находим импортированное api, стартуем и публикуем его.   
 
-### Деплой функции в OpenFaas
+TODO pic
 
-Для деплоя необходимо выполнить команду:
-`faas-cli deploy -f fn1.yml`{{execute}}
+### Попытка  вызова функции
 
-Проверить статус можно командой:
-`kubectl get po -n openfaas-fn`{{execute}}
-Дождемся, пока статус пода станет Ready
-```
-NAME                   READY   STATUS    RESTARTS   AGE
-fn1-794f59b5fd-448pd   1/1     Running   0          14s
-```
+Согласно настройкам плана api fn2 публично не доступно, для обращения нужен API key. Проверим это запросом:
 
-### Вызов функции
-
-Выполним запрос утилитой curl:
-
-`curl $OPENFAAS_URL/function/fn1`{{execute}}  
-Функция должна вывести сообщений вида:  
-`Hello from OpenFaaS!`
-
-Мы успешно собрали и развернули простейшую функцию в кубернетес.
+`curl http://localhost:32100/gateway/fn2`{{execute}}
+Получаем 401 ошибку, нужен ключ доступа в заголовке `X-Gravitee-Api-Key`.
