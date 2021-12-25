@@ -11,15 +11,15 @@
                 "text": "step0.md"
             },
             {
-                "title": "Изучаем serverless функции",
+                "title": "Публикуем  api v1",
                 "text": "step1.md"
             },
             {
-                "title": "Изучаем serverless функции",
+                "title": "Публикуем api v2",
                 "text": "step2.md"
             },
             {
-                "title": "Изучаем api gateway",
+                "title": "Просмотр версий api",
                 "text": "step3.md"
             }
         ],
