@@ -11,16 +11,12 @@
                 "text": "step0.md"
             },
             {
-                "title": "Изучаем serverless функции",
+                "title": "Импортируем апи",
                 "text": "step1.md"
             },
             {
-                "title": "Изучаем serverless функции",
+                "title": "Настраиваем маппинг ответа",
                 "text": "step2.md"
-            },
-            {
-                "title": "Изучаем api gateway",
-                "text": "step3.md"
             }
         ],
         "intro": {
@@ -32,6 +28,7 @@
         "assets": {
             "host01": [
                 {"file": "gravitee.yaml", "target": "/tmp"},
+                {"file": "httpbin-1-0-0.json", "target": "/root"},
                 {"file": "prepare.sh", "target": "/usr/local/bin", "chmod": "+x"}
             ]
           }

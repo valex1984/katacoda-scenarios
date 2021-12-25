@@ -1,0 +1,130 @@
+{
+  "name": "httpbin",
+  "version": "1.0.0",
+  "description": "demo api",
+  "visibility": "PRIVATE",
+  "gravitee": "2.0.0",
+  "flow_mode": "DEFAULT",
+  "resources": [],
+  "properties": [],
+  "members": [
+    {
+      "source": "memory",
+      "sourceId": "admin",
+      "roles": [
+        "c38cf66b-d2d6-4b39-8cf6-6bd2d69b39c9"
+      ]
+    }
+  ],
+  "pages": [
+    {
+      "id": "2c2fa3f3-1f02-4f27-afa3-f31f025f2783",
+      "name": "Aside",
+      "type": "SYSTEM_FOLDER",
+      "order": 0,
+      "published": true,
+      "visibility": "PUBLIC",
+      "lastModificationDate": 1640424778353,
+      "contentType": "application/json",
+      "configuration": {},
+      "homepage": false,
+      "parentPath": "",
+      "excludedAccessControls": false,
+      "accessControls": [],
+      "metadata": {},
+      "api": "70baa1f6-0b52-4413-baa1-f60b526413ec",
+      "attached_media": []
+    }
+  ],
+  "plans": [
+    {
+      "id": "f0a8bc99-64ed-4fa9-a8bc-9964edafa919",
+      "name": "httpbin-plan",
+      "description": "demo plan",
+      "validation": "AUTO",
+      "security": "KEY_LESS",
+      "type": "API",
+      "status": "PUBLISHED",
+      "api": "70baa1f6-0b52-4413-baa1-f60b526413ec",
+      "order": 0,
+      "characteristics": [],
+      "tags": [],
+      "created_at": 1640424778377,
+      "updated_at": 1640424778377,
+      "paths": {},
+      "flows": [
+        {
+          "name": "",
+          "path-operator": {
+            "path": "/",
+            "operator": "STARTS_WITH"
+          },
+          "condition": "",
+          "consumers": [],
+          "methods": [],
+          "pre": [],
+          "post": [],
+          "enabled": true
+        }
+      ],
+      "excluded_groups": [],
+      "comment_required": false
+    }
+  ],
+  "metadata": [
+    {
+      "key": "email-support",
+      "name": "email-support",
+      "format": "MAIL",
+      "value": "${(api.primaryOwner.email)!''}",
+      "defaultValue": "support@change.me",
+      "apiId": "70baa1f6-0b52-4413-baa1-f60b526413ec"
+    }
+  ],
+  "id": "70baa1f6-0b52-4413-baa1-f60b526413ec",
+  "path_mappings": [],
+  "proxy": {
+    "virtual_hosts": [
+      {
+        "path": "/httpbin"
+      }
+    ],
+    "strip_context_path": false,
+    "preserve_host": false,
+    "groups": [
+      {
+        "name": "default-group",
+        "endpoints": [
+          {
+            "name": "default",
+            "target": "http://httpbin.default:8000",
+            "weight": 1,
+            "backup": false,
+            "type": "HTTP",
+            "inherit": true
+          }
+        ],
+        "load_balancing": {
+          "type": "ROUND_ROBIN"
+        },
+        "http": {
+          "connectTimeout": 5000,
+          "idleTimeout": 60000,
+          "keepAlive": true,
+          "readTimeout": 10000,
+          "pipelining": false,
+          "maxConcurrentConnections": 100,
+          "useCompression": true,
+          "followRedirects": false
+        }
+      }
+    ]
+  },
+  "response_templates": {},
+  "primaryOwner": {
+    "id": "e261ac6b-2905-4a2d-a1ac-6b29055a2d01",
+    "email": "sbercode@none.net",
+    "displayName": "admin admin",
+    "type": "USER"
+  }
+}

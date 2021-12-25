@@ -1,63 +1,55 @@
-### Изменение функции
-Попробуем внести изменения в нашу функцию.  
-Для этого откроем в редакторе файл fn1/handler.py и изменим текст, который выдается в ответ на запрос
+### Авторизация в gravitee apim
+Откроем интерфейс gravitee apim по ссылке [gravitee ](https://[[HOST_SUBDOMAIN]]-32100-[[KATACODA_HOST]].environments.katacoda.com/)  и авторизуемся в нем  
+```
+права администратора
+user: admin
+pasword: admin
+```
+### Настройки плана
+План предоставляет сервис и уровень доступа к апи для конкретных потребителей. В данном случае манипуляции с маппингами ответов мы будем осуществлять в рамках существующего ранее загруженного плана. После авторизации перейдем в дизайнер
 
-<pre class="file" data-filename="./fn1/handler.py" data-target="insert" data-marker="Hello from OpenFaaS!">
-changed</pre>
+TODO картинки
 
-Для публикации изменений пересоберем и опубликуем образ
-`faas-cli up -f fn1.yml `{{execute}}
+Добавим в респонс из блока "Transformation" компонент "Transform Headers"
 
-Сборка образа упала с ошибкой. Что произошло? Не прошли юнит тесты, т.к. мы поменяли поведение функции.  
-Поправим ошибку в файле fn1/handler_test.py
+В настройках укажем удалить не нужные нам заголовки (TODO сылка на картинку)
+Нажмем "ок" и сохраним и задеплоим изменения (deploy your api).
 
-<pre class="file" data-filename="./fn1/handler_test.py" data-target="insert" data-marker="Hello from OpenFaaS!">
-changed</pre>
 
-И затем заново запустим сборку и публикацию функции
-`faas-cli up -f fn1.yml `{{execute}}
+### Проверка изменений
 
-Кубернетес развернет новый под с функцией и уничтожит предыдущую версию. Посмотреть статус деплоймента можно командой:
-`kubectl get po -n openfaas-fn`{{execute}}
+Пробуем выполнить запрос к апи, опубликованному через api gateway.
 
-Также статус функции можно отследить через faas-cli:
-`faas-cli list -v`{{execute}}
+`curl -v http://localhost:32100/gateway/httpbin/get`{{execute}}
 
-Проверим, что измененная функция успешно установлена в кластер командой:
-`curl $OPENFAAS_URL/function/fn1`{{execute}}  
-Функция должна вывести наш измененный текст:  
-`changed`
-### Настройки автоскейлинга
-По-умолчанию openfaas устанавливает настройки автоскейлинга следующим образом:
-- минимум 1 реплика, максимум 20
-- скейл на 20% от максималного значания,( т.е. + 4 реплики), при среденей нагрузке на функцию >5 запросов за последние 5 сек.
+Заметим, что httpbin работает как и раньше, он прислал в json ответа все заголовки, которые к нему пришли. В том числе и X-Gravitee-Request-Id, X-Gravitee-Transaction-Id.  
+А вот в самом ответе api gateway эти заголовки отсутствуют. Они были удалены согласно выполенным настройкам.
 
-Изменим для нашей функции данные настройки на следующие:
-- минимум 2 реплики, максимум 10
-- скейл на 50% от максимального значения ( + 5 реплик )
-<pre class="file" data-filename="./fn1.yml" data-target="append">
-    labels:
-      com.openfaas.scale.min: "2"
-      com.openfaas.scale.max: "10"
-      com.openfaas.scale.factor: "50"
-</pre>
+Пример ответа:
+```
+< HTTP/1.1 200 OK
+< Date: Sat, 25 Dec 2021 10:07:27 GMT
+< Content-Type: application/json
+< Content-Length: 484
+< Connection: keep-alive
+< Access-Control-Allow-Origin: *
+< Access-Control-Allow-Credentials: true
+< 
+{
+  "args": {}, 
+  "headers": {
+    "Accept": "*/*", 
+    "Accept-Encoding": "deflate, gzip", 
+    "Host": "httpbin.default:8000", 
+    "User-Agent": "curl/7.68.0", 
+    "X-Forwarded-Host": "localhost:32100", 
+    "X-Forwarded-Scheme": "http", 
+    "X-Gravitee-Request-Id": "ba370e6f-21b7-47b5-b70e-6f21b7c7b5c1", 
+    "X-Gravitee-Transaction-Id": "ba370e6f-21b7-47b5-b70e-6f21b7c7b5c1", 
+    "X-Scheme": "http"
+  }, 
+  "origin": "10.42.0.1", 
+  "url": "http://localhost:32100/get"
+}
+```
 
-И далее заново опубликуем изменения:
-`faas-cli up -f fn1.yml`{{execute}}
-
-Убедимся, что кубернетес развернет новый под с количеством реплик равным двум:
-`kubectl get po -n openfaas-fn`{{execute}}
-
-После того, как статус подов перейдет в Ready, подадим нагрузку на функцию и посмотрим как отработает автоскейлинг.  
-Создаем деплоймент с нагрузкой:
-`kubectl create deployment loader --image=httpd:alpine -- sh -c "while true; do ab -n100 $OPENFAAS_URL/function/fn1; done"`{{execute}}  
-Понаблюдаем за состоянием функции:
-`watch -n1 faas-cli list`{{execute}}  
-Заметим, что количество вызовов растет и через некоторое время (~5-10сек) кол-во реплик возрасло. Автоскейлинг отрабатывает согласно настройкам.
-Если продолжить генерировать нагрузку  - следующее увеличение произойдет через ~40сек.  
-Прервем вывод команды watch комбинацией клавиш `ctrl+c`  
-Удалим деплоймент нагрузки:
-`kubectl delete deployment loader`{{execute}}  
-При прекращении потока запросов к функции количество реплик будет возвращено к минимальному.  
-
-На этом обзор serverless функций завершен. Далее перейдем к изучению функциональности api gateway.
