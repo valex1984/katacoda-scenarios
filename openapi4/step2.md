@@ -20,4 +20,60 @@ pasword: admin
 
 ```
 
-Переходим на страницу нашего апи и добавляем еще один бэкенд (новая версия) с весом 1. Вес текущей версии указываем 9. Таким образом 90% траффика остается на текущей версии и 10% направляется на новую. Сохраняем изменения и публикуем их.
+Переходим на страницу нашего апи и добавляем еще один бэкенд (новая версия) с весом 1. Вес текущей версии указываем 9. 
+![App_](./assets/openapi4-1.png)
+![App_](./assets/openapi4-2.png)
+Кроме того, меняем тип балансировки на "Weighted Round-Robin". 
+![App_](./assets/openapi4-3.png) 
+Таким образом 90% траффика остается на текущей версии и 10% направляется на новую.  
+Сохраняем изменения и публикуем их.
+![App_](./assets/openapi4-4.png) 
+
+Проверим настройки, выполнив 20 обращений к апи
+for i in {1..20}; do echo "$(curl -s  http://localhost:32100/gateway/api/v1)"; done
+
+пример вывода:
+```
+Hello from OpenFaaS!
+Version_2
+Hello from OpenFaaS!
+Hello from OpenFaaS!
+Hello from OpenFaaS!
+Hello from OpenFaaS!
+Hello from OpenFaaS!
+Hello from OpenFaaS!
+Hello from OpenFaaS!
+Hello from OpenFaaS!
+Hello from OpenFaaS!
+Version_2
+Hello from OpenFaaS!
+Hello from OpenFaaS!
+Hello from OpenFaaS!
+Hello from OpenFaaS!
+Hello from OpenFaaS!
+Hello from OpenFaaS!
+Hello from OpenFaaS!
+Hello from OpenFaaS!
+```
+Заметим, что 10% запросов попадают на новую версию согласно настройкам.
+
+После успешного тестирования новой версии на нее перенаправляется 100% траффика, а старая версия выводится из эксплуатации. 
+Для этого переходим на страницу управления эндпоинтами и корректируем настройки.
+![App_](./assets/openapi4-5.png) 
+Применяем изменения и проверяем, что весь траффик направляется на новую версию.
+for i in {1..10}; do echo "$(curl -s  http://localhost:32100/gateway/api/v1)"; done
+
+пример вывода:
+
+```
+Version_2
+Version_2
+Version_2
+Version_2
+Version_2
+Version_2
+Version_2
+Version_2
+Version_2
+Version_2
+```
