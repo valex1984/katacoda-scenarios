@@ -11,16 +11,12 @@
                 "text": "step0.md"
             },
             {
-                "title": "Изучаем serverless функции",
+                "title": "Создаем и публикуем апи",
                 "text": "step1.md"
             },
             {
-                "title": "Изучаем serverless функции",
+                "title": "Изучаем канареечный деплой api",
                 "text": "step2.md"
-            },
-            {
-                "title": "Изучаем api gateway",
-                "text": "step3.md"
             }
         ],
         "intro": {
@@ -33,8 +29,7 @@
             "host01": [
                 {"file": "gravitee.yaml", "target": "/tmp"},
                 {"file": "prepare.sh", "target": "/usr/local/bin", "chmod": "+x"},
-                {"file": "serverless-example-1-0-0.json", "target": "/root"},
-                {"file": "apikey", "target": "/root"}
+                {"file": "demoapi-1-0-0.json", "target": "/root"}
             ]
           }
     },

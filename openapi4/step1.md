@@ -1,48 +1,19 @@
-### Создание функции
-Для создания структуры директорий новой функции из темплейта выполним команду:
-`faas-cli new --lang python3-sbercode fn1`{{execute}}
-Данная команда ищет темплейт с имененем python3-sbercode (мы скачали его при подготовке окружения) и создает на его основе скелет функции в текущей директории. Результат можно посмотреть в директории fn1
+###  Создание и публикация функции через gravitee api gateway
+Cоздадим функцию из темплейта и выполним ее сборку и деплой:
+`faas-cli new --lang python3-sbercode apiv1 && faas-cli up -f apiv1.yml`{{execute}}
 
-Выполним сборку функции в докер образ командой:
-`faas-cli build -f fn1.yml`{{execute}}
+Дождемся, пока статус пода станет Ready.  
+`kubectl wait -n openfaas-fn --for=condition=ContainersReady --timeout=5m --all pods`{{execute}}  
 
-Проверим наличие образа в локальном докер репозитории
-`docker images|grep sbercode`{{execute}}
-имя образа состоит из префикса репозитория кубернетис, куда мы его будем заливать, префикса `sbercode` и имени функции. Префиксы выставлены через переменные указанные в файле ~/envs и прописываются в дескриптор имя_функции.yml при создании через `faas-cli new`
+Импортируем файл с готовым описанием апи для нашей функции командой
 
-Зальем образ в репозиторий на kubernetes:
-`docker push $REGISTRY/sbercode/fn1`{{execute}}
+`curl -u admin:admin -H "Content-Type:application/json;charset=UTF-8" -d @demoapi-1-0-0.json    http://localhost:32100/management/organizations/DEFAULT/environments/DEFAULT/apis/import`{{execute}}
 
-И проверим его наличие
-`curl -s $REGISTRY/v2/_catalog|jq`{{execute}}
-Вывод должен иметь следующий вид:
-```
-{
-  "repositories": [
-    "sbercode/fn1"
-  ]
-}
-```
+Стартуем апи командой
+`curl  -u admin:admin -X POST http://localhost:32100/management/organizations/DEFAULT/environments/DEFAULT/apis/32707a13-6fb4-4146-b07a-136fb4d1464c?action=START`{{execute}}
 
-### Деплой функции в OpenFaas
+Пробуем выполнить запрос к апи, опубликованному через api gateway.
 
-Для деплоя необходимо выполнить команду:
-`faas-cli deploy -f fn1.yml`{{execute}}
+`curl -v http://localhost:32100/gateway/api/v1`{{execute}}
 
-Проверить статус можно командой:
-`kubectl get po -n openfaas-fn`{{execute}}
-Дождемся, пока статус пода станет Ready
-```
-NAME                   READY   STATUS    RESTARTS   AGE
-fn1-794f59b5fd-448pd   1/1     Running   0          14s
-```
-
-### Вызов функции
-
-Выполним запрос утилитой curl:
-
-`curl $OPENFAAS_URL/function/fn1`{{execute}}  
-Функция должна вывести сообщений вида:  
-`Hello from OpenFaaS!`
-
-Мы успешно собрали и развернули простейшую функцию в кубернетес.
+В случае успеха должен вернуться текст `Hello from OpenFaaS!`
