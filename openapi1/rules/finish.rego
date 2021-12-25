@@ -10,13 +10,13 @@ fn2_ok = true {
 allow[msg] {
 	res := input.results[_]
 	fn2_ok
-	msg := sprintf("[OK] сервис httpbin доступен")
+	msg := "[OK] сервис httpbin доступен"
 }
 
 deny[msg] {
 	res := input.results[_]
 	fn2_ok == false
-	msg := sprintf("[ERROR] сервис httpbin не доступен")
+	msg := "[ERROR] сервис httpbin не доступен"
 }
 
 error[msg] {
