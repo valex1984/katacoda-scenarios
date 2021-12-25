@@ -22,7 +22,29 @@ function install_ingress() {
     test $? -eq 1 && echo "[ERROR] Ingress controller not ready" && kill "$!" && exit 1
     kubectl -n ingress-nginx patch svc ingress-nginx-controller --patch \
       '{"spec": { "type": "NodePort", "ports": [ { "nodePort": 32100, "port": 80, "protocol": "TCP", "targetPort": 80 } ] } }'
+
+
+cat <<EOF >/tmp/httpbin-ingress.yaml
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: httpbin-external
+  annotations:
+      kubernetes.io/ingress.class: "nginx"
+      nginx.ingress.kubernetes.io/rewrite-target: "/$1$2"
+spec:
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: /$(cat /usr/local/etc/sbercode-prefix)-32100/(.*)
+        backend:
+          service:
+            name: httpbin
+            port:
+              number: 80
     echo done
+EOF
     touch $INGRESS_DONE
   else
     echo already installed
