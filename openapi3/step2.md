@@ -1,63 +1,39 @@
-### Изменение функции
-Попробуем внести изменения в нашу функцию.  
-Для этого откроем в редакторе файл fn1/handler.py и изменим текст, который выдается в ответ на запрос
+###  Создание новой версии
+Создадим еще одну функцию из темплейта
 
-<pre class="file" data-filename="./fn1/handler.py" data-target="insert" data-marker="Hello from OpenFaaS!">
-changed</pre>
+`faas-cli new --lang python3-sbercode apiv2
+Внесем изменения в нашу функцию.  
+Для этого откроем в редакторе файл apiv2/handler.py и изменим текст, который выдается в ответ на запрос
+
+<pre class="file" data-filename="./apiv2/handler.py" data-target="insert" data-marker="Hello from OpenFaaS!">
+Version_2</pre>
 
 Для публикации изменений пересоберем и опубликуем образ
-`faas-cli up -f fn1.yml `{{execute}}
+`faas-cli up -f apiv2.yml `{{execute}}
 
 Сборка образа упала с ошибкой. Что произошло? Не прошли юнит тесты, т.к. мы поменяли поведение функции.  
 Поправим ошибку в файле fn1/handler_test.py
 
-<pre class="file" data-filename="./fn1/handler_test.py" data-target="insert" data-marker="Hello from OpenFaaS!">
-changed</pre>
+<pre class="file" data-filename="./apiv2/handler_test.py" data-target="insert" data-marker="Hello from OpenFaaS!">
+Version_2</pre>
 
 И затем заново запустим сборку и публикацию функции
-`faas-cli up -f fn1.yml `{{execute}}
+`faas-cli up -f apiv2.yml `{{execute}}
 
 Кубернетес развернет новый под с функцией и уничтожит предыдущую версию. Посмотреть статус деплоймента можно командой:
 `kubectl get po -n openfaas-fn`{{execute}}
 
-Также статус функции можно отследить через faas-cli:
-`faas-cli list -v`{{execute}}
+### Публикация новой версии
 
-Проверим, что измененная функция успешно установлена в кластер командой:
-`curl $OPENFAAS_URL/function/fn1`{{execute}}  
-Функция должна вывести наш измененный текст:  
-`changed`
-### Настройки автоскейлинга
-По-умолчанию openfaas устанавливает настройки автоскейлинга следующим образом:
-- минимум 1 реплика, максимум 20
-- скейл на 20% от максималного значания,( т.е. + 4 реплики), при среденей нагрузке на функцию >5 запросов за последние 5 сек.
+Импортируем файл с готовым описанием апи для нашей функции командой
 
-Изменим для нашей функции данные настройки на следующие:
-- минимум 2 реплики, максимум 10
-- скейл на 50% от максимального значения ( + 5 реплик )
-<pre class="file" data-filename="./fn1.yml" data-target="append">
-    labels:
-      com.openfaas.scale.min: "2"
-      com.openfaas.scale.max: "10"
-      com.openfaas.scale.factor: "50"
-</pre>
+`curl -u admin:admin -H "Content-Type:application/json;charset=UTF-8" -d @demoapi-2-0-0.json    http://localhost:32100/management/organizations/DEFAULT/environments/DEFAULT/apis/import`{{execute}}
 
-И далее заново опубликуем изменения:
-`faas-cli up -f fn1.yml`{{execute}}
+Стартуем апи командой
+`curl  -u admin:admin -X POST http://localhost:32100/management/organizations/DEFAULT/environments/DEFAULT/apis/70baa1f6-0b52-4413-baa1-f60b526413ec?action=START`{{execute}}
 
-Убедимся, что кубернетес развернет новый под с количеством реплик равным двум:
-`kubectl get po -n openfaas-fn`{{execute}}
+Пробуем выполнить запрос к апи, опубликованному через api gateway.
 
-После того, как статус подов перейдет в Ready, подадим нагрузку на функцию и посмотрим как отработает автоскейлинг.  
-Создаем деплоймент с нагрузкой:
-`kubectl create deployment loader --image=httpd:alpine -- sh -c "while true; do ab -n100 $OPENFAAS_URL/function/fn1; done"`{{execute}}  
-Понаблюдаем за состоянием функции:
-`watch -n1 faas-cli list`{{execute}}  
-Заметим, что количество вызовов растет и через некоторое время (~5-10сек) кол-во реплик возрасло. Автоскейлинг отрабатывает согласно настройкам.
-Если продолжить генерировать нагрузку  - следующее увеличение произойдет через ~40сек.  
-Прервем вывод команды watch комбинацией клавиш `ctrl+c`  
-Удалим деплоймент нагрузки:
-`kubectl delete deployment loader`{{execute}}  
-При прекращении потока запросов к функции количество реплик будет возвращено к минимальному.  
+`curl -v http://localhost:32100/gateway/api/v2`{{execute}}
 
-На этом обзор serverless функций завершен. Далее перейдем к изучению функциональности api gateway.
+В случае успеха должен вернуться текст `Version_2`
