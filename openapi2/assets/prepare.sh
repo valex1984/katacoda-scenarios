@@ -5,6 +5,7 @@ GRAVITEE_DONE=/tmp/gravitee_installed
 HTTPBIN_DONE=/tmp/httpbin_installed
 BASE_PATH="$(cat /usr/local/etc/sbercode-prefix)"
 INGRESS_HOSTNAME_PLACEHOLDER="$(cat /usr/local/etc/sbercode-ingress)"
+export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
 
 spinner() {
   local i sp n
@@ -14,14 +15,6 @@ spinner() {
   while sleep 0.2; do
     printf "%s\b" "${sp:i++%n:1}"
   done
-}
-
-function prepare_env() {
-
-  echo "export KUBECONFIG=/etc/rancher/k3s/k3s.yaml" >~/envs
-  echo "export INGRESS_URL=http://$(hostname):32100" >>~/envs
-  . ~/envs
-
 }
 
 function install_ingress() {
@@ -113,6 +106,7 @@ function install_gravitee() {
 }
 
 function install_httpbin() {
+   echo -e "\n[INFO] Installing httpbin"
 
   if [ ! -f "$HTTPBIN_DONE" ]; then
   cat <<EOF >/tmp/httpbin.yaml
@@ -161,10 +155,12 @@ spec:
         - containerPort: 80
 EOF
     kubectl apply -f /tmp/httpbin.yaml
+    kubectl wait --for=condition=ContainersReady --timeout=5m --all pods
+    test $? -eq 1 && echo "[ERROR] httpbin not ready" && kill "$!" && exit 1
     echo done
     touch $HTTPBIN_DONE
   else
-    echo gravitee already installed
+    echo httpbin already installed
   fi
 
 }
@@ -173,7 +169,6 @@ EOF
 launch.sh
 
 spinner &
-prepare_env
 install_ingress
 install_gravitee
 install_httpbin
