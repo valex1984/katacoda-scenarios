@@ -48,8 +48,9 @@ spec:
             name: httpbin
             port:
               number: 80
-    echo done
 EOF
+    kubectl apply -f /tmp/httpbin-ingress.yaml
+    echo done
     touch $INGRESS_DONE
   else
     echo already installed
