@@ -31,6 +31,11 @@ metadata:
   name: httpbin-external
   annotations:
       kubernetes.io/ingress.class: "nginx"
+      nginx.ingress.kubernetes.io/configuration-snippet: |
+        etag on;
+        proxy_pass_header ETag;
+        sub_filter '<script src="/"' '<base href="/$(cat /usr/local/etc/sbercode-prefix)-32100/"';
+        sub_filter_once off;
       nginx.ingress.kubernetes.io/rewrite-target: "/$1"
 spec:
   rules:
