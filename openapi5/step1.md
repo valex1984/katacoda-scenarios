@@ -7,9 +7,15 @@ Cоздадим функцию из темплейта и выполним ее 
 
 `curl -u admin:admin -H "Content-Type:application/json;charset=UTF-8" -d @serverless-example-1-0-0.json    http://localhost:32100/management/organizations/DEFAULT/environments/DEFAULT/apis/import`{{execute}}
 
+### Авторизация в gravitee apim
+Откроем интерфейс gravitee apim по ссылке [gravitee ](https://[[HOST_SUBDOMAIN]]-32100-[[KATACODA_HOST]].environments.katacoda.com/)  и авторизуемся в нем  как администратор
+```
+права администратора
+user: admin
+pasword: admin
+```
 Далее переходим в интерфейсе gravitee на вкладку APIs, находим импортированное api, стартуем и публикуем его.   
-
-TODO pic
+![App_](./assets/openapi5-1.png) 
 
 ### Попытка  вызова функции
 
