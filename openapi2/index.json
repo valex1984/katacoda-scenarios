@@ -32,9 +32,7 @@
         "assets": {
             "host01": [
                 {"file": "gravitee.yaml", "target": "/tmp"},
-                {"file": "prepare.sh", "target": "/usr/local/bin", "chmod": "+x"},
-                {"file": "serverless-example-1-0-0.json", "target": "/root"},
-                {"file": "apikey", "target": "/root"}
+                {"file": "prepare.sh", "target": "/usr/local/bin", "chmod": "+x"}
             ]
           }
     },
