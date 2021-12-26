@@ -3,6 +3,7 @@ package sbercode
 allow[msg] {
 	res := input.results[_]
 	res.before_count == res.after_count
+	res.before_count != ""
 	msg := "[OK] Количество вызовов функции не увеличивается"
 }
 
