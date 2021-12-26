@@ -1,0 +1,30 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: api-client
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-client
+  template:
+    metadata:
+      labels:
+        app: api-client
+    spec:
+      containers:
+      - command:
+        - sh
+        - -c
+        - |
+            while true
+            do 
+                out=$(wget --header="HEADER_PLACEHOLDER" \
+                    -qO-  http://gravitee-apim3-gateway.gravitee.svc.cluster.local:8082/fn2)
+                echo $(date)    $out
+                sleep 1
+            done
+        image: busybox:1.34
+        imagePullPolicy: IfNotPresent
+        name: busybox
+      restartPolicy: Always

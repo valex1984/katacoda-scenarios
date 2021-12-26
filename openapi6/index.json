@@ -35,6 +35,7 @@
                 {"file": "prepare.sh", "target": "/usr/local/bin", "chmod": "+x"},
                 {"file": "publish_and_subscribe.sh", "target": "/root", "chmod": "+x"},
                 {"file": "serverless-example-1-0-0.json", "target": "/root"},
+                {"file": "loader.yaml", "target": "/root"},
                 {"file": "apikey", "target": "/root"}
             ]
           }
