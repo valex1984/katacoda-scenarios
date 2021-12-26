@@ -78,24 +78,7 @@
           "condition": "",
           "consumers": [],
           "methods": [],
-          "pre": [
-            {
-              "name": "Rate Limiting",
-              "description": "Rate limit how many HTTP requests an application can make in a given period of seconds or minutes",
-              "enabled": true,
-              "policy": "rate-limit",
-              "configuration": {
-                "async": false,
-                "addHeaders": false,
-                "rate": {
-                  "periodTime": 1,
-                  "limit": 3,
-                  "periodTimeUnit": "MINUTES",
-                  "key": ""
-                }
-              }
-            }
-          ],
+          "pre": [],
           "post": [],
           "enabled": true
         }
