@@ -31,11 +31,6 @@
             "id": "kotlin"
         },
         {
-            "title": "openapi",
-            "description": "openapi",
-            "id": "openapi"
-        },
-        {
             "title": "golang",
             "description": "golang",
             "id": "golang"
