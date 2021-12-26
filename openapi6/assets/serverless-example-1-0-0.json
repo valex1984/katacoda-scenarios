@@ -5,7 +5,18 @@
   "visibility": "PUBLIC",
   "gravitee": "2.0.0",
   "flow_mode": "DEFAULT",
-  "resources": [],
+  "resources": [
+    {
+      "name": "cache1",
+      "type": "cache",
+      "enabled": true,
+      "configuration": {
+        "timeToIdleSeconds": 0,
+        "timeToLiveSeconds": 0,
+        "maxEntriesLocalHeap": 1000
+      }
+    }
+  ],
   "properties": [],
   "members": [
     {
