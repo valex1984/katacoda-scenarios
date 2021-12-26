@@ -42,5 +42,6 @@ curl -s -u admin:admin -XPOST \
       $API_URL/management/organizations/DEFAULT/environments/DEFAULT/apis/$api_id/subscriptions/$subscr_id/_process
 
 echo "X-Gravitee-Api-Key:$key" > apikey
+sleep 3
 
 echo -e "\n[INFO] done"
