@@ -91,15 +91,30 @@
         {
           "name": "",
           "path-operator": {
-            "path": "/get",
+            "path": "/",
             "operator": "STARTS_WITH"
           },
           "condition": "",
           "consumers": [],
-          "methods": [
-            "GET"
+          "methods": [],
+          "pre": [
+            {
+              "name": "Resource Filtering",
+              "description": "",
+              "enabled": true,
+              "policy": "resource-filtering",
+              "configuration": {
+                "whitelist": [
+                  {
+                    "pattern": "/get",
+                    "methods": [
+                      "GET"
+                    ]
+                  }
+                ]
+              }
+            }
           ],
-          "pre": [],
           "post": [],
           "enabled": true
         }
