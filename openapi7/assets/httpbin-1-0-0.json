@@ -12,19 +12,19 @@
       "source": "memory",
       "sourceId": "admin",
       "roles": [
-        "c38cf66b-d2d6-4b39-8cf6-6bd2d69b39c9"
+        "995713e8-8a86-4dfb-9713-e88a86cdfbd0"
       ]
     }
   ],
   "pages": [
     {
-      "id": "2c2fa3f3-1f02-4f27-afa3-f31f025f2783",
+      "id": "1cc70352-5136-39a4-85cb-376ee89ccef9",
       "name": "Aside",
       "type": "SYSTEM_FOLDER",
       "order": 0,
       "published": true,
       "visibility": "PUBLIC",
-      "lastModificationDate": 1640424778353,
+      "lastModificationDate": 1640537739239,
       "contentType": "application/json",
       "configuration": {},
       "homepage": false,
@@ -38,19 +38,58 @@
   ],
   "plans": [
     {
-      "id": "f0a8bc99-64ed-4fa9-a8bc-9964edafa919",
-      "name": "httpbin-plan",
-      "description": "demo plan",
-      "validation": "AUTO",
+      "id": "114c2275-95b5-38ca-9bf4-8fc31ff5f3d7",
+      "name": "demo-plan-get-only",
+      "description": "demo plan to access only GET requests to /get/** endpoints",
+      "validation": "MANUAL",
       "security": "KEY_LESS",
+      "securityDefinition": "{}",
       "type": "API",
       "status": "PUBLISHED",
       "api": "70baa1f6-0b52-4413-baa1-f60b526413ec",
-      "order": 0,
+      "order": 1,
       "characteristics": [],
       "tags": [],
-      "created_at": 1640424778377,
-      "updated_at": 1640424778377,
+      "created_at": 1640537739256,
+      "updated_at": 1640537790786,
+      "published_at": 1640537790786,
+      "paths": {},
+      "flows": [
+        {
+          "name": "",
+          "path-operator": {
+            "path": "/get",
+            "operator": "STARTS_WITH"
+          },
+          "condition": "",
+          "consumers": [],
+          "methods": [
+            "GET"
+          ],
+          "pre": [],
+          "post": [],
+          "enabled": true
+        }
+      ],
+      "excluded_groups": [],
+      "comment_required": false
+    },
+    {
+      "id": "83801d6c-b892-3369-ad83-f6a0ea6fe49d",
+      "name": "http-plan-access-all",
+      "description": "demo plan access all endpoints",
+      "validation": "MANUAL",
+      "security": "API_KEY",
+      "securityDefinition": "{}",
+      "type": "API",
+      "status": "PUBLISHED",
+      "api": "70baa1f6-0b52-4413-baa1-f60b526413ec",
+      "order": 2,
+      "characteristics": [],
+      "tags": [],
+      "created_at": 1640537739278,
+      "updated_at": 1640537796667,
+      "published_at": 1640537796667,
       "paths": {},
       "flows": [
         {
@@ -122,7 +161,7 @@
   },
   "response_templates": {},
   "primaryOwner": {
-    "id": "e261ac6b-2905-4a2d-a1ac-6b29055a2d01",
+    "id": "193a1d59-711b-4488-ba1d-59711be488f2",
     "email": "sbercode@none.net",
     "displayName": "admin admin",
     "type": "USER"
