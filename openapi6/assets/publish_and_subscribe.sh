@@ -1,8 +1,8 @@
 #!/bin/bash
 
 
-# API_URL=http://localhost:32100
-API_URL=http://localhost:8083
+API_URL=http://localhost:32100
+# API_URL=http://localhost:8083
 FILE=serverless-example-1-0-0.json
 api_id=$(cat $FILE|jq -r '.id')
 # plan_id=$(cat $FILE|jq -r '.plans[0].id')

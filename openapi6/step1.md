@@ -4,7 +4,7 @@ Cоздадим функцию из темплейта и выполним ее 
 `faas-cli new --lang python3-sbercode fn2 && faas-cli up -f fn2.yml`{{execute}}
 
 Для автоматизации импорта и запуска апи, создания и подтверждения подписки используем скрипт:
-`httpbin-openapi.yaml`{{open}}
+`publish_and_subscribe.sh`{{open}}
 
 Выполним скрипт:
 `~/publish_and_subscribe.sh`{{execute}}
