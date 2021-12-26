@@ -12,19 +12,19 @@
       "source": "memory",
       "sourceId": "admin",
       "roles": [
-        "995713e8-8a86-4dfb-9713-e88a86cdfbd0"
+        "85aafd5a-28da-4c0a-aafd-5a28da1c0ab9"
       ]
     }
   ],
   "pages": [
     {
-      "id": "1cc70352-5136-39a4-85cb-376ee89ccef9",
+      "id": "74fd52b6-7b47-3f71-ba34-3b8aa342e211",
       "name": "Aside",
       "type": "SYSTEM_FOLDER",
       "order": 0,
       "published": true,
       "visibility": "PUBLIC",
-      "lastModificationDate": 1640537739239,
+      "lastModificationDate": 1640541090668,
       "contentType": "application/json",
       "configuration": {},
       "homepage": false,
@@ -38,21 +38,54 @@
   ],
   "plans": [
     {
-      "id": "114c2275-95b5-38ca-9bf4-8fc31ff5f3d7",
+      "id": "23174650-a60e-33e6-a5d2-de650c95d52e",
+      "name": "http-plan-access-all",
+      "description": "demo plan access all endpoints",
+      "validation": "MANUAL",
+      "security": "API_KEY",
+      "securityDefinition": "{}",
+      "type": "API",
+      "status": "PUBLISHED",
+      "api": "70baa1f6-0b52-4413-baa1-f60b526413ec",
+      "order": 0,
+      "characteristics": [],
+      "tags": [],
+      "created_at": 1640541090763,
+      "updated_at": 1640541090763,
+      "paths": {},
+      "flows": [
+        {
+          "name": "",
+          "path-operator": {
+            "path": "/",
+            "operator": "STARTS_WITH"
+          },
+          "condition": "",
+          "consumers": [],
+          "methods": [],
+          "pre": [],
+          "post": [],
+          "enabled": true
+        }
+      ],
+      "excluded_groups": [],
+      "comment_required": false
+    },
+    {
+      "id": "0a20a7ac-60f9-3793-94b1-956b7cfd23bc",
       "name": "demo-plan-get-only",
       "description": "demo plan to access only GET requests to /get/** endpoints",
-      "validation": "MANUAL",
+      "validation": "AUTO",
       "security": "KEY_LESS",
       "securityDefinition": "{}",
       "type": "API",
       "status": "PUBLISHED",
       "api": "70baa1f6-0b52-4413-baa1-f60b526413ec",
-      "order": 1,
+      "order": 0,
       "characteristics": [],
       "tags": [],
-      "created_at": 1640537739256,
-      "updated_at": 1640537790786,
-      "published_at": 1640537790786,
+      "created_at": 1640541090706,
+      "updated_at": 1640541090706,
       "paths": {},
       "flows": [
         {
@@ -66,41 +99,6 @@
           "methods": [
             "GET"
           ],
-          "pre": [],
-          "post": [],
-          "enabled": true
-        }
-      ],
-      "excluded_groups": [],
-      "comment_required": false
-    },
-    {
-      "id": "83801d6c-b892-3369-ad83-f6a0ea6fe49d",
-      "name": "http-plan-access-all",
-      "description": "demo plan access all endpoints",
-      "validation": "MANUAL",
-      "security": "API_KEY",
-      "securityDefinition": "{}",
-      "type": "API",
-      "status": "PUBLISHED",
-      "api": "70baa1f6-0b52-4413-baa1-f60b526413ec",
-      "order": 2,
-      "characteristics": [],
-      "tags": [],
-      "created_at": 1640537739278,
-      "updated_at": 1640537796667,
-      "published_at": 1640537796667,
-      "paths": {},
-      "flows": [
-        {
-          "name": "",
-          "path-operator": {
-            "path": "/",
-            "operator": "STARTS_WITH"
-          },
-          "condition": "",
-          "consumers": [],
-          "methods": [],
           "pre": [],
           "post": [],
           "enabled": true
@@ -161,7 +159,7 @@
   },
   "response_templates": {},
   "primaryOwner": {
-    "id": "193a1d59-711b-4488-ba1d-59711be488f2",
+    "id": "cd4fc377-42bf-4674-8fc3-7742bfc674bf",
     "email": "sbercode@none.net",
     "displayName": "admin admin",
     "type": "USER"
