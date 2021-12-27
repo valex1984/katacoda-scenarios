@@ -1,5 +1,5 @@
 Для демонстрации разграничения доступа к апи настроим 2 плана подписки:
-* публичный доступ на /get/** ендпоинты с  GET типом запросов
+* публичный доступ на /get/** endpointы с  GET типом запросов
 * полный доступ с API KEY
 
 Откроем описание апи и изучим секцию "plans"
@@ -15,13 +15,13 @@
 
 Пробуем выполнить запрос к публичному апи, опубликованному через api gateway:
 
-`curl -v http://localhost:32100/gateway/httpbin/get`{{execute}}
+`curl http://localhost:32100/gateway/httpbin/get`{{execute}}
 
-Запрос успешно выполняется. Если получаете ответ "No context-path matches the request URI." - api gateway еще не успел развернуть ендпоинт. Попробуйте повторить через 3-5 сек.
+Запрос успешно выполняется. Если получаете ответ "No context-path matches the request URI." - api gateway еще не успел развернуть endpoint. Попробуйте повторить через 3-5 сек.
 
 Пробуем выполнить запрос к закрытой части апи:
 
-`curl -v -XPOST http://localhost:32100/gateway/httpbin/post`{{execute}}
+`curl -XPOST http://localhost:32100/gateway/httpbin/post`{{execute}}
 
 Получаем ошибку доступа 403, не хватает полномочий. Получим ключ для доступа к этой части апи.
 Для этого запустим скрипт:
@@ -32,4 +32,7 @@
 
 Проверим доступ с ключем к закрытой части апи:
 
-`curl -v -XPOST -H @apikey http://localhost:32100/gateway/httpbin/post`{{execute}}
+`curl -XPOST -H @apikey http://localhost:32100/gateway/httpbin/post`{{execute}}
+
+Запрос успешно выполняется.  
+Далее посмотрим каким образом настроены ограничения доступа и добавим в публичный доступ еще один endpoint /post c типом запроса POST.

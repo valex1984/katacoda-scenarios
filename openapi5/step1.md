@@ -22,4 +22,4 @@ pasword: admin
 Согласно настройкам плана api fn2 публично не доступно, для обращения нужен API key. Проверим это запросом:
 
 `curl http://localhost:32100/gateway/fn2`{{execute}}
-Получаем 401 ошибку, нужен ключ доступа в заголовке `X-Gravitee-Api-Key`. Если получаете ответ "No context-path matches the request URI." - api gateway еще не успел развернуть ендпоинт. Попробуйте повторить через 3-5 сек.
+Получаем 401 ошибку, нужен ключ доступа в заголовке `X-Gravitee-Api-Key`. Если получаете ответ "No context-path matches the request URI." - api gateway еще не успел развернуть endpoint. Попробуйте повторить через 3-5 сек.

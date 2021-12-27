@@ -16,4 +16,4 @@ Cоздадим функцию из темплейта и выполним ее 
 
 `curl -v http://localhost:32100/gateway/api/v1`{{execute}}
 
-В случае успеха должен вернуться текст `Hello from OpenFaaS!`. Если получаете ответ "No context-path matches the request URI." - api gateway еще не успел развернуть ендпоинт. Попробуйте повторить через 3-5 сек.
+В случае успеха должен вернуться текст `Hello from OpenFaaS!`. Если получаете ответ "No context-path matches the request URI." - api gateway еще не успел развернуть endpoint. Попробуйте повторить через 3-5 сек.

@@ -27,6 +27,6 @@ apiv1-794f59b5fd-448pd   1/1     Running   0          14s
 
 `curl -v http://localhost:32100/gateway/api/v1`{{execute}}
 
-В случае успеха должен вернуться текст `Hello from OpenFaaS!`. Если получаете ответ "No context-path matches the request URI." - api gateway еще не успел развернуть ендпоинт. Попробуйте повторить через 3-5 сек.
+В случае успеха должен вернуться текст `Hello from OpenFaaS!`. Если получаете ответ "No context-path matches the request URI." - api gateway еще не успел развернуть endpoint. Попробуйте повторить через 3-5 сек.
 
 Мы успешно собрали и развернули простейшую функцию в кубернетес, а так же опубликовали ее через api gateway.

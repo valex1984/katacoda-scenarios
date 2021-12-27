@@ -9,7 +9,7 @@
 
 `curl -v http://localhost:32100/gateway/httpbin/get`{{execute}}
 
-получаем ответ от сервиса httpbin, В перечне заголовков видим специфичные для api gateway gravitee. Если получаете ответ "No context-path matches the request URI." - api gateway еще не успел развернуть ендпоинт. Попробуйте повторить через 3-5 сек.
+получаем ответ от сервиса httpbin, В перечне заголовков видим специфичные для api gateway gravitee. Если получаете ответ "No context-path matches the request URI." - api gateway еще не успел развернуть endpoint. Попробуйте повторить через 3-5 сек.
 
 ```
 < X-Gravitee-Transaction-Id: 75bf1c39-f519-4432-bf1c-39f519943259
