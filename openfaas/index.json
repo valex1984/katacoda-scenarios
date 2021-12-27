@@ -23,7 +23,8 @@
         },
         "assets": {
             "host01": [
-                {"file": "prepare.sh", "target": "/usr/local/bin", "chmod": "+x"}
+                {"file": "prepare.sh", "target": "/usr/local/bin", "chmod": "+x"},
+                {"file": "functions.json", "target": "/root"}
 
             ]
           }
