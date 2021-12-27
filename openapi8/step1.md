@@ -18,7 +18,7 @@ pasword: admin
 ![App_](./assets/openapi8-1.png) 
 
 Спецификация openapi для нашего сервиса находится в файле
-`httpbin-1-0-0.json`{{open}}
+`httpbin-openapi.yaml`{{open}}
 
 Внесем изменения и сохраним их
 ![App_](./assets/openapi8-2.png) 
