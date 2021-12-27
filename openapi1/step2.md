@@ -4,7 +4,7 @@
 Выполним GET запрос:
 `curl -v localhost:32100/httpbin/get`{{execute}}
 
-В ответе запроса получаем данные в виде json
+В ответе запроса получаем данные в виде json.
 
 Выполним POST запрос:
 `curl -v -XPOST localhost:32100/post -H "Content-Type: application/json" -d'{"data":"test data here"}'`{{execute}}
