@@ -1,6 +1,6 @@
 {
     "pathwayTitle": "openapi2",
-    "title": "openapi - мапинги запросов и ответов",
+    "title": "openapi - документирование апи",
     "description": "openapi2",
     "difficulty": "beginner",
     "time": "30 minutes",
@@ -15,7 +15,7 @@
                 "text": "step1.md"
             },
             {
-                "title": "Настраиваем маппинг ответа",
+                "title": "Просматриваем документацию на портале",
                 "text": "step2.md"
             }
         ],
