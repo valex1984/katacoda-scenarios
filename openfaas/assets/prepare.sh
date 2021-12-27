@@ -47,7 +47,6 @@ function install_openfaas() {
       --set queueWorker.image=openfaas/queue-worker:0.12.2
 
     curl -Ls http://nexus:8081/repository/binaries/openfaas/faas-cli/0.13.15/faas-cli -o /usr/local/bin/faas-cli && chmod +x /usr/local/bin/faas-cli
-    faas-cli template pull https://github.com/valex1984/openfaas-tpl
 
     echo "waiting for openfaas system pods ready"
     kubectl -n openfaas wait --for=condition=ContainersReady --timeout=5m --all pods
