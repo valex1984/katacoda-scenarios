@@ -3,8 +3,6 @@
 OPENFAAS_DONE=/tmp/dashboard_installed
 REGISTRY_DONE=/tmp/registry_installed
 INGRESS_DONE=/tmp/ingress_installed
-BASE_PATH="$(cat /usr/local/etc/sbercode-prefix)"
-INGRESS_HOSTNAME_PLACEHOLDER="$(cat /usr/local/etc/sbercode-ingress)"
 
 spinner() {
   local i sp n
@@ -22,7 +20,6 @@ function prepare_env() {
   kubectl create ns openfaas-fn --dry-run=client -o yaml | kubectl apply -f -
   echo "export KUBECONFIG=/etc/rancher/k3s/k3s.yaml" >~/envs
   echo "export OPENFAAS_URL=http://$(hostname):31112" >>~/envs
-  echo "export INGRESS_URL=http://$(hostname):32100" >>~/envs
   echo "export REGISTRY=$(hostname):32500" >>~/envs
   echo "export OPENFAAS_PREFIX=$(hostname):32500/sbercode" >>~/envs
   . ~/envs
@@ -152,21 +149,6 @@ EOF
   fi
 }
 
-function install_ingress() {
-  echo -e "\n[INFO] Installing nginx ingress controller"
-  if [ ! -f "$INGRESS_DONE" ]; then
-    kubectl apply -f /usr/local/etc/nginx-ingress-deploy.yaml
-    kubectl -n ingress-nginx wait --for=condition=available --timeout=3m deployment/ingress-nginx-controller
-    test $? -eq 1 && echo "[ERROR] Ingress controller not ready" && kill "$!" && exit 1
-    kubectl -n ingress-nginx patch svc ingress-nginx-controller --patch \
-      '{"spec": { "type": "NodePort", "ports": [ { "nodePort": 32100, "port": 80, "protocol": "TCP", "targetPort": 80 } ] } }'
-    echo done
-    touch $INGRESS_DONE
-  else
-    echo already installed
-  fi
-}
-
 function login_openfaas() {
 
       PASSWORD=$(kubectl -n openfaas get secret basic-auth -o jsonpath="{.data.basic-auth-password}" | base64 --decode) && echo $PASSWORD | faas-cli login --username admin -s >/dev/null
@@ -179,7 +161,6 @@ spinner &
 prepare_env
 install_openfaas
 install_registry
-install_ingress
 login_openfaas
 #stop spinner
 kill "$!"
