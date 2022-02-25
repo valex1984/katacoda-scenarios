@@ -210,7 +210,7 @@ function install_pg() {
 
   helm upgrade --install -n gravitee \
     --set auth.postgresPassword=postgres \
-    --set auth.atabase=graviteeapim \
+    --set auth.database=graviteeapim \
     --set persistence.size=2Gi \
     postgres-apim bitnami/postgresql
 
