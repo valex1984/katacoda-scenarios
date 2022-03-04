@@ -16,6 +16,7 @@ CMD ["python", "/app/app.py"]
 
 <pre class="file" data-filename="./app/requirements.txt" data-target="replace">
 Flask==1.1.2
+itsdangerous==2.0.1
 prometheus-client==0.7.1
 </pre>
 
