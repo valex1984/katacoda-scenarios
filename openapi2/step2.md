@@ -15,12 +15,12 @@ pasword: admin
 
 ![App_](./assets/openapi2-2.png)
 
-Добавим в респонс из блока "Transformation" компонент "Transform Headers"
+Добавим в респонс из блока "Transformation" компонент "Transform Headers" (перетащить мышью на стрелку responce)
 
 ![App_](./assets/openapi2-3.png)
 
 В настройках укажем удалить не нужные нам заголовки.
-Нажмем "ок" чтобы сохранить изменения
+Нажмем "ок", затем "save", чтобы сохранить изменения.
 
 ![App_](./assets/openapi2-4.png)
 

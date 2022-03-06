@@ -950,6 +950,7 @@ metadata:
         proxy_pass_header ETag;
         sub_filter '<base href="/"' '<base href="/BASE_PATH-32100/portal-ui/"';
         sub_filter_once on;
+        proxy_set_header Accept-Encoding "";
       nginx.ingress.kubernetes.io/ssl-redirect: "false"
       nginx.ingress.kubernetes.io/rewrite-target: "/$1$2"
 spec:
