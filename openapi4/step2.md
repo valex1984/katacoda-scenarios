@@ -25,7 +25,7 @@ pasword: admin
 Добавляем еще один бэкенд 
 ![App_](./assets/openapi4-1.png)
 Указываем URL http://gateway.openfaas:8080/function/apiv2 и вес 1
-![App_](./assets/openapi4-1-1.png)
+![App_](./assets/openapi4-1-1.png) 
 Переходим на страницу редактирования текущей версии
 ![App_](./assets/openapi4-1-2.png)
 Вес текущей версии указываем 9
