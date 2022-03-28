@@ -53,15 +53,6 @@ COPY . /app
 CMD ["python", "/app/app.py"]
 </pre>
 
-Откройте вкладку файла ./app/requirements.txt в редакторе и введите в него код ниже, либо нажмите кнопку "Copy to Editor". Это файл с описанием зависимостей для сервиса
-
-<pre class="file" data-filename="./app/requirements.txt" data-target="replace">
-Flask==1.1.2
-Jinja2<3.1
-itsdangerous==2.0.1
-prometheus-client==0.7.1
-</pre>
-
 Откройте вкладку файла ./app/pip.conf в редакторе и введите в него код ниже, либо нажмите кнопку "Copy to Editor". Это файл с описанием откуда брать зависимости
 
 <pre class="file" data-filename="./app/pip.conf" data-target="replace">
