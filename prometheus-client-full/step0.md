@@ -56,10 +56,16 @@ CMD ["python", "/app/app.py"]
 Откройте вкладку файла ./app/requirements.txt в редакторе и введите в него код ниже, либо нажмите кнопку "Copy to Editor". Это файл с описанием зависимостей для сервиса
 
 <pre class="file" data-filename="./app/requirements.txt" data-target="replace">
+click==8.0.4
 Flask==1.1.2
-Jinja2<3.1
+importlib-metadata==4.11.3
 itsdangerous==2.0.1
+Jinja2==3.0.3
+MarkupSafe==2.1.1
 prometheus-client==0.7.1
+typing_extensions==4.1.1
+Werkzeug==2.0.3
+zipp==3.7.0
 </pre>
 
 Откройте вкладку файла ./app/pip.conf в редакторе и введите в него код ниже, либо нажмите кнопку "Copy to Editor". Это файл с описанием откуда брать зависимости
