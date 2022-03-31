@@ -18,7 +18,7 @@
 
 `kubectl get po -A`{{execute}}
 
-Под с сервисом httpbin, скорее всего, еще запускается. Дождемся, пока статус всех подов станет Ready.  
+Под с сервисом httpbin, скорее всего, еще запускается. Дождемся, пока он станет доступен 
 ` kubectl wait --for=condition=ContainersReady --timeout=5m --all pods`{{execute}}  
 
 
