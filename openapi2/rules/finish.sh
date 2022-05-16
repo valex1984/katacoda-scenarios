@@ -1,6 +1,6 @@
 #!/bin/bash
 
-httpbin_retcode="$(curl -o /dev/null -s -w "%{http_code}\n" http://localhost:32100/httpbin/get)"
+httpbin_retcode="$(curl -o /dev/null -s -w "%{http_code}\n" http://localhost:32100/gateway/httpbin/get)"
 httpbin_header_count="$(curl -sI http://localhost:32100/gateway/httpbin/get |grep Gravitee|wc -l)"
 
 jq --null-input \

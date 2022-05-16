@@ -7,7 +7,7 @@ gravitee_apiv2_out="$(curl -s http://localhost:32100/gateway/api/v2)"
 
 jq --null-input \
 --arg gravitee_apiv1_out "$gravitee_apiv1_out" \
---arg gravitee_apiv1_out "$gravitee_apiv1_out" \
+--arg gravitee_apiv2_out "$gravitee_apiv2_out" \
 '{"gravitee_apiv1_out": $gravitee_apiv1_out, 
 "gravitee_apiv2_out": $gravitee_apiv2_out
 }'| jq -n '.results |= [inputs]'
