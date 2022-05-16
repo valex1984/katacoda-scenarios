@@ -7,7 +7,7 @@ gravitee_fn2_retcode="$(curl -o /dev/null -s -w "%{http_code}\n" -H @apikey http
 
 #check if cache configured
 before_count=$(faas-cli list|grep fn2|cut -f 2)
-for i in {1..10}; do curl -s -H @apikey http://localhost:32100/gateway/fn2; done
+for i in {1..10}; do a="$(curl -s -H @apikey http://localhost:32100/gateway/fn2)"; done
 #faas stats updates every 5 seconds, we need next value
 sleep 5
 after_count=$(faas-cli list|grep fn2|cut -f 2)
