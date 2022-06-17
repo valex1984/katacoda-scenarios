@@ -33,17 +33,17 @@
         "uimessage2": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
     },
     "backend": {
-        "imageid": "openshift-client"
+        "imageid": "openshift-client",
         "openShift": {
           "enable": true,
           "serviceAccountNameInProject": "admin",
           "clusterRoleNameForBinding": "admin",
-          "projects": {
+          "projects": [
             {
-              "name": "project1"
+              "name": "project1",
               "displayName": "Test project 1",
               "description": "This is project for first exercise",
-              "labels": {
+              "labels": [
                 {
                   "key": "label_key1",
                   "value": "label_value1",
@@ -52,18 +52,18 @@
                   "key": "label_key2",
                   "value": "label_value2",
                 }
-              },
-              "annotations": {
+              ],
+              "annotations": [
                 {
                   "key": "annotation_key1",
                   "value": "annotation_value1",
                 },
-              }
+              ]
             },
             {
               "name": "project2"
             },
-          }
+          ]
         }
     }
 }
