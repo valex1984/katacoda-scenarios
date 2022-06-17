@@ -34,5 +34,36 @@
     },
     "backend": {
         "imageid": "openshift-client"
+        "openShift": {
+          "enable": true,
+          "serviceAccountNameInProject": "admin",
+          "clusterRoleNameForBinding": "admin",
+          "projects": {
+            {
+              "name": "project1"
+              "displayName": "Test project 1",
+              "description": "This is project for first exercise",
+              "labels": {
+                {
+                  "key": "label_key1",
+                  "value": "label_value1",
+                },
+                {
+                  "key": "label_key2",
+                  "value": "label_value2",
+                }
+              },
+              "annotations": {
+                {
+                  "key": "annotation_key1",
+                  "value": "annotation_value1",
+                },
+              }
+            },
+            {
+              "name": "project2"
+            },
+          }
+        }
     }
 }
