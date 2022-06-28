@@ -41,3 +41,4 @@ spec:
         name: httpbin
         ports:
         - containerPort: 80
+        args: ["gunicorn", "-b", "0.0.0.0:8080", "httpbin:app", "-k", "gevent"]
