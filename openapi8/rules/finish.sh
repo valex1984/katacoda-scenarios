@@ -4,7 +4,7 @@
 # FILE=~/httpbin-1-0-0.json
 
 API_URL="http://localhost:8083"
-FILE="../root/httpbin-1-0-0.json"
+FILE="/root/httpbin-1-0-0.json"
 
 
 api_id=$(cat $FILE|jq -r '.id')
