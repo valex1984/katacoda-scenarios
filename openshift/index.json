@@ -50,25 +50,17 @@
           "name": "project1",
           "displayName": "Test project 1",
           "description": "This is project for first exercise",
-          "labels": [
-            {
-              "key": "label_key1",
-              "value": "label_value1"
-            },
-            {
-              "key": "label_key2",
-              "value": "label_value2"
-            }
-          ],
-          "annotations": [
-            {
-              "key": "annotation_key1",
-              "value": "annotation_value1"
-            }
-          ]
+          "inServiceMeshMemberRoll": {
+              "name": "default",
+              "namespace": "istio-system"
+          }
         },
         {
-          "name": "project2"
+          "name": "project2",
+          "inServiceMeshMemberRoll": {
+              "name": "default",
+              "namespace": "istio-system"
+          }
         }
       ]
     }
