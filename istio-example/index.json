@@ -35,6 +35,6 @@
         "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
     },
     "backend": {
-      "imageid": "k3s-istio:1.10.1"
+      "imageid": "k3s-istio:1.14.1"
     }
 }
