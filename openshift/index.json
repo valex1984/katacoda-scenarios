@@ -50,15 +50,15 @@
           "name": "project1",
           "displayName": "Test project 1",
           "description": "This is project for first exercise",
-          "inServiceMeshMemberRoll": {
-              "name": "default",
+          "inServiceMeshControlPlane": {
+              "name": "basic",
               "namespace": "istio-system"
           }
         },
         {
           "name": "project2",
-          "inServiceMeshMemberRoll": {
-              "name": "default",
+          "inServiceMeshControlPlane": {
+              "name": "basic",
               "namespace": "istio-system"
           }
         }
