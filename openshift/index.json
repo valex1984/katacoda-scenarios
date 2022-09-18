@@ -20,7 +20,7 @@
     "assets": {
       "host01": [
         {
-          "file": "httpbin.yaml",
+          "file": "postgres.yaml",
           "target": "/usr/local/k8s"
         },
         {
@@ -47,16 +47,14 @@
       "clusterRoleNameForBinding": "admin",
       "projects": [
         {
-          "name": "project1",
-          "displayName": "Test project 1",
-          "description": "This is project for first exercise",
-          "inServiceMeshControlPlane": {
-              "name": "basic",
-              "namespace": "istio-system"
-          }
+          "name": "infra",
+          "displayName": "infra",
+          "description": "This is project for exercise dependencies workloads"
         },
         {
-          "name": "project2",
+          "name": "work",
+          "displayName": "work",
+          "description": "This is project for exercise workloads",
           "inServiceMeshControlPlane": {
               "name": "basic",
               "namespace": "istio-system"
