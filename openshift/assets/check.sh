@@ -22,10 +22,19 @@ spinner() {
 
 spinner &
 
+echo "[INFO] waiting for starting infra pods..."
+while true
+    do 
+    count=$(oc get po --ignore-not-found|wc -l)
+    [[ $count -gt 0 ]] && break
+    sleep 2
+done
+echo "[INFO] done"
+echo "[INFO] waiting for infra pods is ready.."
 oc wait --for=condition=ready pod  --all --timeout=3m  >/dev/null 2>&1
 test $? -eq 1 && echo "[ERROR] infra pods not ready" && kill "$!" && exit 1
 
 kill "$!"
-echo "[INFO] all infra pods ready"
+echo "[INFO] done"
 
 oc config use-context ${work_context} > /dev/null
