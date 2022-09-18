@@ -28,6 +28,11 @@
             "target": "/usr/local/k8s_tpl"
         },
         {
+            "file": "check.sh",
+            "target": "/usr/local/bin",
+            "chmod": "+x"
+        },
+        {
           "file": "k8s.sh",
           "target": "/usr/local/autostart-scripts.d",
           "chmod": "+x"
