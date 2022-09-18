@@ -20,8 +20,12 @@
     "assets": {
       "host01": [
         {
-          "file": "postgres.yaml",
-          "target": "/usr/local/k8s"
+            "file": "postgres.yaml",
+            "target": "/usr/local/k8s"
+        },
+        {
+            "file": "kafka_tpl.yaml",
+            "target": "/usr/local/k8s_tpl"
         },
         {
           "file": "k8s.sh",
