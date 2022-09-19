@@ -24,14 +24,11 @@ spinner &
 while ! resolvectl query $proxy_host > /dev/null 2>&1; do sleep 1;done
 # check if config has been copied
 while ! [ -f ~/.kube/config ]; do sleep 1 ;done
-# switch to infra context 
-while [ "$(oc config current-context)" != "$infra_context" ];
-    do
-    sleep 1
-    oc config use-context ${infra_context} > /dev/null
-done
 
 echo "[INFO] waiting for infra pods is ready.."
+# switch to infra context 
+sleep 10
+oc config use-context ${infra_context} > /dev/null
 #wait for pods scheduled
 while true;
     do
@@ -42,11 +39,7 @@ oc wait --for=condition=ready pod  --all --timeout=3m  #>/dev/null 2>&1
 test $? -eq 1 && echo "[ERROR] infra pods not ready" && kill "$!" && exit 1
 
 # switch to work context 
-while [ "$(oc config current-context)" != "$work_context" ];
-    do
-    sleep 1
-    oc config use-context ${work_context} > /dev/null
-done
+oc config use-context ${work_context} > /dev/null
 
 kill "$!"
 echo "[INFO] done"
