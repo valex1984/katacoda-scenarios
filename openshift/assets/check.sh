@@ -3,11 +3,10 @@
 _user=student
 infra_project=infra
 work_project=work
+proxy_host=nexus
 
 infra_context=${infra_project}-${_user}
 work_context=${work_project}-${_user}
-
-oc config use-context ${infra_context} > /dev/null
 
 spinner() {
     local i sp n
@@ -20,6 +19,9 @@ spinner() {
 }
 
 spinner &
+
+while ! resolvectl query $proxy_host > /dev/null; do sleep 1;done
+oc config use-context ${infra_context} > /dev/null
 
 echo "[INFO] waiting for infra pods is ready.."
 count=$(oc get po --ignore-not-found|wc -l)
