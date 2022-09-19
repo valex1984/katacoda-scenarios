@@ -200,7 +200,7 @@ spec:
       securityContext: {}
       containers:
         - name: zookeeper
-          image: docker.io/bitnami/zookeeper:3.8.0-debian-11-r30
+          image: nexus.local:5000/bitnami/zookeeper:3.8.0-debian-11-r30
           imagePullPolicy: "IfNotPresent"
           securityContext:
             capabilities: {}
@@ -325,7 +325,7 @@ spec:
       serviceAccountName: kafka
       containers:
         - name: kafka
-          image: docker.io/bitnami/kafka:3.2.1-debian-11-r16
+          image: nexus.local:5000/bitnami/kafka:3.2.1-debian-11-r16
           imagePullPolicy: "IfNotPresent"
           securityContext:
             capabilities: {}
