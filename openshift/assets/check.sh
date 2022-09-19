@@ -20,7 +20,11 @@ spinner() {
 
 spinner &
 
-while ! resolvectl query $proxy_host > /dev/null; do sleep 1;done
+# check if proxy_host already resolvable
+while ! resolvectl query $proxy_host > /dev/null 2>&1; do sleep 1;done
+# check if config has been copied
+while ! [ -f ~/.kube/config ]; do sleep 1 ;done
+
 oc config use-context ${infra_context} > /dev/null
 
 echo "[INFO] waiting for infra pods is ready.."
