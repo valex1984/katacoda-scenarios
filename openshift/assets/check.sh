@@ -1,4 +1,4 @@
-#!/bin/bash
+#!/bin/bash -x
 
 _user=student
 infra_project=infra
@@ -25,7 +25,7 @@ while ! resolvectl query $proxy_host > /dev/null 2>&1; do sleep 1;done
 # check if config has been copied
 while ! [ -f ~/.kube/config ]; do sleep 1 ;done
 
-oc config use-context ${infra_context} > /dev/null
+oc config use-context ${infra_context}
 
 echo "[INFO] waiting for infra pods is ready.."
 count=$(oc get po --ignore-not-found|wc -l)
@@ -36,4 +36,4 @@ test $? -eq 1 && echo "[ERROR] infra pods not ready" && kill "$!" && exit 1
 kill "$!"
 echo "[INFO] done"
 
-oc config use-context ${work_context} > /dev/null
+oc config use-context ${work_context}
