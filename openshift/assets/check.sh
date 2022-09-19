@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 
 _user=student
 infra_project=infra
@@ -28,8 +28,13 @@ while ! [ -f ~/.kube/config ]; do sleep 1 ;done
 oc config use-context ${infra_context}
 
 echo "[INFO] waiting for infra pods is ready.."
-count=$(oc get po --ignore-not-found|wc -l)
-[[ $count -eq 0 ]] && sleep 10 #wait for pods scheduled
+#wait for pods scheduled
+while true;
+    do
+    count=$(oc get po --ignore-not-found|wc -l)
+    [[ $count -gt 0 ]] && break 
+    sleep 2
+done
 oc wait --for=condition=ready pod  --all --timeout=3m  #>/dev/null 2>&1
 test $? -eq 1 && echo "[ERROR] infra pods not ready" && kill "$!" && exit 1
 
