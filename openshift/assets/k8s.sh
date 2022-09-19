@@ -3,6 +3,7 @@ PS1=1
 source ~/.bashrc
 
 OUT_FILE=~/creds.yaml
+DONE_FILE=/usr/local/etc/k8s.sh.done
 
 _user=student
 infra_project=infra
@@ -29,3 +30,5 @@ echo -e "kafka:\n  addr: kafka.${curr_project}.svc.cluster.local:9092" >> $OUT_F
 ####end
 
 oc config use-context ${work_context}
+touch $DONE_FILE
+
