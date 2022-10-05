@@ -12,7 +12,7 @@ Version_2</pre>
 `faas-cli up -f apiv2.yml `{{execute}}
 
 Сборка образа упала с ошибкой. Что произошло? Не прошли юнит тесты, т.к. мы поменяли поведение функции.  
-Поправим ошибку в файле `fn1/handler_test.py`{{open}}
+Поправим ошибку в файле `apiv2/handler_test.py`{{open}}
 
 <pre class="file" data-filename="./apiv2/handler_test.py" data-target="insert" data-marker="Hello from OpenFaaS!">
 Version_2</pre>
