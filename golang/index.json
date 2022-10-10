@@ -35,7 +35,7 @@
             "failMessage": "Не найдены необходимые файлы из упражнения по openfaas"
         }
     ],
-    "save": false,
+    "save": true,
     "backend": {
         "imageid": "golang"
     }
