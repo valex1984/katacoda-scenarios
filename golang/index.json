@@ -27,14 +27,6 @@
         "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n",
         "uimessage2": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
     },
-    "load": [
-        {
-            "author": "valex1984",
-            "scenario": "golang",
-            "required": true,
-            "failMessage": "Не найдены необходимые файлы из упражнения по openfaas"
-        }
-    ],
     "save": true,
     "backend": {
         "imageid": "golang"
