@@ -1,0 +1,69 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: ingressgateway-routing-template
+objects:
+  - apiVersion: networking.istio.io/v1alpha3
+    kind: Gateway
+    metadata:
+      name: mutual-ingressgateway-gw
+      labels:
+        marker: practice
+    spec:
+      selector:
+        istio: ${INGRESS_NAME}
+      servers:
+        - hosts:
+            - ${MUTUAL_URL}
+          port:
+            name: https-3001
+            number: 3001
+            protocol: HTTPS
+          tls:
+            caCertificates: /etc/istio/ingress-certs/ca.pem
+            mode: MUTUAL
+            privateKey: /etc/istio/ingress-certs/key.pem
+            serverCertificate: /etc/istio/ingress-certs/crt.pem
+  - apiVersion: route.openshift.io/v1
+    kind: Route
+    metadata:
+      annotations:
+        haproxy.router.openshift.io/balance: roundrobin
+      labels:
+        istio: ${INGRESS_NAME}
+        marker: practice
+      name: mutual-ingressgateway-https
+    spec:
+      host: ${MUTUAL_URL}
+      port:
+        targetPort: https-3001
+      tls:
+        termination: passthrough
+      to:
+        kind: Service
+        name: ${INGRESS_NAME}
+  - apiVersion: networking.istio.io/v1alpha3
+    kind: VirtualService
+    metadata:
+      name: mutual-ingressgateway-vs
+      labels:
+        marker: practice
+    spec:
+      exportTo:
+        - .
+      gateways:
+        - mutual-ingressgateway-gw
+      hosts:
+        - ${MUTUAL_URL}
+      http:
+        - route:
+            - destination:
+                host: server
+                port:
+                  number: 8080
+parameters:
+  - name: MUTUAL_URL
+    description: URL для доступа к ingress
+    required: true
+  - name: INGRESS_NAME
+    required: true

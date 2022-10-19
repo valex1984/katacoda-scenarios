@@ -1,0 +1,46 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: server
+    marker: practice
+  name: server
+spec:
+  selector:
+    matchLabels:
+      app: server
+  template:
+    metadata:
+      annotations:
+        sidecar.istio.io/inject: 'true'
+      labels:
+        app: server
+        maistra.io/expose-route: "true"
+    spec:
+      containers:
+        - image: >-
+            nexus.local:5000/kib/http-server:1.0.0
+          name: server
+          imagePullPolicy: Always
+          resources:
+            limits:
+              cpu: 100m
+              memory: 128Mi
+            requests:
+              cpu: 100m
+              memory: 128Mi
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: server
+  labels:
+    app: server
+    marker: practice
+spec:
+  ports:
+    # Обратите внимание на название порта
+    - name: tcp-8080
+      port: 8080
+  selector:
+    app: server

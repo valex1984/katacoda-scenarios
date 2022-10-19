@@ -1,0 +1,26 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: easy-routing-template
+objects:
+    # Route (https://docs.openshift.com/container-platform/4.7/networking/routes/route-configuration.html), описывающий внешнюю точку доступа к ресурсам внутри Openshift
+  - kind: Route
+    apiVersion: route.openshift.io/v1
+    metadata:
+      name: test-easy-route
+      labels:
+        marker: practice
+    spec:
+      # URL, по которому сервис доступен извне
+      host: ${EASY_URL}
+      to:
+        kind: Service
+        # Имя сервиса, куда будет направлен трафик
+        name: server
+      port:
+        # Важно! Здесь указывается название (name) порта в Service, а не номер
+        targetPort: tcp-8080
+parameters:
+  - name: EASY_URL
+    description: URL для доступа к сервису
+    required: true

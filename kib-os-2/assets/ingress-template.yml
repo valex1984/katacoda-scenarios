@@ -1,0 +1,350 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: ingressgateway-template
+objects:
+  - apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      labels:
+        app: ${INGRESS_NAME}
+        app.kubernetes.io/component: gateways
+        app.kubernetes.io/instance: ${CONTROL_PLANE}
+        app.kubernetes.io/name: gateways
+        app.kubernetes.io/part-of: istio
+        chart: gateways
+        heritage: Tiller
+        istio: ${INGRESS_NAME}
+        maistra-version: 2.1.0
+        release: istio
+        marker: practice
+      name: ${INGRESS_NAME}
+    spec:
+      progressDeadlineSeconds: 1200
+      revisionHistoryLimit: 0
+      selector:
+        matchLabels:
+          app: ${INGRESS_NAME}
+          istio: ${INGRESS_NAME}
+      template:
+        metadata:
+          annotations:
+            sidecar.istio.io/inject: "false"
+          labels:
+            app: ${INGRESS_NAME}
+            chart: gateways
+            heritage: Tiller
+            istio: ${INGRESS_NAME}
+            release: istio
+        spec:
+          affinity:
+            nodeAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+                - preference:
+                    matchExpressions:
+                      - key: beta.kubernetes.io/arch
+                        operator: In
+                        values:
+                          - amd64
+                  weight: 2
+                - preference:
+                    matchExpressions:
+                      - key: beta.kubernetes.io/arch
+                        operator: In
+                        values:
+                          - ppc64le
+                  weight: 2
+                - preference:
+                    matchExpressions:
+                      - key: beta.kubernetes.io/arch
+                        operator: In
+                        values:
+                          - s390x
+                  weight: 2
+              requiredDuringSchedulingIgnoredDuringExecution:
+                nodeSelectorTerms:
+                  - matchExpressions:
+                      - key: beta.kubernetes.io/arch
+                        operator: In
+                        values:
+                          - amd64
+                          - ppc64le
+                          - s390x
+            podAntiAffinity:
+              preferredDuringSchedulingIgnoredDuringExecution:
+                - podAffinityTerm:
+                    labelSelector:
+                      matchExpressions:
+                        - key: app
+                          operator: In
+                          values:
+                            - ${INGRESS_NAME}
+                    topologyKey: kubernetes.io/hostname
+                  weight: 1
+          containers:
+            - resources:
+                limits:
+                  cpu: 200m
+                  memory: 256Mi
+                requests:
+                  cpu: 100m
+                  memory: 128Mi
+              readinessProbe:
+                httpGet:
+                  path: /healthz/ready
+                  port: 15021
+                  scheme: HTTP
+                initialDelaySeconds: 1
+                timeoutSeconds: 3
+                periodSeconds: 2
+                successThreshold: 1
+                failureThreshold: 30
+              terminationMessagePath: /dev/termination-log
+              name: istio-proxy
+              env:
+                - name: JWT_POLICY
+                  value: first-party-jwt
+                - name: PILOT_CERT_PROVIDER
+                  value: istiod
+                - name: CA_ADDR
+                  value: 'istiod-basic.${CONTROL_PLANE}.svc:15012'
+                - name: POD_NAME
+                  valueFrom:
+                    fieldRef:
+                      apiVersion: v1
+                      fieldPath: metadata.name
+                - name: POD_NAMESPACE
+                  valueFrom:
+                    fieldRef:
+                      apiVersion: v1
+                      fieldPath: metadata.namespace
+                - name: INSTANCE_IP
+                  valueFrom:
+                    fieldRef:
+                      apiVersion: v1
+                      fieldPath: status.podIP
+                - name: SERVICE_ACCOUNT
+                  valueFrom:
+                    fieldRef:
+                      apiVersion: v1
+                      fieldPath: spec.serviceAccountName
+                - name: HOST_IP
+                  valueFrom:
+                    fieldRef:
+                      apiVersion: v1
+                      fieldPath: status.hostIP
+                - name: CANONICAL_SERVICE
+                  valueFrom:
+                    fieldRef:
+                      apiVersion: v1
+                      fieldPath: 'metadata.labels[''service.istio.io/canonical-name'']'
+                - name: CANONICAL_REVISION
+                  valueFrom:
+                    fieldRef:
+                      apiVersion: v1
+                      fieldPath: 'metadata.labels[''service.istio.io/canonical-revision'']'
+                - name: PROXY_CONFIG
+                  value: >
+                    {"discoveryAddress":"istiod-basic.${CONTROL_PLANE}.svc:15012","tracing":{"zipkin":{"address":"jaeger-collector.${CONTROL_PLANE}.svc:9411"}},"proxyMetadata":{"ISTIO_META_DNS_AUTO_ALLOCATE":"true","ISTIO_META_DNS_CAPTURE":"true","PROXY_XDS_VIA_AGENT":"true"}}
+                - name: ISTIO_META_POD_PORTS
+                  value: |-
+                    [
+                    ]
+                - name: ISTIO_META_APP_CONTAINERS
+                  value: server
+                - name: ISTIO_META_CLUSTER_ID
+                  value: Kubernetes
+                - name: ISTIO_META_INTERCEPTION_MODE
+                  value: REDIRECT
+                - name: ISTIO_METAJSON_ANNOTATIONS
+                  value: |
+                    {"openshift.io/scc":"restricted","sidecar.istio.io/inject":"true"}
+                - name: ISTIO_META_WORKLOAD_NAME
+                  value: server
+                - name: ISTIO_META_OWNER
+                  value: >-
+                    kubernetes://apis/apps/v1/namespaces/istio-practice-var1/deployments/server
+                - name: ISTIO_META_MESH_ID
+                  value: cluster.local
+                - name: TRUST_DOMAIN
+                  value: cluster.local
+                - name: ISTIO_META_DNS_AUTO_ALLOCATE
+                  value: 'true'
+                - name: ISTIO_META_DNS_CAPTURE
+                  value: 'true'
+                - name: PROXY_XDS_VIA_AGENT
+                  value: 'true'
+              ports:
+                - name: http-envoy-prom
+                  containerPort: 15090
+                  protocol: TCP
+              imagePullPolicy: Always
+              volumeMounts:
+                - mountPath: /etc/istio/ingress-certs
+                  name: ingress-certs
+                  readOnly: true
+                - name: istiod-ca-cert
+                  mountPath: /var/run/secrets/istio
+                - name: istio-data
+                  mountPath: /var/lib/istio/data
+                - name: istio-envoy
+                  mountPath: /etc/istio/proxy
+                - name: istio-podinfo
+                  mountPath: /etc/istio/pod
+                - name: kube-api-access-wx7h4
+                  readOnly: true
+                  mountPath: /var/run/secrets/kubernetes.io/serviceaccount
+              terminationMessagePolicy: File
+              image: 'quay.io/maistra/proxyv2-ubi8:2.1.0'
+              args:
+                - proxy
+                - router
+                - '--domain'
+                - $(POD_NAMESPACE).svc.cluster.local
+                - '--proxyLogLevel=warning'
+                - '--proxyComponentLogLevel=misc:error'
+                - '--log_output_level=default:info'
+                - '--serviceCluster'
+                - ${INGRESS_NAME}
+                - '--trust-domain=cluster.local'
+          volumes:
+            - name: istio-envoy
+              emptyDir:
+                medium: Memory
+            - name: istio-data
+              emptyDir: {}
+            - name: istio-podinfo
+              downwardAPI:
+                items:
+                  - path: labels
+                    fieldRef:
+                      apiVersion: v1
+                      fieldPath: metadata.labels
+                  - path: annotations
+                    fieldRef:
+                      apiVersion: v1
+                      fieldPath: metadata.annotations
+                  - path: cpu-limit
+                    resourceFieldRef:
+                      containerName: istio-proxy
+                      resource: limits.cpu
+                      divisor: 1m
+                  - path: cpu-request
+                    resourceFieldRef:
+                      containerName: istio-proxy
+                      resource: requests.cpu
+                      divisor: 1m
+                defaultMode: 420
+            - name: istiod-ca-cert
+              configMap:
+                name: istio-ca-root-cert
+                defaultMode: 420
+            - name: kube-api-access-wx7h4
+              projected:
+                sources:
+                  - serviceAccountToken:
+                      expirationSeconds: 3607
+                      path: token
+                  - configMap:
+                      name: kube-root-ca.crt
+                      items:
+                        - key: ca.crt
+                          path: ca.crt
+                  - downwardAPI:
+                      items:
+                        - path: namespace
+                          fieldRef:
+                            apiVersion: v1
+                            fieldPath: metadata.namespace
+                  - configMap:
+                      name: openshift-service-ca.crt
+                      items:
+                        - key: service-ca.crt
+                          path: service-ca.crt
+            - name: ingress-certs
+              secret:
+                defaultMode: 256
+                secretName: ingress-certs
+  - apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: ingress-config
+      labels:
+        app.kubernetes.io/component: istio-discovery
+        app.kubernetes.io/instance: ${CONTROL_PLANE}
+        app.kubernetes.io/name: istio-discovery
+        app.kubernetes.io/part-of: istio
+        istio.io/rev: basic
+        maistra-version: 2.0.2
+        release: istio
+        marker: practice
+    data:
+      mesh: |-
+        accessLogEncoding: TEXT
+        accessLogFile: /dev/stdout
+        accessLogFormat: ""
+        defaultConfig:
+          concurrency: 2
+          configPath: ./etc/istio/proxy
+          controlPlaneAuthPolicy: NONE
+          discoveryAddress: istiod-basic.${CONTROL_PLANE}.svc:15012
+          drainDuration: 45s
+          parentShutdownDuration: 1m0s
+          proxyAdminPort: 15000
+          proxyMetadata:
+            DNS_AGENT: ""
+          serviceCluster: istio-proxy
+          tracing:
+            tlsSettings:
+              caCertificates: null
+              clientCertificate: null
+              mode: DISABLE
+              privateKey: null
+              sni: null
+              subjectAltNames: []
+            zipkin:
+              address: jaeger-collector.${CONTROL_PLANE}.svc:9411
+        disableMixerHttpReports: true
+        disablePolicyChecks: true
+        enableAutoMtls: true
+        enableEnvoyAccessLogService: false
+        enablePrometheusMerge: false
+        enableTracing: true
+        ingressClass: istio
+        ingressControllerMode: STRICT
+        ingressService: istio-ingressgateway
+        localityLbSetting:
+          enabled: true
+        outboundTrafficPolicy:
+          mode: ALLOW_ANY
+        protocolDetectionTimeout: 5000ms
+        reportBatchMaxEntries: 100
+        reportBatchMaxTime: 1s
+        rootNamespace: ${CONTROL_PLANE}
+        sdsUdsPath: unix:/etc/istio/proxy/SDS
+        trustDomain: cluster.local
+        trustDomainAliases: null
+      meshNetworks: 'networks: {}'
+  - kind: Service
+    apiVersion: v1
+    metadata:
+      name: ${INGRESS_NAME}
+      labels:
+        app: ${INGRESS_NAME}
+        marker: practice
+    spec:
+      ports:
+        - name: https-3000
+          port: 3000
+        - name: https-3001
+          port: 3001
+      selector:
+        app: ${INGRESS_NAME}
+        istio: ${INGRESS_NAME}
+parameters:
+  - name: PROJECT_NAME
+    required: true
+  - name: CONTROL_PLANE
+    required: true
+  - name: INGRESS_NAME
+    required: true

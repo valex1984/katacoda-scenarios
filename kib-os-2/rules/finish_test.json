@@ -1,0 +1,29 @@
+{
+  "url": {
+    "easy": "qwe.apps.sbc-okd.pcbltools.ru",
+    "simple": "asd.apps.sbc-okd.pcbltools.ru",
+    "mutual": "zxc.apps.sbc-okd.pcbltools.ru"
+  },
+  "san": {
+    "simple": "1",
+    "mutual": "1"
+  },
+  "curl": {
+    "easy": "200",
+    "simple": "200",
+    "mutual": "200"
+  },
+  "route": {
+    "easy": "2",
+    "simple": "2",
+    "mutual": "2"
+  },
+  "gw": {
+    "simple": "1",
+    "mutual": "1"
+  },
+  "vs": {
+    "simple": "1",
+    "mutual": "1"
+  }
+}

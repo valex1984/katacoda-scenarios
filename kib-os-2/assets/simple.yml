@@ -1,0 +1,78 @@
+apiVersion: template.openshift.io/v1
+kind: Template
+metadata:
+  name: ingressgateway-routing-template
+objects:
+  # Gateway для обработки трафика, входящего в Ingress Proxy (https://istio.io/latest/docs/reference/config/networking/gateway/)
+  - apiVersion: networking.istio.io/v1alpha3
+    kind: Gateway
+    metadata:
+      name: simple-ingressgateway-gw
+      labels:
+        marker: practice
+    spec:
+      selector:
+        istio: ${INGRESS_NAME}
+      servers:
+        - hosts:
+            - ${SIMPLE_URL}
+          port:
+            name: https-3000
+            number: 3000
+            protocol: HTTPS
+          tls:
+            # Файлы должны присутствовать в подах Ingress Gateway
+            caCertificates: /etc/istio/ingress-certs/ca.pem
+            # Определение режима TLS
+            mode: SIMPLE
+            privateKey: /etc/istio/ingress-certs/key.pem
+            serverCertificate: /etc/istio/ingress-certs/crt.pem
+  # Route (https://docs.openshift.com/container-platform/4.7/networking/routes/route-configuration.html), описывающий внешнюю точку доступа к ресурсам внутри Openshift
+  - apiVersion: route.openshift.io/v1
+    kind: Route
+    metadata:
+      annotations:
+        # Важно! Аннотация позволяет равномерно распределять трафик между репликами Ingress Gateway. Если ее не указать, все запросы пойдут в один экземпляр
+        haproxy.router.openshift.io/balance: roundrobin
+      labels:
+        istio: ${INGRESS_NAME}
+        marker: practice
+      name: simple-ingressgateway-https
+    spec:
+      host: ${SIMPLE_URL}
+      port:
+        # Важно! Здесь указывается название (name) порта в Service, а не номер
+        targetPort: https-3000
+      tls:
+        # Используем passthrough, чтобы работать с сертификатами на уровне Istio, а не Openshift
+        termination: passthrough
+      to:
+        kind: Service
+        name: ${INGRESS_NAME}
+  # VirtualService (https://istio.io/latest/docs/reference/config/networking/gateway/), реализующий маршрутизацию трафика от Ingress Proxy к подам приложения
+  - apiVersion: networking.istio.io/v1alpha3
+    kind: VirtualService
+    metadata:
+      name: simple-ingressgateway-vs
+      labels:
+        marker: practice
+    spec:
+      exportTo:
+        - .
+      gateways:
+        - simple-ingressgateway-gw
+      hosts:
+        - ${SIMPLE_URL}
+      http:
+        # Ingress -> Приложение
+        - route:
+            - destination:
+                host: server
+                port:
+                  number: 8080
+parameters:
+  - name: SIMPLE_URL
+    description: URL для доступа к ingress
+    required: true
+  - name: INGRESS_NAME
+    required: true
