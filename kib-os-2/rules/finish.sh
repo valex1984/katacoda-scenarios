@@ -22,13 +22,13 @@ EASY_RESULT="$(curl -o /dev/null -s -w "%{http_code} %{errormsg}\n" http://${EAS
 SIMPLE_RESULT="$(curl -o /dev/null --cacert ./certs/crt.pem -s -w "%{http_code} %{errormsg}\n" https://${SIMPLE_URL})"
 MUTUAL_RESULT="$(curl -o /dev/null --cacert ./certs/crt.pem --cert ./certs/crt.pem --key ./certs/key.pem -s -w "%{http_code} %{errormsg}\n" https://${MUTUAL_URL})"
 # Проверка конфигов Openshift
-EASY_ROUTE=$(oc describe routes | grep ${EASY_URL} | wc -l)
-SIMPLE_ROUTE=$(oc describe routes | grep ${SIMPLE_URL} | wc -l)
-MUTUAL_ROUTE=$(oc describe routes | grep ${MUTUAL_URL} | wc -l)
-SIMPLE_GW=$(oc describe gateways | grep ${SIMPLE_URL} | wc -l)
-MUTUAL_GW=$(oc describe gateways | grep ${MUTUAL_URL} | wc -l)
-SIMPLE_VS=$(oc describe virtualservices | grep ${SIMPLE_URL} | wc -l)
-MUTUAL_VS=$(oc describe virtualservices | grep ${MUTUAL_URL} | wc -l)
+EASY_ROUTE=$(oc describe routes 2>&1| grep ${EASY_URL} | wc -l)
+SIMPLE_ROUTE=$(oc describe routes 2>&1| grep ${SIMPLE_URL} | wc -l)
+MUTUAL_ROUTE=$(oc describe routes 2>&1| grep ${MUTUAL_URL} | wc -l)
+SIMPLE_GW=$(oc describe gateways 2>&1| grep ${SIMPLE_URL} | wc -l)
+MUTUAL_GW=$(oc describe gateways 2>&1| grep ${MUTUAL_URL} | wc -l)
+SIMPLE_VS=$(oc describe virtualservices 2>&1| grep ${SIMPLE_URL} | wc -l)
+MUTUAL_VS=$(oc describe virtualservices 2>&1| grep ${MUTUAL_URL} | wc -l)
 
 jq --null-input \
 --arg EASY_URL "$EASY_URL" \
