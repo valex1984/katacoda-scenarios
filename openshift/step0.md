@@ -5,3 +5,5 @@
 файл с данными для подключения к сервисам
 
 `creds.yaml`{{open}}
+
+Откроем интерфейс openshift apim по ссылке [консоль ](https://console-openshift-console.apps.sbc-okd.pcbltools.ru/)
