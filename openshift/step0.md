@@ -6,4 +6,4 @@
 
 `creds.yaml`{{open}}
 
-Откроем интерфейс openshift apim по ссылке [консоль ](https://console-openshift-console.apps.sbc-okd.pcbltools.ru/)
+Откроем интерфейс openshift по ссылке [консоль ](https://console-openshift-console.apps.sbc-okd.pcbltools.ru/)
