@@ -37,6 +37,11 @@
     ],
     "save": true,
     "backend": {
-        "imageid": "golang"
+        "imageid": "golang",
+        "userid": 1000,
+        "envs": [
+            {"name": "HOME", "value": "/home/ubuntu"},
+            {"name": "USER", "value": "ubuntu"}
+        ]
     }
 }
