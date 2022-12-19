@@ -27,6 +27,7 @@
         "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n",
         "uimessage2": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
     },
+    "layoutType": "LAYOUT_TYPE_TERMINAL_ONLY",
     "backend": {
         "imageid": "kubernetes-cluster-running:1.18"
     }
