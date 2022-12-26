@@ -19,7 +19,14 @@
         },
         "assets": {}
     },
-    "files": [],
+    "assets": {
+        "host01": [
+            {"file": "test.txt", "target": "./test"}
+        ]
+      },
+    "files": [
+        "./app/app.log"
+    ],
     "environment": {
         "uilayout": "terminal",
         "uisettings": "yaml",
