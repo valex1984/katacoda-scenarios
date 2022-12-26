@@ -30,6 +30,7 @@
     "backend": {
         "imageid": "golang",
         "userid": 1000,
+        "groupid": 1000,
         "envs": [
             {"name": "HOME", "value": "/home/ubuntu"},
             {"name": "USER", "value": "ubuntu"}
