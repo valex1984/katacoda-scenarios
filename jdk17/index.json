@@ -17,7 +17,22 @@
         "finish": {
             "text": "finish.md"
         },
-        "assets": {}
+        "assets": {
+            "host01": [
+                {
+                    "file": "App.java",
+                    "target": "/root/demo/src/main/java/demo"
+                },
+                {
+                    "file": "AppTest.java",
+                    "target": "/root/demo/src/test/java/demo"
+                },
+                {
+                    "file": "pom.xml",
+                    "target": "/root/demo"
+                }
+            ]
+        }
     },
     "files": [],
     "environment": {
