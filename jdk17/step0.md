@@ -1,5 +1,5 @@
 запустим сборку
 
-откроем файл `./demo/src/main/java/demo/App.java`{{open}}
+откроем файл `/root/demo/src/main/java/demo/App.java`{{open}}
 
 `cd demo && mvn package `{{execute}}
