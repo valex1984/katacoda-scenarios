@@ -20,6 +20,15 @@
         "assets": {
             "host01": [
                 {
+                    "file": "postgres.yaml",
+                    "target": "/usr/local/prepare"
+                },
+                {
+                    "file": "autostart.sh",
+                    "target": "/usr/local/autostart-scripts.d",
+                    "chmod": "+x"
+                },
+                {
                     "file": "App.java",
                     "target": "/root/demo/src/main/java/demo"
                 },

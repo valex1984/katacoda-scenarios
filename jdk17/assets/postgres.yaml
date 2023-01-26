@@ -1,0 +1,28 @@
+version: "3.9"
+
+services:
+  postgesql:
+    image: bitnami/postgresql:15.1.0-debian-11-r12
+    container_name: postgesql
+    expose:
+      - "5432"
+    ports:
+      - "5432:5432"
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=eduterm
+      - POSTGRES_HOST=5432
+    command: -p 5432
+    volumes:
+      - pg_data:/var/lib/postgresql/data
+    networks: [ "pg" ]
+ 
+volumes:
+  pg_data:
+    name: pg_data
+
+networks:
+  eduterm:
+    name: pg
