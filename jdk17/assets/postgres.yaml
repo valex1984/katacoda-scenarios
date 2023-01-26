@@ -24,5 +24,5 @@ volumes:
     name: pg_data
 
 networks:
-  eduterm:
+  pg:
     name: pg
