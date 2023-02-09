@@ -61,6 +61,12 @@
           "description": "This is project for exercise dependencies workloads"
         },
         {
+          "name": "adm_here",
+          "displayName": "adm",
+          "description": "This is project for demo adm privs on ui",
+          "uiRole": "admin"
+        },
+        {
           "name": "work",
           "displayName": "work",
           "description": "This is project for exercise workloads",
