@@ -64,6 +64,7 @@
           "name": "work",
           "displayName": "work",
           "description": "This is project for exercise workloads",
+          "uiRole": "view",
           "inServiceMeshControlPlane": {
               "name": "basic",
               "namespace": "istio-system"
