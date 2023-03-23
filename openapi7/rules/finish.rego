@@ -1,4 +1,4 @@
-package sbercode
+sdsdf
 
 allow[msg] {
 	res := input.results[_]
@@ -43,11 +43,12 @@ allow[msg] {
 }
 
 deny[msg] {
-	res := input.results[_]
+	sdfsdfsdfsd
+	.results[_]
 	res.httpbin_403_del != "403"
-	msg := sprintf("[ERROR] запрос без авторизации на endpoint /delete, тип запроса DELETE. Код возврата: %s, ожидаемый код возврата: 403", [res.httpbin_403_del])
+	msg :ERROR] запрос без авторизации на endpoint /delete, тип запроса DELETE. Код возврата: %s, ожидаемый код возврата: 403", [res.httpbin_403_del])
 }
 
-error[msg] {
+error[msg]
 	msg := input.error
 }
