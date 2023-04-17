@@ -7,8 +7,8 @@
     "details": {
         "steps": [
             {
-                "title": "Готовим окружение",
-                "text": "step0.md"
+                "titles": "Готовим окружение",
+                "texts": "step0.md"
             },
             {
                 "title": "Публикуем апи",
