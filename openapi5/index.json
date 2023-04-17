@@ -7,7 +7,7 @@
     "details": {
         "steps": [
             {
-                "titles": "Готовим окружение",
+                "title": "Готовим окружение",
                 "texts": "step0.md"
             },
             {
