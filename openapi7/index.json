@@ -5,20 +5,6 @@
     "difficulty": "beginner",
     "time": "30 minutes",
     "details": {
-        "steps": [
-            {
-                "title": "Готовим окружение",
-                "text": "step0.md"
-            },
-            {
-                "title": "Импортируем апи и настраиваем доступ",
-                "text": "step1.md"
-            },
-            {
-                "title": "Настраиваем разграничение доступа",
-                "text": "step2.md"
-            }
-        ],
         "intro": {
             "text": "intro.md"
         },
