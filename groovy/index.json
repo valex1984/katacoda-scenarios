@@ -1,0 +1,28 @@
+{
+    "title": "groovy example",
+    "details": {
+        "steps": [
+            {
+                "title": "groovy halloworld",
+                "text": "step0.md"
+            }
+        ],
+        "intro": {
+            "text": "intro.md"
+        },
+        "finish": {
+            "text": "finish.md"
+        },
+        "assets": {
+            "host01": [
+                {
+                    "file": "helloworld.groovy",
+                    "target": "/root"
+                }
+            ]
+        }
+    },
+    "backend": {
+        "imageid": "groovy"
+    }
+}
