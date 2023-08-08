@@ -42,10 +42,10 @@ function install_openfaas() {
       --namespace openfaas \
       --set functionNamespace=openfaas-fn \
       --set generateBasicAuth=true \
-      --set gateway.image=openfaas/gateway:0.21.1 \
+      --set gateway.image=openfaas/gateway:0.27.0 \
       --set basicAuthPlugin.image=openfaas/basic-auth:0.21.1 \
-      --set faasnetes.image=openfaas/faas-netes:0.14.1 \
-      --set queueWorker.image=openfaas/queue-worker:0.12.2
+      --set faasnetes.image=openfaas/faas-netes:0.17.1 \
+      --set queueWorker.image=openfaas/queue-worker:0.14.0
 
     curl -Ls http://nexus:8081/repository/binaries/openfaas/faas-cli/0.13.15/faas-cli -o /usr/local/bin/faas-cli && chmod +x /usr/local/bin/faas-cli
     faas-cli template pull https://github.com/valex1984/openfaas-tpl
