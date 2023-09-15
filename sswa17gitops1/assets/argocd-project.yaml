@@ -1,0 +1,27 @@
+# https://argo-cd.readthedocs.io/en/stable/operator-manual/declarative-setup/#projects
+apiVersion: argoproj.io/v1alpha1
+
+# название проекта
+kind: AppProject 
+metadata:
+  name: development 
+  namespace: argocd
+  finalizers:
+    - resources-finalizer.argocd.argoproj.io
+spec:
+  # описание проекта
+  description: Project containing development environment services 
+
+  # ссылка на репозиторий, откуда оператор может делать манифесты, 
+  # значение * — любые
+  sourceRepos: 
+    - '*'
+
+  # набор из пространств имен, в которые можно деплоить 
+  # манифесты 
+  destinations:
+    - namespace: '*'
+      server: '*'
+  clusterResourceWhitelist:
+    - group: '*'
+      kind: '*'

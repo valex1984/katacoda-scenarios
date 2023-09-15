@@ -1,0 +1,32 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  # название приложения
+  name: nginx-app 
+  namespace: argocd
+spec:
+  # то же название проекта, что в dev.yaml
+  project: development 
+
+  # репозиторий, из которого ArgoCD будет брать код 
+  source:
+    repoURL: http://gogs-svc.gogs.svc.cluster.local/argo/gitops.git 
+    targetRevision: master 
+    # путь до приложения Kubernetes, деплой которого также описан
+    # YAML-файлом (см. пример в репозитории)
+    path: app  
+  
+  destination:
+    server: https://kubernetes.default.svc
+    namespace: app
+
+  # параметры для автоматического мониторинга и внесения изменений
+  # в Git-репозитория 
+  syncPolicy:
+    # каждые 3 минуты Ar—goCD проверяет Git-репозиторий
+    automated: 
+      prune: true 
+      # чтобы запретить автоматический деплой, поставьте false
+      selfHeal: true 
+    syncOptions:         
+    - CreateNamespace=true 
