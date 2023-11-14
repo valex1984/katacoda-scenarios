@@ -39,3 +39,5 @@ docker run -d -p 9091:9090 --name=prometheus2 \
 ```{{execute}}
 
 Дашборд Prometheus доступен [здесь]([[UUID_SUBDOMAIN]]-9091-[[HOST]]/)
+
+тест с сабурлом [здесь]([[UUID_SUBDOMAIN]]-9092-[[HOST]]/ui/here)
