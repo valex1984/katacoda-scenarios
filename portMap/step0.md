@@ -40,4 +40,17 @@ docker run -d -p 9091:9090 --name=prometheus2 \
 
 Дашборд Prometheus доступен [здесь]([[UUID_SUBDOMAIN]]-9091-[[HOST]]/)
 
+Еще один на порту 9092
+```
+docker run -d -p 9092:9090 --name=prometheus2 \
+   -v /root/prometheus.yml:/etc/prometheus/prometheus.yml \
+   prom/prometheus \
+   --config.file=/etc/prometheus/prometheus.yml \
+   --storage.tsdb.path=/prometheus \
+   --web.console.libraries=/usr/share/prometheus/console_libraries \
+   --web.console.templates=/usr/share/prometheus/consoles
+```{{execute}}
+
+Дашборд Prometheus доступен [здесь]([[UUID_SUBDOMAIN]]-9092-[[HOST]]/)
+
 тест с сабурлом [здесь]([[UUID_SUBDOMAIN]]-9092-[[HOST]]/ui/here)
