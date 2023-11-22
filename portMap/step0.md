@@ -42,7 +42,7 @@ docker run -d -p 9091:9090 --name=prometheus2 \
 
 Еще один на порту 9092
 ```
-docker run -d -p 9092:9090 --name=prometheus2 \
+docker run -d -p 9092:9090 --name=prometheus3 \
    -v /root/prometheus.yml:/etc/prometheus/prometheus.yml \
    prom/prometheus \
    --config.file=/etc/prometheus/prometheus.yml \
