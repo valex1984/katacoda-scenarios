@@ -6,6 +6,7 @@ INGRESS_DONE=/tmp/ingress_installed
 GRAVITEE_DONE=/tmp/gravitee_installed
 BASE_PATH="$(cat /usr/local/etc/sbercode-prefix)"
 INGRESS_HOSTNAME_PLACEHOLDER="$(cat /usr/local/etc/sbercode-ingress)"
+pg_version="12.12.10"
 
 spinner() {
   local i sp n
@@ -212,7 +213,7 @@ function install_pg() {
     --set auth.postgresPassword=postgres \
     --set auth.database=graviteeapim \
     --set persistence.size=2Gi \
-    postgres-apim bitnami/postgresql
+    postgres-apim bitnami/postgresql --version $pg_version
 
 }
 
