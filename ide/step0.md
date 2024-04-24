@@ -1,11 +1,13 @@
 запустим ide
 
-`mkdir -p ~/.config && docker run -it --name code-server -p 127.0.0.1:8080:8080 \
-  -v "$HOME/.local:/home/coder/.local" \
-  -v "$HOME/.config:/home/coder/.config" \
-  -v "$PWD:/home/coder/project" \
-  -u "$(id -u):$(id -g)" \
-  -e "DOCKER_USER=$USER" \
-  codercom/code-server:latest`{{execute}}
+`mkdir -p ~/workspace && \
+    docker run -p 8443:8443 -d \
+    --name=code-server \
+    -e PUID=$(id -u) \
+    -e PGID=$(id -g) \
+    -e TZ=Europe/Moscow \
+    -v $HOME/workspace:/config/workspace \
+    linuxserver/code-server:4.23.1`{{execute}}
 
-откроем в браузере [ide]([[UUID_SUBDOMAIN]]-8080-[[HOST]]/)
+
+откроем в браузере [ide]([[UUID_SUBDOMAIN]]-8443-[[HOST]]/)
