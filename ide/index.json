@@ -1,0 +1,33 @@
+{
+    "pathwayTitle": "ide poc",
+    "title": "ide poc",
+    "description": "ide poc",
+    "details": {
+        "steps": [
+            {
+                "title": "запуск",
+                "text": "step0.md"
+            }
+        ],
+        "intro": {
+            "text": "intro.md"
+        },
+        "assets": {}
+    },
+    "assets": {
+        "host01": [
+            {"file": "readme.txt", "target": "/root/source/"}
+        ]
+      },
+    "files": [],
+    "environment": {
+        "uilayout": "terminal",
+        "uisettings": "yaml",
+        "showide": true,
+        "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n",
+        "uimessage2": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
+    },
+    "backend": {
+        "imageid": "ubuntu:2004"
+    }
+}
