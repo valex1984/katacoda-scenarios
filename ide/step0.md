@@ -1,7 +1,9 @@
 запустим ide
 
-`mkdir -p ~/workspace && \
-    docker run -p 8443:8443 -d \
+`mkdir -p ~/workspace && 
+    cd ~/workspace && \
+    git clone https://github.com/valex1984/openfaas-tpl && \
+    sudo docker run -p 8443:8443 -d \
     --name=code-server \
     -e PUID=$(id -u) \
     -e PGID=$(id -g) \
