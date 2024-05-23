@@ -1,0 +1,40 @@
+{
+  "pathwayTitle": "python example",
+  "title": "python example",
+  "description": "python example",
+  "details": {
+    "steps": [
+      {
+        "title": "простейший пример приложения python",
+        "text": "step0.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "simple.py",
+          "target": "/root"
+        },
+        {
+          "file": "venv.sh",
+          "target": "/usr/local/autostart-scripts.d",
+          "chmod": "+x"
+        }
+      ]
+    }
+  },
+  "files": [],
+  "environment": {
+    "uilayout": "terminal",
+    "uisettings": "yaml",
+    "showide": true,
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n",
+    "uimessage2": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "python"   
+  }
+}
