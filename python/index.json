@@ -35,6 +35,6 @@
     "uimessage2": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
   },
   "backend": {
-    "imageid": "python"   
+    "imageid": "python_3.11"   
   }
 }
