@@ -17,11 +17,6 @@
         {
           "file": "simple.py",
           "target": "/root"
-        },
-        {
-          "file": "venv.sh",
-          "target": "/usr/local/autostart-scripts.d",
-          "chmod": "+x"
         }
       ]
     }
