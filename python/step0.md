@@ -2,3 +2,6 @@
 
 `pip3 install gigachat`{{execute}}
 
+заготовка:
+`simple.py`{{open}}
+
