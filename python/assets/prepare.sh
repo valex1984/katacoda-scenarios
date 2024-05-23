@@ -26,9 +26,6 @@ function install_venv() {
   fi
 }
 
-# wait for cluster readiness
-launch.sh
-
 spinner &
 install_venv
 #stop spinner
