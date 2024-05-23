@@ -1,4 +1,4 @@
-Установим в venv библиотеку: 
+Установим venv  и библиотеку gigachat: 
 
 `python3.11 -m venv /opt/venv && \
     source /opt/venv/bin/activate && \
