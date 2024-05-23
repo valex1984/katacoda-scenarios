@@ -5,9 +5,9 @@ DONE_FILE=/usr/local/etc/venv.done
 
 [ -f $DONE_FILE ] && exit 0
 
-python3 -m venv ~/${venv_name} && source ~/${venv_name}/bin/activate
+python3 -m venv /opt/${venv_name}
 
-echo "source ${venv_name}/bin/activate" >>  ~/.bashrc
+echo "source /opt/${venv_name}/bin/activate" >>  ~/.bashrc
 
 touch $DONE_FILE
 
