@@ -1,2 +1,3 @@
-текст
+тест
+`sowa-version`{{execute}}
 
