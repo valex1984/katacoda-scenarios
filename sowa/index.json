@@ -1,0 +1,30 @@
+{
+  "pathwayTitle": "sowa example",
+  "title": "sowa example",
+  "description": "sowa example",
+  "details": {
+    "steps": [
+      {
+        "title": "простейший пример приложения",
+        "text": "step0.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "assets": {
+      "host01": [ ]
+    }
+  },
+  "files": [],
+  "environment": {
+    "uilayout": "terminal",
+    "uisettings": "yaml",
+    "showide": true,
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n",
+    "uimessage2": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "sowa"
+  }
+}
