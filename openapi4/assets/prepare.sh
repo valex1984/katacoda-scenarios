@@ -1,9 +1,9 @@
 #!/bin/bash
 
-OPENFAAS_DONE=/tmp/dashboard_installed
-REGISTRY_DONE=/tmp/registry_installed
-INGRESS_DONE=/tmp/ingress_installed
-GRAVITEE_DONE=/tmp/gravitee_installed
+OPENFAAS_DONE=/usr/local/src/dashboard_installed
+REGISTRY_DONE=/usr/local/src/registry_installed
+INGRESS_DONE=/usr/local/src/ingress_installed
+GRAVITEE_DONE=/usr/local/src/gravitee_installed
 BASE_PATH="$(cat /usr/local/etc/sbercode-prefix)"
 INGRESS_HOSTNAME_PLACEHOLDER="$(cat /usr/local/etc/sbercode-ingress)"
 pg_version="12.12.10"
@@ -66,7 +66,7 @@ function install_registry() {
   echo -e "\n[INFO] Installing registry"
 
   if [ ! -f "$REGISTRY_DONE" ]; then
-    cat <<EOF >/tmp/registry.yaml
+    cat <<EOF >/usr/local/src/registry.yaml
 ---
 apiVersion: v1
 kind: Namespace
@@ -143,7 +143,7 @@ spec:
       nodePort: 32500
 EOF
 
-    kubectl apply -f /tmp/registry.yaml
+    kubectl apply -f /usr/local/src/registry.yaml
     echo "waiting for container registry pod ready"
     kubectl -n container-registry wait --for=condition=ContainersReady --timeout=5m --all pods
     test $? -eq 1 && echo "[ERROR] registry pod not ready" && kill "$!" && exit 1
@@ -176,7 +176,7 @@ function install_es() {
   helm repo add bitnami http://nexus:8081/repository/bitnami/
   test $? -eq 1 && echo "[ERROR] cannot add bitnami proxy repo" && kill "$!" && exit 1
   kubectl create ns gravitee --dry-run=client -o yaml | kubectl apply -f -
-  cat <<EOF >/tmp/es-values.yaml
+  cat <<EOF >/usr/local/src/es-values.yaml
 replicas: 1
 antiAffinity: "soft"
 esJavaOpts: "-Xmx128m -Xms128m"
@@ -203,7 +203,7 @@ extraEnvs:
  - name: xpack.monitoring.enabled
    value: "false"
 EOF
-  helm upgrade --install -n gravitee elasticsearch -f /tmp/es-values.yaml nexus/elasticsearch
+  helm upgrade --install -n gravitee elasticsearch -f /usr/local/src/es-values.yaml nexus/elasticsearch
 
 }
 
@@ -220,9 +220,9 @@ function install_pg() {
 function install_apim() {
   echo -e "\n[INFO] Installing gravitee"
 
-  sed -i "s#BASE_PATH#$BASE_PATH#g" /tmp/gravitee.yaml
-  sed -i "s#INGRESS_HOSTNAME_PLACEHOLDER#$INGRESS_HOSTNAME_PLACEHOLDER#g" /tmp/gravitee.yaml
-  kubectl apply -n gravitee -f /tmp/gravitee.yaml
+  sed -i "s#BASE_PATH#$BASE_PATH#g" /usr/local/src/gravitee.yaml
+  sed -i "s#INGRESS_HOSTNAME_PLACEHOLDER#$INGRESS_HOSTNAME_PLACEHOLDER#g" /usr/local/src/gravitee.yaml
+  kubectl apply -n gravitee -f /usr/local/src/gravitee.yaml
   test $? -eq 1 && echo "[ERROR] cannot install gravitee" && kill "$!" && exit 1
 }
 

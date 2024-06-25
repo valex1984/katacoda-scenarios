@@ -1,6 +1,6 @@
 #!/bin/bash
 
-INGRESS_DONE=/tmp/ingress_installed
+INGRESS_DONE=/usr/local/src/ingress_installed
 
 spinner() {
   local i sp n
