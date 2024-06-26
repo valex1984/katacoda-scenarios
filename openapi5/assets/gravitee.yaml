@@ -490,10 +490,10 @@ spec:
           securityContext:
             runAsNonRoot: true
             runAsUser: 1001
-          command: ['sh', '-c', "mkdir -p /tmp/plugins-ext && cd /tmp/plugins-ext && wget  http://nexus:8081/repository/maven-public/org/postgresql/postgresql/42.2.24/postgresql-42.2.24.jar"]
+          command: ['sh', '-c', "mkdir -p /usr/local/src/plugins-ext && cd /usr/local/src/plugins-ext && wget  http://nexus:8081/repository/maven-public/org/postgresql/postgresql/42.2.24/postgresql-42.2.24.jar"]
           volumeMounts:
             - name: graviteeio-apim-repository-jdbc-ext
-              mountPath: /tmp/plugins-ext        
+              mountPath: /usr/local/src/plugins-ext        
       containers:
         - name: gravitee-apim3-api
           image: "graviteeio/apim-management-api:3.11.2"
@@ -508,13 +508,13 @@ spec:
           envFrom: 
             []
           livenessProbe: 
-            failureThreshold: 3
+            failureThreshold: 15
             initialDelaySeconds: 30
             periodSeconds: 30
             tcpSocket:
               port: http
           readinessProbe: 
-            failureThreshold: 3
+            failureThreshold: 15
             initialDelaySeconds: 30
             periodSeconds: 30
             tcpSocket:
@@ -586,10 +586,10 @@ spec:
           securityContext:
             runAsNonRoot: true
             runAsUser: 1001
-          command: ['sh', '-c', "mkdir -p /tmp/plugins-ext && cd /tmp/plugins-ext && wget  http://nexus:8081/repository/maven-public/org/postgresql/postgresql/42.2.24/postgresql-42.2.24.jar"]
+          command: ['sh', '-c', "mkdir -p /usr/local/src/plugins-ext && cd /usr/local/src/plugins-ext && wget  http://nexus:8081/repository/maven-public/org/postgresql/postgresql/42.2.24/postgresql-42.2.24.jar"]
           volumeMounts:
             - name: graviteeio-apim-repository-jdbc-ext
-              mountPath: /tmp/plugins-ext        
+              mountPath: /usr/local/src/plugins-ext        
       containers:
         - name: gravitee-apim3-gateway
           image: "graviteeio/apim-gateway:3.11.2"
@@ -604,13 +604,13 @@ spec:
           envFrom: 
             []
           livenessProbe: 
-            failureThreshold: 3
+            failureThreshold: 15
             initialDelaySeconds: 30
             periodSeconds: 30
             tcpSocket:
               port: http
           readinessProbe:
-            failureThreshold: 3
+            failureThreshold: 15
             initialDelaySeconds: 10
             periodSeconds: 30
             tcpSocket:
@@ -691,14 +691,14 @@ spec:
             - name: http
               containerPort: 8080
           livenessProbe: 
-            failureThreshold: 3
+            failureThreshold: 15
             httpGet:
               path: /
               port: http
             initialDelaySeconds: 10
             periodSeconds: 30
           readinessProbe: 
-            failureThreshold: 3
+            failureThreshold: 15
             httpGet:
               path: /
               port: http
@@ -776,14 +776,14 @@ spec:
             - name: http
               containerPort: 8080
           livenessProbe: 
-            failureThreshold: 3
+            failureThreshold: 15
             httpGet:
               path: /
               port: http
             initialDelaySeconds: 10
             periodSeconds: 30
           readinessProbe: 
-            failureThreshold: 3
+            failureThreshold: 15
             httpGet:
               path: /
               port: http

@@ -30,7 +30,7 @@
     },
     "assets": {
       "host01": [
-          {"file": "bookinfo.yaml", "target": "/tmp"},
+          {"file": "bookinfo.yaml", "target": "/usr/local/src/"},
           {"file": "init.sh", "target": "/usr/local/bin", "chmod": "+x"}
       ]
     }

@@ -31,7 +31,7 @@
         },
         "assets": {
             "host01": [
-                {"file": "gravitee.yaml", "target": "/tmp"},
+                {"file": "gravitee.yaml", "target": "/usr/local/src/"},
                 {"file": "prepare.sh", "target": "/usr/local/bin", "chmod": "+x"},
                 {"file": "demoapi-1-0-0.json", "target": "/root"},
                 {"file": "demoapi-2-0-0.json", "target": "/root"}

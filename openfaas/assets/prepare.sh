@@ -1,8 +1,8 @@
 #!/bin/bash
 
-OPENFAAS_DONE=/tmp/dashboard_installed
-REGISTRY_DONE=/tmp/registry_installed
-INGRESS_DONE=/tmp/ingress_installed
+OPENFAAS_DONE=/usr/local/src/dashboard_installed
+REGISTRY_DONE=/usr/local/src/registry_installed
+INGRESS_DONE=/usr/local/src/ingress_installed
 
 spinner() {
   local i sp n
@@ -46,7 +46,7 @@ function install_openfaas() {
     curl -Ls http://nexus:8081/repository/binaries/openfaas/faas-cli/0.13.15/faas-cli -o /usr/local/bin/faas-cli && chmod +x /usr/local/bin/faas-cli
 
     echo "waiting for openfaas system pods ready"
-    kubectl -n openfaas wait --for=condition=ContainersReady --timeout=5m --all pods
+    kubectl -n openfaas wait --for=condition=ContainersReady --timeout=10m --all pods
     test $? -eq 1 && echo "[ERROR] openfaas pods not ready" && kill "$!" && exit 1
     echo "done"
     touch $OPENFAAS_DONE
@@ -60,7 +60,7 @@ function install_registry() {
   echo -e "\n[INFO] Installing registry"
 
   if [ ! -f "$REGISTRY_DONE" ]; then
-    cat <<EOF >/tmp/registry.yaml
+    cat <<EOF >/usr/local/src/registry.yaml
 ---
 apiVersion: v1
 kind: Namespace
@@ -137,9 +137,9 @@ spec:
       nodePort: 32500
 EOF
 
-    kubectl apply -f /tmp/registry.yaml
+    kubectl apply -f /usr/local/src/registry.yaml
     echo "waiting for container registry pod ready"
-    kubectl -n container-registry wait --for=condition=ContainersReady --timeout=5m --all pods
+    kubectl -n container-registry wait --for=condition=ContainersReady --timeout=10m --all pods
     test $? -eq 1 && echo "[ERROR] registry pod not ready" && kill "$!" && exit 1
     echo -e "\n[[registry]]\nlocation = \"$REGISTRY\"\ninsecure = true" | tee -a /etc/containers/registries.conf
     echo "done"

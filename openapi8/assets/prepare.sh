@@ -1,8 +1,8 @@
 #!/bin/bash
 
-INGRESS_DONE=/tmp/ingress_installed
-GRAVITEE_DONE=/tmp/gravitee_installed
-HTTPBIN_DONE=/tmp/httpbin_installed
+INGRESS_DONE=/usr/local/src/ingress_installed
+GRAVITEE_DONE=/usr/local/src/gravitee_installed
+HTTPBIN_DONE=/usr/local/src/httpbin_installed
 BASE_PATH="$(cat /usr/local/etc/sbercode-prefix)"
 INGRESS_HOSTNAME_PLACEHOLDER="$(cat /usr/local/etc/sbercode-ingress)"
 export KUBECONFIG=/etc/rancher/k3s/k3s.yaml
@@ -22,7 +22,7 @@ function install_ingress() {
   echo -e "\n[INFO] Installing nginx ingress controller"
   if [ ! -f "$INGRESS_DONE" ]; then
     kubectl apply -f /usr/local/etc/nginx-ingress-deploy.yaml
-    kubectl -n ingress-nginx wait --for=condition=available --timeout=3m deployment/ingress-nginx-controller
+    kubectl -n ingress-nginx wait --for=condition=available --timeout=10m deployment/ingress-nginx-controller
     test $? -eq 1 && echo "[ERROR] Ingress controller not ready" && kill "$!" && exit 1
     kubectl -n ingress-nginx patch svc ingress-nginx-controller --patch \
       '{"spec": { "type": "NodePort", "ports": [ { "nodePort": 32100, "port": 80, "protocol": "TCP", "targetPort": 80 } ] } }'
@@ -40,7 +40,7 @@ function install_es() {
   helm repo add bitnami http://nexus:8081/repository/bitnami/
   test $? -eq 1 && echo "[ERROR] cannot add bitnami proxy repo" && kill "$!" && exit 1
   kubectl create ns gravitee --dry-run=client -o yaml | kubectl apply -f -
-  cat <<EOF >/tmp/es-values.yaml
+  cat <<EOF >/usr/local/src/es-values.yaml
 replicas: 1
 antiAffinity: "soft"
 esJavaOpts: "-Xmx128m -Xms128m"
@@ -67,7 +67,7 @@ extraEnvs:
  - name: xpack.monitoring.enabled
    value: "false"
 EOF
-  helm upgrade --install -n gravitee elasticsearch -f /tmp/es-values.yaml nexus/elasticsearch
+  helm upgrade --install -n gravitee elasticsearch -f /usr/local/src/es-values.yaml nexus/elasticsearch
 
 }
 
@@ -84,9 +84,9 @@ function install_pg() {
 function install_apim() {
   echo -e "\n[INFO] Installing gravitee"
 
-  sed -i "s#BASE_PATH#$BASE_PATH#g" /tmp/gravitee.yaml
-  sed -i "s#INGRESS_HOSTNAME_PLACEHOLDER#$INGRESS_HOSTNAME_PLACEHOLDER#g" /tmp/gravitee.yaml
-  kubectl apply -n gravitee -f /tmp/gravitee.yaml
+  sed -i "s#BASE_PATH#$BASE_PATH#g" /usr/local/src/gravitee.yaml
+  sed -i "s#INGRESS_HOSTNAME_PLACEHOLDER#$INGRESS_HOSTNAME_PLACEHOLDER#g" /usr/local/src/gravitee.yaml
+  kubectl apply -n gravitee -f /usr/local/src/gravitee.yaml
   test $? -eq 1 && echo "[ERROR] cannot install gravitee" && kill "$!" && exit 1
 }
 
@@ -96,7 +96,7 @@ function install_gravitee() {
     install_es
     install_pg
     install_apim
-    kubectl -n gravitee wait --for=condition=ContainersReady --timeout=5m --all pods
+    kubectl -n gravitee wait --for=condition=ContainersReady --timeout=10m --all pods
     test $? -eq 1 && echo "[ERROR] gravitee not ready" && kill "$!" && exit 1
     echo done
     touch $GRAVITEE_DONE
@@ -110,7 +110,7 @@ function install_httpbin() {
    echo -e "\n[INFO] Installing httpbin"
 
   if [ ! -f "$HTTPBIN_DONE" ]; then
-  cat <<EOF >/tmp/httpbin.yaml
+  cat <<EOF >/usr/local/src/httpbin.yaml
 apiVersion: v1
 kind: ServiceAccount
 metadata:
@@ -155,8 +155,8 @@ spec:
         ports:
         - containerPort: 80
 EOF
-    kubectl apply -f /tmp/httpbin.yaml
-    kubectl wait --for=condition=ContainersReady --timeout=5m --all pods
+    kubectl apply -f /usr/local/src/httpbin.yaml
+    kubectl wait --for=condition=ContainersReady --timeout=10m --all pods
     test $? -eq 1 && echo "[ERROR] httpbin not ready" && kill "$!" && exit 1
     echo done
     touch $HTTPBIN_DONE
