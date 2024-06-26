@@ -46,7 +46,7 @@ function install_openfaas() {
     curl -Ls http://nexus:8081/repository/binaries/openfaas/faas-cli/0.13.15/faas-cli -o /usr/local/bin/faas-cli && chmod +x /usr/local/bin/faas-cli
 
     echo "waiting for openfaas system pods ready"
-    kubectl -n openfaas wait --for=condition=ContainersReady --timeout=5m --all pods
+    kubectl -n openfaas wait --for=condition=ContainersReady --timeout=10m --all pods
     test $? -eq 1 && echo "[ERROR] openfaas pods not ready" && kill "$!" && exit 1
     echo "done"
     touch $OPENFAAS_DONE
@@ -139,7 +139,7 @@ EOF
 
     kubectl apply -f /usr/local/src/registry.yaml
     echo "waiting for container registry pod ready"
-    kubectl -n container-registry wait --for=condition=ContainersReady --timeout=5m --all pods
+    kubectl -n container-registry wait --for=condition=ContainersReady --timeout=10m --all pods
     test $? -eq 1 && echo "[ERROR] registry pod not ready" && kill "$!" && exit 1
     echo -e "\n[[registry]]\nlocation = \"$REGISTRY\"\ninsecure = true" | tee -a /etc/containers/registries.conf
     echo "done"

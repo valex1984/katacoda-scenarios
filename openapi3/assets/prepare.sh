@@ -52,7 +52,7 @@ function install_openfaas() {
     faas-cli template pull https://github.com/valex1984/openfaas-tpl
 
     echo "waiting for openfaas system pods ready"
-    kubectl -n openfaas wait --for=condition=ContainersReady --timeout=5m --all pods
+    kubectl -n openfaas wait --for=condition=ContainersReady --timeout=10m --all pods
     test $? -eq 1 && echo "[ERROR] openfaas pods not ready" && kill "$!" && exit 1
     echo "done"
     touch $OPENFAAS_DONE
@@ -145,7 +145,7 @@ EOF
 
     kubectl apply -f /usr/local/src/registry.yaml
     echo "waiting for container registry pod ready"
-    kubectl -n container-registry wait --for=condition=ContainersReady --timeout=5m --all pods
+    kubectl -n container-registry wait --for=condition=ContainersReady --timeout=10m --all pods
     test $? -eq 1 && echo "[ERROR] registry pod not ready" && kill "$!" && exit 1
     echo -e "\n[[registry]]\nlocation = \"$REGISTRY\"\ninsecure = true" | tee -a /etc/containers/registries.conf
     echo "done"
@@ -159,7 +159,7 @@ function install_ingress() {
   echo -e "\n[INFO] Installing nginx ingress controller"
   if [ ! -f "$INGRESS_DONE" ]; then
     kubectl apply -f /usr/local/etc/nginx-ingress-deploy.yaml
-    kubectl -n ingress-nginx wait --for=condition=available --timeout=3m deployment/ingress-nginx-controller
+    kubectl -n ingress-nginx wait --for=condition=available --timeout=10m deployment/ingress-nginx-controller
     test $? -eq 1 && echo "[ERROR] Ingress controller not ready" && kill "$!" && exit 1
     kubectl -n ingress-nginx patch svc ingress-nginx-controller --patch \
       '{"spec": { "type": "NodePort", "ports": [ { "nodePort": 32100, "port": 80, "protocol": "TCP", "targetPort": 80 } ] } }'
@@ -232,7 +232,7 @@ function install_gravitee() {
     install_es
     install_pg
     install_apim
-    kubectl -n gravitee wait --for=condition=ContainersReady --timeout=5m --all pods
+    kubectl -n gravitee wait --for=condition=ContainersReady --timeout=10m --all pods
     test $? -eq 1 && echo "[ERROR] gravitee not ready" && kill "$!" && exit 1
     echo done
     touch $GRAVITEE_DONE

@@ -22,7 +22,7 @@ function install_ingress() {
   echo -e "\n[INFO] Installing nginx ingress controller"
   if [ ! -f "$INGRESS_DONE" ]; then
     kubectl apply -f /usr/local/etc/nginx-ingress-deploy.yaml
-    kubectl -n ingress-nginx wait --for=condition=available --timeout=3m deployment/ingress-nginx-controller
+    kubectl -n ingress-nginx wait --for=condition=available --timeout=10m deployment/ingress-nginx-controller
     test $? -eq 1 && echo "[ERROR] Ingress controller not ready" && kill "$!" && exit 1
     kubectl -n ingress-nginx patch svc ingress-nginx-controller --patch \
       '{"spec": { "type": "NodePort", "ports": [ { "nodePort": 32100, "port": 80, "protocol": "TCP", "targetPort": 80 } ] } }'
@@ -96,7 +96,7 @@ function install_gravitee() {
     install_es
     install_pg
     install_apim
-    kubectl -n gravitee wait --for=condition=ContainersReady --timeout=5m --all pods
+    kubectl -n gravitee wait --for=condition=ContainersReady --timeout=10m --all pods
     test $? -eq 1 && echo "[ERROR] gravitee not ready" && kill "$!" && exit 1
     echo done
     touch $GRAVITEE_DONE
@@ -156,7 +156,7 @@ spec:
         - containerPort: 80
 EOF
     kubectl apply -f /usr/local/src/httpbin.yaml
-    kubectl wait --for=condition=ContainersReady --timeout=5m --all pods
+    kubectl wait --for=condition=ContainersReady --timeout=10m --all pods
     test $? -eq 1 && echo "[ERROR] httpbin not ready" && kill "$!" && exit 1
     echo done
     touch $HTTPBIN_DONE
