@@ -508,13 +508,13 @@ spec:
           envFrom: 
             []
           livenessProbe: 
-            failureThreshold: 3
+            failureThreshold: 15
             initialDelaySeconds: 30
             periodSeconds: 30
             tcpSocket:
               port: http
           readinessProbe: 
-            failureThreshold: 3
+            failureThreshold: 15
             initialDelaySeconds: 30
             periodSeconds: 30
             tcpSocket:
@@ -604,13 +604,13 @@ spec:
           envFrom: 
             []
           livenessProbe: 
-            failureThreshold: 3
+            failureThreshold: 15
             initialDelaySeconds: 30
             periodSeconds: 30
             tcpSocket:
               port: http
           readinessProbe:
-            failureThreshold: 3
+            failureThreshold: 15
             initialDelaySeconds: 10
             periodSeconds: 30
             tcpSocket:
@@ -691,14 +691,14 @@ spec:
             - name: http
               containerPort: 8080
           livenessProbe: 
-            failureThreshold: 3
+            failureThreshold: 15
             httpGet:
               path: /
               port: http
             initialDelaySeconds: 10
             periodSeconds: 30
           readinessProbe: 
-            failureThreshold: 3
+            failureThreshold: 15
             httpGet:
               path: /
               port: http
@@ -776,14 +776,14 @@ spec:
             - name: http
               containerPort: 8080
           livenessProbe: 
-            failureThreshold: 3
+            failureThreshold: 15
             httpGet:
               path: /
               port: http
             initialDelaySeconds: 10
             periodSeconds: 30
           readinessProbe: 
-            failureThreshold: 3
+            failureThreshold: 15
             httpGet:
               path: /
               port: http
