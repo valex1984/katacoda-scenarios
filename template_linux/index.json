@@ -1,0 +1,24 @@
+{
+  "title": "linux template example",
+  "description": "linux template example",
+  "details": {
+    "template": true,
+    "steps": [
+      {
+        "title": "простейший пример приложения",
+        "text": "step0.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "assets": {
+      "host01": []
+    }
+  },
+  "files": [],
+  "environment": {},
+  "backend": {
+    "imageid": "ubuntu:2004"
+  }
+}
