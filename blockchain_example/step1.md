@@ -29,8 +29,8 @@
 `python ~/getPrivateKey.py`{{execute}} 
 
 Получим адрес из расшифрованного приватного ключа. Для этого добавим блок кода в исходный файл:  
-<pre class="file" data-filename="./getPrivateKey.py" data-target="insert" data-marker="##end Of First Block##">
-
+<pre class="file" data-filename="./getPrivateKey.py" data-target="insert" data-marker="#end Of First Block">
+#get address
 account = w3.eth.account.from_key(bin_private_key)
 address = w3.to_checksum_address(account.address)
 print(f"Ethereum address: {address}")

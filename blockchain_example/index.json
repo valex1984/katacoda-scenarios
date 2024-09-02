@@ -8,8 +8,12 @@
         "text": "step0.md"
       },
       {
-        "title": "создаем кошелек",
+        "title": "Cоздаем кошелек",
         "text": "step1.md"
+      },
+      {
+        "title": "Импорт аккаунта в Metamask",
+        "text": "step2.md"
       }
     ],
     "intro": {
