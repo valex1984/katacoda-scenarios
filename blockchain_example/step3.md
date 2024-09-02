@@ -1,9 +1,5 @@
-Установим venv и необходимые библиотеки: 
+скрипт
+`./siberium.py`{{open}}
 
-`prepare.sh && . ~/.bashrc`{{execute}}
-
-проверим установку
-
-`geth account --help`{{execute}}
-
-идем дальше
+запустим
+`python3 siberium.py`{{execute}} 
