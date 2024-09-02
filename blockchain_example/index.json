@@ -1,0 +1,43 @@
+{
+  "title": "пример упражнения для blockchain",
+  "description": "blockchain example",
+  "details": {
+    "steps": [
+      {
+        "title": "готовим окружение",
+        "text": "step0.md"
+      },
+      {
+        "title": "создаем кошелек",
+        "text": "step1.md"
+      }
+    ],
+    "intro": {
+      "text": "intro.md"
+    },
+    "assets": {
+      "host01": [
+        {
+          "file": "getPrivateKey.py",
+          "target": "/root"
+        },
+        {
+          "file": "prepare.sh",
+          "target": "/usr/local/bin",
+          "chmod": "+x"
+        }
+      ]
+    }
+  },
+  "files": [],
+  "environment": {
+    "uilayout": "terminal",
+    "uisettings": "yaml",
+    "showide": true,
+    "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n",
+    "uimessage2": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
+  },
+  "backend": {
+    "imageid": "python"
+  }
+}
