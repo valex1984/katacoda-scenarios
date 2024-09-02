@@ -14,6 +14,10 @@
       {
         "title": "Импорт аккаунта в Metamask",
         "text": "step2.md"
+      },
+      {
+        "title": "Работа с Siberium",
+        "text": "step3.md"
       }
     ],
     "intro": {
@@ -23,6 +27,10 @@
       "host01": [
         {
           "file": "getPrivateKey.py",
+          "target": "/root"
+        },
+        {
+          "file": "siberium.py",
           "target": "/root"
         },
         {
