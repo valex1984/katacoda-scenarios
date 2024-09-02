@@ -25,6 +25,10 @@
           "file": "prepare.sh",
           "target": "/usr/local/bin",
           "chmod": "+x"
+        },
+        {
+          "file": "requirements.txt",
+          "target": "/root"
         }
       ]
     }
