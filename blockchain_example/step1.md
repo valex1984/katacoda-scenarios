@@ -22,10 +22,14 @@
 
 Считываем файл ключа и, указав пароль, расшифровываем приватный ключ:  
 
+`getPrivateKey.py`{{open}}
+
+Запускаем:
+
 `python ~/getPrivateKey.py`{{execute}} 
 
 Получим адрес из расшифрованного приватного ключа. Для этого добавим блок кода в исходный файл:  
-<pre class="file" data-filename="~/getPrivateKey.py" data-target="insert" data-marker="##end Of First Block##">
+<pre class="file" data-filename="/root/getPrivateKey.py" data-target="insert" data-marker="##end Of First Block##">
 
 account = w3.eth.account.from_key(bin_private_key)
 address = w3.to_checksum_address(account.address)
