@@ -32,9 +32,9 @@ MY_ADDRESS = "0x2842fc9008eD72b976d540EAFB4ED046280fA5F3"
 # мы всегда будем оборачивать адреса с помощью дополнительной функции
 MY_ADDRESS = w3.to_checksum_address("0x2842fc9008eD72b976d540EAFB4ED046280fA5F3")
 
-w3.eth.get_balance(MY_ADDRESS)
-
-w3.from_wei(
+b = w3.from_wei(
     number=w3.eth.get_balance(MY_ADDRESS), ## какое число в wei
     unit='Ether' ## в какую единицу измерения переводим
 )
+
+print(f"Balance of {MY_ADDRESS} = {b} ETH\n")
