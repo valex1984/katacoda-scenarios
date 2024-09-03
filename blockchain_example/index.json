@@ -34,6 +34,10 @@
           "target": "/root"
         },
         {
+          "file": "alchemy.py",
+          "target": "/root"
+        },
+        {
           "file": "prepare.sh",
           "target": "/usr/local/bin",
           "chmod": "+x"
