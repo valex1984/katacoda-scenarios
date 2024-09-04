@@ -1,0 +1,21 @@
+{
+    "title": "sl example",
+    "description": "пример работы с sl",
+    "details": {
+        "steps": [
+            {
+                "title": "example step 1",
+                "text": "step0.md"
+            }
+        ],
+        "intro": {
+            "text": "intro.md"
+        },
+        "assets": {
+            "host01": [ ]
+        }
+    },
+    "backend": {
+        "imageid": "ubuntu:2004"
+    }
+}
