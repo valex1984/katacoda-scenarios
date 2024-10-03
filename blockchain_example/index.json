@@ -54,6 +54,12 @@
     }
   },
   "files": [],
+  "persistent": [
+    {
+        "path": "/root/keystore",
+        "namespace":"blockchain_keystore_example"
+    }
+],
   "environment": {
     "uilayout": "terminal",
     "uisettings": "yaml",
