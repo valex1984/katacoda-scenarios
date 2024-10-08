@@ -1,0 +1,21 @@
+{
+    "title": "tkonf example",
+    "description": "tkonf example",
+    "details": {
+        "steps": [
+            {
+                "title": "run examples",
+                "text": "step0.md"
+            }
+        ],
+        "intro": {
+            "text": "intro.md"
+        },
+        "assets": {
+            "host01": [ ]
+        }
+    },
+    "backend": {
+        "imageid": "tkonf"
+    }
+}
