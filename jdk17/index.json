@@ -52,6 +52,6 @@
         "uimessage2": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
     },
     "backend": {
-        "imageid": "jdk21-24"
+        "imageid": "jdk11"
     }
 }
