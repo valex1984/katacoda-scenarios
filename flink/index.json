@@ -3,6 +3,7 @@
     "description": "flink example",
     "difficulty": "beginner",
     "time": "30 minutes",
+    "idleSessionTimeoutMins": 15,
     "details": {
         "steps": [
             {
