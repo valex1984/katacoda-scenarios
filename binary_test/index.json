@@ -1,15 +1,21 @@
 {
-    "title": "binary test example",
-    "description": "binary test example",
+    "title": "flink example",
+    "description": "flink example",
+    "difficulty": "beginner",
+    "time": "30 minutes",
+    "idleSessionTimeoutMins": 15,
     "details": {
         "steps": [
             {
-                "title": "запускаем binary test",
+                "title": "запускаем flink",
                 "text": "step0.md"
             }
         ],
         "intro": {
             "text": "intro.md"
+        },
+        "finish": {
+            "text": "finish.md"
         },
         "assets": {
             "host01": [
@@ -24,11 +30,6 @@
                 {
                     "file": "Dockerfile",
                     "target": "/home/ubuntu/build/"
-                },
-                {
-                    "file": "gradle-wrapper.jar",
-                    "target": "/home/ubuntu",
-                    "binary": true
                 }
             ]
         }
@@ -40,14 +41,14 @@
         "userid": 1000,
         "groupid": 1000,
         "envs": [
-            {
-                "name": "HOME",
-                "value": "/home/ubuntu"
-            },
-            {
-                "name": "USER",
-                "value": "ubuntu"
-            }
+          {
+            "name": "HOME",
+            "value": "/home/ubuntu"
+          },
+          {
+            "name": "USER",
+            "value": "ubuntu"
+          }
         ]
-    }
+      }
 }

@@ -1,0 +1,2 @@
+FROM docker.io/flink:1.20.0-scala_2.12-java11
+RUN  wget -P /opt/flink/lib http://nexus:8081/repository/maven-public/org/apache/flink/flink-sql-connector-kafka/3.3.0-1.20/flink-sql-connector-kafka-3.3.0-1.20.jar
