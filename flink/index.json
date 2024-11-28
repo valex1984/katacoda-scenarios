@@ -24,11 +24,6 @@
                 {
                     "file": "Dockerfile",
                     "target": "/home/ubuntu/build/"
-                },
-                {
-                    "file": "gradle-wrapper.jar",
-                    "target": "/home/ubuntu",
-                    "binary": true
                 }
             ]
         }
