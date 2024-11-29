@@ -1,13 +1,13 @@
 {
-    "title": "flink example",
-    "description": "flink example",
+    "title": "binary test example",
+    "description": "binary test example",
     "difficulty": "beginner",
     "time": "30 minutes",
     "idleSessionTimeoutMins": 15,
     "details": {
         "steps": [
             {
-                "title": "запускаем flink",
+                "title": "запускаем binary test",
                 "text": "step0.md"
             }
         ],

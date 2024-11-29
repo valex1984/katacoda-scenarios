@@ -1,10 +1,10 @@
 {
-    "title": "binary test example",
-    "description": "binary test example",
+    "title": "flink example",
+    "description": "flink example",
     "details": {
         "steps": [
             {
-                "title": "запускаем binary test",
+                "title": "запускаем flink",
                 "text": "step0.md"
             }
         ],
