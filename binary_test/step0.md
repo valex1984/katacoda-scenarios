@@ -1,6 +1,8 @@
 Соберем имиджи с необходимыми артефактами
 `podman compose build`{{execute}}
 
+![App_](./assets/asset1.png)
+
 запустим контейнеры с сервисами flink
 `podman compose up -d taskmanager`{{execute}}
 
