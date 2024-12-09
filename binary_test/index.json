@@ -32,6 +32,11 @@
                     "file": "gradle-wrapper.jar",
                     "target": "/home/ubuntu",
                     "binary": true
+                },
+                {
+                    "file": "gradle-wrapper.jar",
+                    "target": "/opt",
+                    "binary": true
                 }
             ]
         }
