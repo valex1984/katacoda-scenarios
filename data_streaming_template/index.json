@@ -1,0 +1,49 @@
+{
+    "title": "Data Streaming Template",
+    "description": "пример создания окружения для упражнений Data Streaming",
+    "details": {
+        "template": true,
+        "steps": [
+            {
+                "title": "запускаем окружение",
+                "text": "step0.md"
+            }
+        ],
+        "intro": {
+            "text": "intro.md"
+        },
+        "assets": {
+            "host01": [
+                {
+                    "file": "compose.yaml",
+                    "target": "/home/ubuntu"
+                },
+                {
+                    "file": "readme",
+                    "target": "/home/ubuntu/data"
+                },
+                {
+                    "file": "Dockerfile",
+                    "target": "/home/ubuntu/build/"
+                }
+            ]
+        }
+    },
+    "files": [],
+    "environment": {},
+    "backend": {
+        "imageid": "jdk11",
+        "userid": 1000,
+        "groupid": 1000,
+        "envs": [
+            {
+                "name": "HOME",
+                "value": "/home/ubuntu"
+            },
+            {
+                "name": "USER",
+                "value": "ubuntu"
+            }
+        ]
+    }
+}
