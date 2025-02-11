@@ -37,7 +37,7 @@ scrape_configs:
 ```
 docker run -d --net=host --name=prometheus \
    -v /root/prometheus.yml:/etc/prometheus/prometheus.yml \
-   prom/prometheus \
+   prom/prometheus:v2.55.1 \
    --config.file=/etc/prometheus/prometheus.yml \
    --storage.tsdb.path=/prometheus \
    --web.console.libraries=/usr/share/prometheus/console_libraries \
