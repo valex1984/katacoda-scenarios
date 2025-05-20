@@ -12,7 +12,12 @@
             "text": "intro.md"
         },
         "assets": {
-            "host01": [ ]
+            "host01": [
+                {
+                    "file": "syngx.conf",
+                    "target": "/root"
+                  }
+             ]
         }
     },
     "backend": {
