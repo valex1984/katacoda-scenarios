@@ -1,0 +1,21 @@
+{
+    "title": "syngx example",
+    "description": "пример работы с syngx",
+    "details": {
+        "steps": [
+            {
+                "title": "example step 1",
+                "text": "step0.md"
+            }
+        ],
+        "intro": {
+            "text": "intro.md"
+        },
+        "assets": {
+            "host01": [ ]
+        }
+    },
+    "backend": {
+        "imageid": "ubuntu:2004"
+    }
+}
