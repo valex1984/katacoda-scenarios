@@ -34,12 +34,36 @@
         },
         "assets": {
             "host01": [
-                {"file": "send.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-                {"file": "courseBase.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-                {"file": "verify.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-                {"file": "verify.py", "target": "/usr/local/bin/", "chmod": "+x"},
-                {"file": "validate.sh", "target": "/usr/local/bin/", "chmod": "+x"},
-                {"file": "load.sh", "target": "/usr/local/bin/", "chmod": "+x"}
+                {
+                    "file": "send.sh",
+                    "target": "/usr/local/bin/",
+                    "chmod": "+x"
+                },
+                {
+                    "file": "courseBase.sh",
+                    "target": "/usr/local/bin/",
+                    "chmod": "+x"
+                },
+                {
+                    "file": "verify.sh",
+                    "target": "/usr/local/bin/",
+                    "chmod": "+x"
+                },
+                {
+                    "file": "verify.py",
+                    "target": "/usr/local/bin/",
+                    "chmod": "+x"
+                },
+                {
+                    "file": "validate.sh",
+                    "target": "/usr/local/bin/",
+                    "chmod": "+x"
+                },
+                {
+                    "file": "load.sh",
+                    "target": "/usr/local/bin/",
+                    "chmod": "+x"
+                }
             ]
         },
         "finish": {
@@ -57,12 +81,18 @@
     ],
     "environment": {
         "showdashboard": true,
-        "dashboards": [{"name": "Prometheus", "port": 9090}],
+        "dashboards": [
+            {
+                "name": "Prometheus",
+                "port": 9090
+            }
+        ],
         "uilayout": "editor-terminal",
         "uisettings": "py",
         "uimessage1": "\u001b[32mYour Interactive Bash Terminal.\u001b[m\r\n"
     },
     "backend": {
-      "imageid": "ubuntu:2004"
+        "type": "dedicated",
+        "imageid": "ubuntu:2004"
     }
 }
