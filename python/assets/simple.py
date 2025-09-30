@@ -1,7 +1,14 @@
-"""Пример вопрос - ответ"""
 from gigachat import GigaChat
 
-# Используйте токен, полученный в личном кабинете из поля Авторизационные данные
-with GigaChat(credentials="") as giga:
-    response = giga.chat("Какие факторы влияют на стоимость страховки на дом?")
-    print(response.choices[0].message.content)
+domain = open("/usr/local/etc/sbercode-ingress", "r").read()
+token = open("/usr/local/etc/proxy-key", "r").read()
+baseurl = f"https://{domain}/proxy/api/v1/gigachat/"
+
+with GigaChat(access_token=token, base_url=baseurl) as giga:
+    response = giga.get_models()
+    print(response)
+
+
+# with GigaChat(access_token=token, base_url=baseurl) as giga:
+#     response = giga.chat("Как дела?")
+#     print(response)
