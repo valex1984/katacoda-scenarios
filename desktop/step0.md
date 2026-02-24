@@ -3,4 +3,4 @@
 ```vncstart.sh```{{execute}}
 
 Скопируйте пароль с терминала и авторизуйтесь
-Рабочий стол доступен [здесь]([[UUID_SUBDOMAIN]]-8901-[[HOST]]/vnc.html)
+Рабочий стол доступен [здесь]([[UUID_SUBDOMAIN]]-8901-[[HOST]]/vnc.html?resize=remote)
