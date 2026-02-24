@@ -1,0 +1,45 @@
+{
+    "pathwayTitle": "Desktop example",
+    "title": "Desktop example",
+    "description": "Desktop example",
+    "difficulty": "beginner",
+    "time": "30 minutes",
+    "details": {
+        "steps": [
+            {
+                "title": "простейший пример упражнения с Desktop",
+                "text": "step0.md"
+            }
+        ],
+        "intro": {
+            "text": "intro.md"
+        },
+        "assets": {
+            "host01": []
+        }
+    },
+    "files": [
+        "./testfile"
+    ],
+    "environment": {},
+    "backend": {
+        "envs": [
+            {
+                "name": "HOME",
+                "value": "/home/ubuntu"
+            },
+            {
+                "name": "USER",
+                "value": "ubuntu"
+            }
+        ],
+        "groupid": 1000,
+        "imageid": "desktop-u24",
+        "userid": 1000,
+        "type": "dedicated",
+        "dedicated": {
+            "flavorRef": "s7n.medium.2",
+            "rootVolSize": 40
+        }
+    }
+}
